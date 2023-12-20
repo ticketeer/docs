@@ -1,0 +1,1 @@
+Copyright © 2023 [Ticketeer](mailto:support@ticketeer.bot)
