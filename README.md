@@ -2,7 +2,7 @@
 
 This is the documentation for Ticketeer (https://ticketeer.bot).
 
-This is still a work in progress, and is constantly updated, in-case you find something incorrect/missing,
+This is still a work in progress and is constantly updated, in-case you find something incorrect/missing,
 feel free to raise a Pull request as per Contributing Guidelines below.
 
 # Support

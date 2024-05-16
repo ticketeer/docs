@@ -1,15 +1,25 @@
-## Ticketeer
+## Ticketeer Docs
+
+Support Made Simple
 
 A fully customizable, ticket & support bot with endless list of features.
 
-## Documentation
+## What is Ticketeer?
 
-See the **[Getting Started](/getting-started)** guide for more details.
+- TODO
 
 ## Features
 
 - TODO
 
-## Support
+## Documentation
 
-Users and the development team usually provide support in the **[Ticketeer Help]()** Discord server.
+See the **[Getting Started](/docs/getting-started)** guide for more details.
+
+## Important Links
+
+* [Invite Ticketeer](https://ticketeer.bot/invite)
+* [Ticketeer Dashboard](https://ticketeer.bot/guilds)
+* [Ticketeer Premium](https://ticketeer.bot/premium)
+* [Support Discord](https://ticketeer.bot/support)
+* [Support Twitter](https://twitter.com/ticketeering)

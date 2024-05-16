@@ -20,7 +20,7 @@
 
   <link rel="manifest" href="site.webmanifest">
   <link rel="mask-icon" href="/_media/safari-pinned-tab.svg" color="#14b8a6">
-
+  
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css">
   <style>
     :root {
@@ -55,6 +55,15 @@
 </head>
 <body>
   <div id="app"></div>
+  <script src="//cdn.jsdelivr.net/npm/docsify-edit-on-github"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-themeable@0"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-tabs@1"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@alertbox/docsify-footer@1.0.0-0"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-pagination-keyboard-helper@latest/dist/bundle.js"></script>
   <script>
     window.$docsify = {
       name: 'Ticketeer',
@@ -65,6 +74,7 @@
       loadSidebar: true,
       loadNavbar: true,
       loadFooter: true,
+      nativeEmoji: true,
       maxLevel: 4,
       subMaxLevel: 3,
       themeColor: '#14b8a6',
@@ -89,17 +99,22 @@
         tabComments: true,
         tabHeadings: true,
       },
-      pagination: {},
+      alias: {
+        '/.*/_sidebar.md': '/_sidebar.md',
+      },
+      plugins: [
+        EditOnGithubPlugin.create('https://github.com/ticketeer/docs/blob/main/', null, () => '📝 Edit Document'),
+        function(hook, vm) {
+          hook.doneEach(function() {
+            if (document.title == 'Ticketeer Docs') {
+              document.title = `Ticketeer Docs :: Support Made Simple`;
+            } else {
+              document.title = `Ticketeer Docs :: ${document.title}`;
+            }
+          });
+        }
+      ]
     }
   </script>
-  <!-- Docsify v4 -->
-  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
-  <script src="//cdn.jsdelivr.net/npm/docsify-themeable@0"></script>
-  <script src="//cdn.jsdelivr.net/npm/docsify-tabs@1"></script>
-  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/@alertbox/docsify-footer@1.0.0-0"></script>
-  <script src="//cdn.jsdelivr.net/npm/docsify-pagination-keyboard-helper@latest/dist/bundle.js"></script>
 </body>
 </html>
