@@ -217,6 +217,16 @@ Some Content
 |`uppercase`|-|-|-|
 |`lowercase`|-|-|-|
 
+## Escaping
+
+Use `{literal}{/literal}` to escape a block
+
+```text
+{literal}
+  {$foo} will not be parsed!
+{/literal}
+``` 
+
 ## Comments
 
 Use `{# #}` to add comments (will be stripped from output)
