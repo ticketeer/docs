@@ -1,14 +1,16 @@
+# Template Engine
+
 ## Value injection
 
 Use the value Tag
 
-```
+```text
 {$varName}
 ```
 
 To access array elements or objects use "." to access sub-elements:
 
-```
+```text
  {$users.0.name}
 ```
 
@@ -16,7 +18,7 @@ To access array elements or objects use "." to access sub-elements:
 
 You can insert loops:
 
-```
+```text
 {for $curName in $names}
 Current Name: {$curName}
 {/for}
@@ -25,7 +27,7 @@ Current Name: {$curName}
 Inside each loop, there are to magic-values ```@index0``` (index starting with 0) and ```@index1``` for a
 index starting with amp1.
 
-```
+```text
 {for $curName in $names}
 Line {$@index1}: {$curName}
 {/for}
@@ -38,7 +40,7 @@ Inside loops you can `{break}` or `{continue}` the loop.
 
 You can use if-conditions:
 
-```
+```text
 {if $someVarName == "SomeValue"}
 Hello World
 {/if}
@@ -46,7 +48,7 @@ Hello World
 
 Shortcut: Test if a variable is null:
 
-```
+```text
 {if $someVarName}
     someVarName is set!
 {/if}
@@ -57,7 +59,7 @@ Shortcut: Test if a variable is null:
 
 Complex logical expressions can be made using && (and), || (or) and brackets.
 
-```
+```text
 {if $someVarName && $otherVarName}
     someVarName and otherVarName are set!
 {/if}
@@ -74,7 +76,7 @@ Complex logical expressions can be made using && (and), || (or) and brackets.
 
 You can use filters on values used in comparisons.
 
-```
+```text
 {if $someArray|count > $otherArray|count}
     someArray has more items than otherArray
 {/if}
@@ -92,7 +94,7 @@ You can use filters on values used in comparisons.
 | <=             | Less than or equal                         |
 
 ## Conditions (else)
-```
+```text
 {if $someVarName == "SomeValue"}
 Hello World
 {else}
@@ -102,7 +104,7 @@ Goodbye World
 
 Lists of choices:
 
-```
+```text
 {if $someVarName == "SomeValue"}
 Hello World
 {elseif $someVarName == "OtherValue"}
