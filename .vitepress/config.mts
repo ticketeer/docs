@@ -3,6 +3,8 @@ import { HeadConfig, defineConfig } from 'vitepress'
 const name = "Ticketeer Docs"
 const tagline = "Support Made Simple"
 const description = "Official documentation for Ticketeer - A Discord ticket support bot!"
+const domain = "docs.ticketeer.bot"
+const hostname = `https://${domain}`
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -30,7 +32,7 @@ export default defineConfig({
   transformHead: ({ pageData }) => {
     const head: HeadConfig[] = []
 
-    const canonicalUrl = `https://docs.ticketeer.bot/${pageData.relativePath}`
+    const canonicalUrl = `${hostname}/${pageData.relativePath}`
       .replace(/index\.md$/, '')
       .replace(/\.md$/, '.html')
 
@@ -39,13 +41,13 @@ export default defineConfig({
     head.push([ 'meta', { property: 'og:type', content: 'website' } ])
     head.push([ 'meta', { property: 'og:title', content: `${name}:: ${pageData.frontmatter.title || tagline}` } ])
     head.push([ 'meta', { property: 'og:description', content: pageData.frontmatter.description || description } ])
-    head.push([ 'meta', { property: 'og:image', content: 'https://docs.ticketeer.bot/banner.jpg' } ])
+    head.push([ 'meta', { property: 'og:image', content: `${hostname}/banner.jpg` } ])
     head.push([ 'meta', { property: 'twitter:card', content: 'summary_large_image' } ])
-    head.push([ 'meta', { property: 'twitter:domain', content: 'docs.ticketeer.bot' } ])
+    head.push([ 'meta', { property: 'twitter:domain', content: domain } ])
     head.push([ 'meta', { property: 'twitter:url', content: canonicalUrl } ])
     head.push([ 'meta', { property: 'twitter:title', content: `${name}:: ${pageData.frontmatter.title || tagline}` } ])
     head.push([ 'meta', { property: 'twitter:description', content: pageData.frontmatter.description || description } ])
-    head.push([ 'meta', { property: 'twitter:image', content: 'https://docs.ticketeer.bot/banner.jpg' } ])
+    head.push([ 'meta', { property: 'twitter:image', content: `${hostname}/banner.jpg` } ])
 
     return head
   },
@@ -53,6 +55,8 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: { alt: 'Ticketeer', light: '/icon-dark.svg', dark: '/icon.svg' },
+
+    siteTitle: 'Ticketeer',
 
     nav: [
       { text: 'Home', link: '/' },
@@ -107,11 +111,30 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/ticketeer/docs' }
+      { icon: 'github', link: 'https://github.com/ticketeer/docs' },
+      { icon: 'discord', link: 'https://ticketeer.bot/support' },
+      { icon: 'twitter', link: 'https://twitter.com/ticketeering' },
     ],
+
+    lastUpdated: {
+      text: 'Updated at',
+      formatOptions: {
+        dateStyle: 'full',
+        timeStyle: 'medium'
+      }
+    },
+
+    editLink: {
+      pattern: 'https://github.com/ticketeer/docs/blob/main/src/:path',
+      text: 'Edit this page on GitHub'
+    },
 
     footer: {
       copyright: 'Copyright © 2024-present Ticketeer'
     }
+  },
+
+  sitemap: {
+    hostname
   }
 })
