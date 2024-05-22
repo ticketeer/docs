@@ -35,7 +35,7 @@ export default defineConfig({
 
     const canonicalUrl = `${hostname}/${pageData.relativePath}`
       .replace(/index\.md$/, '')
-      .replace(/\.md$/, '.html')
+      .replace(/\.md$/, '')
 
     head.push([ 'link', { property: 'canonical', href: canonicalUrl  } ])
     head.push([ 'meta', { property: 'og:url', content: canonicalUrl  } ])
