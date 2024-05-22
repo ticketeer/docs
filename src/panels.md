@@ -1,3 +1,0 @@
-# Ticket Panels
-
->  // TODO:

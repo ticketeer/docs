@@ -1,3 +1,0 @@
-# Message Editor
-
->  // TODO:

@@ -1,7 +1,7 @@
 # Ticket Messages
 
 
-## Ticket Created
+## Ticket Created {#created}
 
 ::: details This message is sent to the user that created the message
 
@@ -22,7 +22,7 @@
 
 :::
 
-## Ticket Created Direct Message
+## Ticket Created Direct Message {#created_dm}
 
 ::: details This message is sent to the owner of the ticket in a DM
 
@@ -44,7 +44,7 @@
 
 :::
 
-## Ticket Welcome Message
+## Ticket Welcome Message {#created_welcome}
 
 ::: details This message is sent to the 
 
@@ -65,7 +65,7 @@
 
 :::
 
-## Ticket Created Log
+## Ticket Created Log {#created_log}
 
 ::: details This message is sent to the 
 
@@ -88,7 +88,7 @@
 
 :::
 
-## Ticket Created from Message
+## Ticket Created from Message {#created_from_message}
 
 ::: details This message is sent to the 
 
@@ -111,7 +111,7 @@
 
 :::
 
-## Ticket Created with Message
+## Ticket Created with Message {#created_with_message}
 
 ::: details This message is sent to the 
 
@@ -134,7 +134,7 @@
 
 :::
 
-## Ticket Opened
+## Ticket Opened {#opened}
 
 ::: details This message is sent to the 
 
@@ -156,7 +156,7 @@
 
 :::
 
-## Ticket Opened Log
+## Ticket Opened Log {#opened_log}
 
 ::: details This message is sent to the 
 
@@ -179,7 +179,7 @@
 
 :::
 
-## Ticket Closed
+## Ticket Closed {#closed}
 
 ::: details This message is sent to the 
 
@@ -200,7 +200,7 @@
 
 :::
 
-## Ticket Close Confirm
+## Ticket Close Confirm {#close_confirm}
 
 ::: details This message is sent to the 
 
@@ -221,7 +221,7 @@
 
 :::
 
-## Ticket Closed Direct Message
+## Ticket Closed Direct Message {#closed_dm}
 
 ::: details This message is sent to the 
 
@@ -242,51 +242,7 @@
 
 :::
 
-## Ticket Closed Log
-
-::: details This message is sent to the 
-
-| Template Options| Value |
-|------------------|------------|
-| Can be disabled? | `-` |
-| Can be automatically deleted? | `-` |
-
-| Variable Name  | Type       | Description                                |
-|----------------|------------|--------------------------------------------|
-|`server`| [Server](#server-object) | The server that the ticket was created in |
-|`ticket`| [Ticket](#ticket-object) | The ticket |
-|`group`| [Group](#group-object) | The ticket group of the ticket |
-|`owner`| [User](#user-object) | The owner of the ticket |
-|`assigned?`| [User](#user-object) \| `null` | The assigned user of the ticket |
-|`channel`| [Channel](#channel-object) | The channel the ticket was created in |
-|`user`| [User](#user-object) | The user that triggered this action |
-|`event`| `string` | Ticket log event |
-|`message`| `string` | Ticket log event message | 
-
-:::
-
-## Ticket Locked
-
-::: details This message is sent to the 
-
-| Template Options| Value |
-|------------------|------------|
-| Can be disabled? | `-` |
-| Can be automatically deleted? | `-` |
-
-| Variable Name  | Type       | Description                                |
-|----------------|------------|--------------------------------------------|
-|`server`| [Server](#server-object) | The server that the ticket was created in |
-|`ticket`| [Ticket](#ticket-object) | The ticket |
-|`group`| [Group](#group-object) | The ticket group of the ticket |
-|`owner`| [User](#user-object) | The owner of the ticket |
-|`assigned?`| [User](#user-object) \| `null` | The assigned user of the ticket |
-|`channel`| [Channel](#channel-object) | The channel the ticket was created in |
-|`user`| [User](#user-object) | The user that triggered this action |
-
-:::
-
-## Ticket Locked Log
+## Ticket Closed Log {#closed_log}
 
 ::: details This message is sent to the 
 
@@ -309,7 +265,7 @@
 
 :::
 
-## Ticket Unlocked
+## Ticket Locked {#locked}
 
 ::: details This message is sent to the 
 
@@ -330,7 +286,7 @@
 
 :::
 
-## Ticket Unlocked Log
+## Ticket Locked Log {#locked_log}
 
 ::: details This message is sent to the 
 
@@ -353,7 +309,51 @@
 
 :::
 
-## Ticket Assigned
+## Ticket Unlocked {#unlocked}
+
+::: details This message is sent to the 
+
+| Template Options| Value |
+|------------------|------------|
+| Can be disabled? | `-` |
+| Can be automatically deleted? | `-` |
+
+| Variable Name  | Type       | Description                                |
+|----------------|------------|--------------------------------------------|
+|`server`| [Server](#server-object) | The server that the ticket was created in |
+|`ticket`| [Ticket](#ticket-object) | The ticket |
+|`group`| [Group](#group-object) | The ticket group of the ticket |
+|`owner`| [User](#user-object) | The owner of the ticket |
+|`assigned?`| [User](#user-object) \| `null` | The assigned user of the ticket |
+|`channel`| [Channel](#channel-object) | The channel the ticket was created in |
+|`user`| [User](#user-object) | The user that triggered this action |
+
+:::
+
+## Ticket Unlocked Log {#unlocked_log}
+
+::: details This message is sent to the 
+
+| Template Options| Value |
+|------------------|------------|
+| Can be disabled? | `-` |
+| Can be automatically deleted? | `-` |
+
+| Variable Name  | Type       | Description                                |
+|----------------|------------|--------------------------------------------|
+|`server`| [Server](#server-object) | The server that the ticket was created in |
+|`ticket`| [Ticket](#ticket-object) | The ticket |
+|`group`| [Group](#group-object) | The ticket group of the ticket |
+|`owner`| [User](#user-object) | The owner of the ticket |
+|`assigned?`| [User](#user-object) \| `null` | The assigned user of the ticket |
+|`channel`| [Channel](#channel-object) | The channel the ticket was created in |
+|`user`| [User](#user-object) | The user that triggered this action |
+|`event`| `string` | Ticket log event |
+|`message`| `string` | Ticket log event message | 
+
+:::
+
+## Ticket Assigned {#assigned}
 
 ::: details This message is sent to the 
 
@@ -374,7 +374,7 @@
 
 :::
 
-## Ticket Assigned Log
+## Ticket Assigned Log {#assigned_log}
 
 ::: details This message is sent to the 
 
@@ -397,7 +397,7 @@
 
 :::
 
-## Ticket Unassigned
+## Ticket Unassigned {#unassigned}
 
 ::: details This message is sent to the 
 
@@ -419,7 +419,7 @@
 
 :::
 
-## Ticket Unassigned Log
+## Ticket Unassigned Log {#unassigned_log}
 
 ::: details This message is sent to the 
 
@@ -443,7 +443,7 @@
 
 :::
 
-## Ticket Deleting
+## Ticket Deleting {#deleting}
 
 ::: details This message is sent to the 
 
@@ -464,7 +464,7 @@
 
 :::
 
-## Ticket Deleting Log
+## Ticket Deleting Log {#deleted_log}
 
 ::: details This message is sent to the 
 
@@ -473,89 +473,6 @@
 | Can be disabled? | `-` |
 | Can be automatically deleted? | `-` |
 
-|`server`| [Server](#server-object) | The server that the ticket was created in |
-|`ticket`| [Ticket](#ticket-object) | The ticket |
-|`group`| [Group](#group-object) | The ticket group of the ticket |
-|`owner`| [User](#user-object) | The owner of the ticket |
-|`assigned?`| [User](#user-object) \| `null` | The assigned user of the ticket |
-|`channel`| [Channel](#channel-object) | The channel the ticket was created in |
-|`user`| [User](#user-object) | The user that triggered this action |
-|`event`| `string` | Ticket log event |
-|`message`| `string` | Ticket log event message | 
-
-:::
-
-## Ticket Transcript
-
-::: details This message is sent to the 
-
-| Template Options| Value |
-|------------------|------------|
-| Can be disabled? | `-` |
-| Can be automatically deleted? | `-` |
-
-| Variable Name  | Type       | Description                                |
-|----------------|------------|--------------------------------------------|
-|`server`| [Server](#server-object) | The server that the ticket was created in |
-|`ticket`| [Ticket](#ticket-object) | The ticket |
-|`group`| [Group](#group-object) | The ticket group of the ticket |
-|`owner`| [User](#user-object) | The owner of the ticket |
-|`assigned?`| [User](#user-object) \| `null` | The assigned user of the ticket |
-|`channel`| [Channel](#channel-object) | The channel the ticket was created in |
-
-:::
-
-## Ticket Transcript Direct Message
-
-::: details This message is sent to the 
-
-| Template Options| Value |
-|------------------|------------|
-| Can be disabled? | `-` |
-| Can be automatically deleted? | `-` |
-
-| Variable Name  | Type       | Description                                |
-|----------------|------------|--------------------------------------------|
-|`server`| [Server](#server-object) | The server that the ticket was created in |
-|`ticket`| [Ticket](#ticket-object) | The ticket |
-|`group`| [Group](#group-object) | The ticket group of the ticket |
-|`owner`| [User](#user-object) | The owner of the ticket |
-|`assigned?`| [User](#user-object) \| `null` | The assigned user of the ticket |
-|`channel`| [Channel](#channel-object) | The channel the ticket was created in |
-
-:::
-
-## Ticket Transcript Saving
-
-::: details This message is sent to the 
-
-| Template Options| Value |
-|------------------|------------|
-| Can be disabled? | `-` |
-| Can be automatically deleted? | `-` |
-
-| Variable Name  | Type       | Description                                |
-|----------------|------------|--------------------------------------------|
-|`server`| [Server](#server-object) | The server that the ticket was created in |
-|`ticket`| [Ticket](#ticket-object) | The ticket |
-|`group`| [Group](#group-object) | The ticket group of the ticket |
-|`owner`| [User](#user-object) | The owner of the ticket |
-|`assigned?`| [User](#user-object) \| `null` | The assigned user of the ticket |
-|`channel`| [Channel](#channel-object) | The channel the ticket was created in |
-
-:::
-
-## Ticket Transcript Log
-
-::: details This message is sent to the 
-
-| Template Options| Value |
-|------------------|------------|
-| Can be disabled? | `-` |
-| Can be automatically deleted? | `-` |
-
-| Variable Name  | Type       | Description                                |
-|----------------|------------|--------------------------------------------|
 |`server`| [Server](#server-object) | The server that the ticket was created in |
 |`ticket`| [Ticket](#ticket-object) | The ticket |
 |`group`| [Group](#group-object) | The ticket group of the ticket |
@@ -568,7 +485,90 @@
 
 :::
 
-## Ticket User Added
+## Ticket Transcript {#transcript}
+
+::: details This message is sent to the 
+
+| Template Options| Value |
+|------------------|------------|
+| Can be disabled? | `-` |
+| Can be automatically deleted? | `-` |
+
+| Variable Name  | Type       | Description                                |
+|----------------|------------|--------------------------------------------|
+|`server`| [Server](#server-object) | The server that the ticket was created in |
+|`ticket`| [Ticket](#ticket-object) | The ticket |
+|`group`| [Group](#group-object) | The ticket group of the ticket |
+|`owner`| [User](#user-object) | The owner of the ticket |
+|`assigned?`| [User](#user-object) \| `null` | The assigned user of the ticket |
+|`channel`| [Channel](#channel-object) | The channel the ticket was created in |
+
+:::
+
+## Ticket Transcript Direct Message {#transcript_dm}
+
+::: details This message is sent to the 
+
+| Template Options| Value |
+|------------------|------------|
+| Can be disabled? | `-` |
+| Can be automatically deleted? | `-` |
+
+| Variable Name  | Type       | Description                                |
+|----------------|------------|--------------------------------------------|
+|`server`| [Server](#server-object) | The server that the ticket was created in |
+|`ticket`| [Ticket](#ticket-object) | The ticket |
+|`group`| [Group](#group-object) | The ticket group of the ticket |
+|`owner`| [User](#user-object) | The owner of the ticket |
+|`assigned?`| [User](#user-object) \| `null` | The assigned user of the ticket |
+|`channel`| [Channel](#channel-object) | The channel the ticket was created in |
+
+:::
+
+## Ticket Transcript Saving {#transcript_saving}
+
+::: details This message is sent to the 
+
+| Template Options| Value |
+|------------------|------------|
+| Can be disabled? | `-` |
+| Can be automatically deleted? | `-` |
+
+| Variable Name  | Type       | Description                                |
+|----------------|------------|--------------------------------------------|
+|`server`| [Server](#server-object) | The server that the ticket was created in |
+|`ticket`| [Ticket](#ticket-object) | The ticket |
+|`group`| [Group](#group-object) | The ticket group of the ticket |
+|`owner`| [User](#user-object) | The owner of the ticket |
+|`assigned?`| [User](#user-object) \| `null` | The assigned user of the ticket |
+|`channel`| [Channel](#channel-object) | The channel the ticket was created in |
+
+:::
+
+## Ticket Transcript Log {#transcript_log}
+
+::: details This message is sent to the 
+
+| Template Options| Value |
+|------------------|------------|
+| Can be disabled? | `-` |
+| Can be automatically deleted? | `-` |
+
+| Variable Name  | Type       | Description                                |
+|----------------|------------|--------------------------------------------|
+|`server`| [Server](#server-object) | The server that the ticket was created in |
+|`ticket`| [Ticket](#ticket-object) | The ticket |
+|`group`| [Group](#group-object) | The ticket group of the ticket |
+|`owner`| [User](#user-object) | The owner of the ticket |
+|`assigned?`| [User](#user-object) \| `null` | The assigned user of the ticket |
+|`channel`| [Channel](#channel-object) | The channel the ticket was created in |
+|`user`| [User](#user-object) | The user that triggered this action |
+|`event`| `string` | Ticket log event |
+|`message`| `string` | Ticket log event message | 
+
+:::
+
+## Ticket User Added {#user_added}
 
 ::: details This message is sent to the 
 
@@ -590,7 +590,7 @@
 
 :::
 
-## Ticket User Added Direct Message
+## Ticket User Added Direct Message {#user_added_dm}
 
 ::: details This message is sent to the 
 
@@ -612,7 +612,7 @@
 
 :::
 
-## Ticket User Added Log
+## Ticket User Added Log {#user_added_log}
 
 ::: details This message is sent to the 
 
@@ -636,7 +636,7 @@
 
 :::
 
-## Ticket User Removed
+## Ticket User Removed {#user_removed}
 
 ::: details This message is sent to the 
 
@@ -658,7 +658,7 @@
 
 :::
 
-## Ticket User Removed Direct Message
+## Ticket User Removed Direct Message {#user_removed_dm}
 
 ::: details This message is sent to the 
 
@@ -680,7 +680,7 @@
 
 :::
 
-## Ticket User Removed Log
+## Ticket User Removed Log {#user_removed_log}
 
 ::: details This message is sent to the 
 
@@ -704,7 +704,7 @@
 
 :::
 
-## Ticket Owner Change
+## Ticket Owner Change {#owner_change}
 
 ::: details This message is sent to the 
 
@@ -726,7 +726,7 @@
 
 :::
 
-## Ticket Owner Change Direct Message
+## Ticket Owner Change Direct Message {#owner_change_dm}
 
 ::: details This message is sent to the 
 
@@ -748,7 +748,7 @@
 
 :::
 
-## Ticket Owner Change Log
+## Ticket Owner Change Log {#owner_change_log}
 
 ::: details This message is sent to the 
 
@@ -772,7 +772,7 @@
 
 :::
 
-## Ticket Priority Change
+## Ticket Priority Change {#priority_change}
 
 ::: details This message is sent to the 
 
@@ -793,7 +793,7 @@
 
 :::
 
-## Ticket Priority Change Log
+## Ticket Priority Change Log {#priority_change_log}
 
 ::: details This message is sent to the 
 
@@ -816,7 +816,7 @@
 
 :::
 
-## Ticket Expired
+## Ticket Expired {#expired}
 
 ::: details This message is sent to the 
 
@@ -839,7 +839,7 @@
 
 :::
 
-## Ticket Expired Log
+## Ticket Expired Log {#expired_log}
 
 ::: details This message is sent to the 
 
@@ -866,7 +866,7 @@
 
 :::
 
-## Ticket Expiring
+## Ticket Expiring {#expiring}
 
 ::: details This message is sent to the 
 
@@ -889,7 +889,7 @@
 
 :::
 
-## Ticket Expire
+## Ticket Expire {#expire}
 
 ::: details This message is sent to the 
 
@@ -913,7 +913,7 @@
 
 :::
 
-## Ticket Expire Log
+## Ticket Expire Log {#expire_log}
 
 ::: details This message is sent to the 
 
@@ -936,7 +936,7 @@
 
 :::
 
-## Ticket Eternal 
+## Ticket Eternal {#eternal}
 
 ::: details This message is sent to the 
 
@@ -958,7 +958,7 @@
 
 :::
 
-## Ticket Eternal Log
+## Ticket Eternal Log {#eternal_log}
 
 ::: details This message is sent to the 
 
@@ -982,7 +982,7 @@
 
 :::
 
-## Ticket Schedule Error
+## Ticket Schedule Error {#schedule_error}
 
 ::: details This message is sent to the 
 
@@ -999,28 +999,7 @@
 
 :::
 
-## Ticket Schedule Notice
-
-::: details This message is sent to the 
-
-| Template Options| Value |
-|------------------|------------|
-| Can be disabled? | `-` |
-| Can be automatically deleted? | `-` |
-
-| Variable Name  | Type       | Description                                |
-|----------------|------------|--------------------------------------------|
-|`server`| [Server](#server-object) | The server that the ticket was created in |
-|`ticket`| [Ticket](#ticket-object) | The ticket |
-|`group`| [Group](#group-object) | The ticket group of the ticket |
-|`owner`| [User](#user-object) | The owner of the ticket |
-|`assigned?`| [User](#user-object) \| `null` | The assigned user of the ticket |
-|`channel`| [Channel](#channel-object) | The channel the ticket was created in |
-|`user`| [User](#user-object) | The user that triggered this action |
-
-:::
-
-## Ticket Feedback
+## Ticket Schedule Notice {#schedule_notice}
 
 ::: details This message is sent to the 
 
@@ -1041,7 +1020,28 @@
 
 :::
 
-## Ticket Feedback Log
+## Ticket Feedback {#feedback_response}
+
+::: details This message is sent to the 
+
+| Template Options| Value |
+|------------------|------------|
+| Can be disabled? | `-` |
+| Can be automatically deleted? | `-` |
+
+| Variable Name  | Type       | Description                                |
+|----------------|------------|--------------------------------------------|
+|`server`| [Server](#server-object) | The server that the ticket was created in |
+|`ticket`| [Ticket](#ticket-object) | The ticket |
+|`group`| [Group](#group-object) | The ticket group of the ticket |
+|`owner`| [User](#user-object) | The owner of the ticket |
+|`assigned?`| [User](#user-object) \| `null` | The assigned user of the ticket |
+|`channel`| [Channel](#channel-object) | The channel the ticket was created in |
+|`user`| [User](#user-object) | The user that triggered this action |
+
+:::
+
+## Ticket Feedback Log {#feedback_log}
 
 ::: details This message is sent to the 
 
@@ -1065,7 +1065,7 @@
 
 :::
 
-## Ticket Rating
+## Ticket Rating {#rating_response}
 
 ::: details This message is sent to the 
 
@@ -1086,7 +1086,7 @@
 
 :::
 
-## Ticket Rating Menu
+## Ticket Rating Menu {#rating_menu}
 
 ::: details This message is sent to the 
 
@@ -1107,7 +1107,7 @@
 
 :::
 
-## Ticket Rating Log
+## Ticket Rating Log {#rating_log}
 
 ::: details This message is sent to the 
 
@@ -1130,7 +1130,7 @@
 
 :::
 
-## Ticket Thread
+## Ticket Thread {#thread}
 
 ::: details This message is sent to the 
 
@@ -1152,7 +1152,7 @@
 
 :::
 
-## Ticket Menu (Opened)
+## Ticket Menu (Opened) {#ticket_menu_opened}
 
 ::: details This message is sent to the 
 
@@ -1173,7 +1173,7 @@
 
 :::
 
-## Ticket Menu (Locked)
+## Ticket Menu (Locked) {#ticket_menu_locked}
 
 ::: details This message is sent to the 
 
@@ -1194,7 +1194,7 @@
 
 :::
 
-## Ticket Menu (Assigned)
+## Ticket Menu (Assigned) {#ticket_menu_assigned}
 
 ::: details This message is sent to the 
 
@@ -1215,7 +1215,7 @@
 
 :::
 
-## Ticket Menu (Closed)
+## Ticket Menu (Closed) {#ticket_menu_closed}
 
 ::: details This message is sent to the 
 
@@ -1236,7 +1236,7 @@
 
 :::
 
-## Ticket Menu (Deleted)
+## Ticket Menu (Deleted) {#ticket_menu_deleted}
 
 ::: details This message is sent to the 
 

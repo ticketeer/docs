@@ -1,3 +1,8 @@
+---
+next: 
+  text: 'Commands'
+  link: '/commands'
+---
 # Getting Started
 
 Ticketeer is simply a Discord ticket support bot, built from the ground up to be one of the most customizable and easy to use ticket bots available. 

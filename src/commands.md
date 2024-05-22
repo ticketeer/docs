@@ -198,3 +198,7 @@ Makes a ticket eternal (immune to expiration)
 ::: info
 
 :::
+
+## User Commands
+
+## Message Commands
