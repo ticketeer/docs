@@ -6,7 +6,7 @@ layout: home
 hero:
   name: "Ticketeer Docs"
   text: "Support Made Simple"
-  tagline: Official documentation for Ticketeer discord bot!
+  tagline: Official documentation for the Ticketeer discord bot!
   actions:
     - theme: brand
       text: Getting Started
@@ -16,8 +16,8 @@ hero:
       link: /commands
 
 features:
-  - title: Advanced Templates
-    details: Advanced menus, buttons and dropdown support
+  - title: Advanced Message Builder
+    details: Add menus, buttons and dropdowns to your messages
   - title: Multiple Ticket Types
     details: Make channel based tickets, forum based tickets, and thread based tickets
   - title: Fully Customizable Messages

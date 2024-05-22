@@ -29,6 +29,16 @@ Ticketeer is simply a Discord ticket support bot, built from the ground up to be
 
 And more!
 
+## Quickstart
+
+If you are familiar with discord bots, here is a quickstart guide to get you started:
+
+- [Invite Ticketeer](https://ticketeer.dev/invite)
+- [Login to dashboard](https://ticketeer.dev/guilds)
+- [Create a Ticket Group](#creating-a-group-via-web-portal)
+- [Create a Ticket Panel](#creating-a-panel-via-web-portal)
+- You're ready to go! You can now open a new ticket from the panel.
+
 ## Inviting Ticketeer
 
 First you'll need to invite Ticketeer to your server, you can do this by clicking on [this link](https://ticketeer.dev/invite).

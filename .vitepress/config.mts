@@ -8,11 +8,12 @@ const hostname = `https://${domain}`
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: name,
+  title: tagline,
   titleTemplate: `${name} :: :title`,
   description,
   srcDir: 'src',
   lang: 'en-US',
+  cleanUrls: true,
 
   head: [
     [ 'link', { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'} ],
@@ -55,21 +56,14 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: { alt: 'Ticketeer', light: '/icon-dark.svg', dark: '/icon.svg' },
-
     siteTitle: 'Ticketeer',
+    outline: { level: [2, 3,] },
 
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Invite', link: 'https://ticketeer.bot/invite' },
+      { text: 'Invite Bot', link: 'https://ticketeer.bot/invite' },
       { text: 'Dashboard', link: 'https://ticketeer.bot/guilds' },
       { text: 'Premium', link: 'https://ticketeer.bot/premium' },
-      {
-        text: 'Support',
-        items: [
-          { text: 'Discord', link: 'https://ticketeer.bot/support' },
-          { text: 'Twitter', link: 'https://twitter.com/ticketeering' },
-        ]
-      }
     ],
 
     sidebar: [
@@ -80,6 +74,8 @@ export default defineConfig({
         text: 'BOT',
         items: [
           { text: 'Commands', link: '/commands' },
+          { text: 'User Commands', link: '/user-commands' },
+          { text: 'Message Commands', link: '/message-commands' },
         ]
       },
       {
@@ -110,6 +106,10 @@ export default defineConfig({
       },
     ],
 
+    search: {
+      provider: 'local'
+    },
+
     socialLinks: [
       { icon: 'github', link: 'https://github.com/ticketeer/docs' },
       { icon: 'discord', link: 'https://ticketeer.bot/support' },
@@ -125,7 +125,7 @@ export default defineConfig({
     },
 
     editLink: {
-      pattern: 'https://github.com/ticketeer/docs/blob/main/src/:path',
+      pattern: 'https://github.com/ticketeer/docs/edit/main/src/:path',
       text: 'Edit this page on GitHub'
     },
 
