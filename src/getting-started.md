@@ -8,7 +8,7 @@ next:
 Ticketeer is simply a Discord ticket support bot, built from the ground up to be one of the most customizable and easy to use ticket bots available. 
 
 <p align="center">
-  <img src="/images/simple_demo.gif" />
+  <img src="/images/simple_demo.gif" class="rounded-md" />
 </p>
 
 ## Features
@@ -49,7 +49,7 @@ If you are familiar with discord bots, here is a quickstart guide to get you sta
 First you'll need to invite Ticketeer to your server, you can do this by clicking on [this link](https://ticketeer.dev/invite).
 
 <p align="center">
-  <img src="/images/invite.gif" loading="lazy" />
+  <img src="/images/invite.gif" loading="lazy" class="rounded-md" />
 </p>
 
 
@@ -63,7 +63,7 @@ You can now create a ticket group. A ticket groups is a way to organize your tic
 Once you've added Ticketeer you can login to the panel and view the server if you have the  `Manage Server` permission.
 
 <p align="center">
-  <img src="/images/create_panel.gif" loading="lazy" />
+  <img src="/images/create_panel.gif" loading="lazy" class="rounded-md" />
 </p>
 
 ### Creating a group via command
@@ -71,7 +71,7 @@ Once you've added Ticketeer you can login to the panel and view the server if yo
 Once Ticketeer is in your server you can run the `/group create` if you have the `Manage Server` permission.
 
 <p align="center">
-  <img src="/images/panel_create_cmd.gif" loading="lazy" />
+  <img src="/images/panel_create_cmd.gif" loading="lazy" class="rounded-md" />
 </p>
 
 ## Creating your first Ticket Panel
