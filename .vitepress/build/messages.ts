@@ -69,7 +69,9 @@ for (const section of Object.keys(messageSections)) {
 
       output += `### ${message.info.title} {#${id}}
 
+<ClientOnly>
 <MessagePreview class="mt-3" title="${message.info.title}" :message="templates['${id}']" />
+</ClientOnly>
 
 ::: info
 
