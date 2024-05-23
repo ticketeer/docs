@@ -3,6 +3,7 @@ import { fileURLToPath } from 'url'
 
 import { HeadConfig, defineConfig } from 'vitepress'
 import timeline from "vitepress-markdown-timeline"
+import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
 
 const name = "Ticketeer Docs"
 const tagline = "Support Made Simple"
@@ -151,7 +152,9 @@ export default defineConfig({
   markdown: {
     config: (md) => {
       // @ts-ignore
-      md.use(timeline);
+      md.use(timeline)
+      // @ts-ignore
+      md.use(tabsMarkdownPlugin)
     },
   },
 

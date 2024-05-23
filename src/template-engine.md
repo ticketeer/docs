@@ -1,4 +1,5 @@
 # Template Engine
+Ticketeer uses an advanced template engine to allow for greater customization of the messages sent to users.
 
 ## Value injection
 

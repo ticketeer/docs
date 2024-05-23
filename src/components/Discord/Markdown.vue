@@ -2,7 +2,6 @@
   import { markdownToVue } from '@/lib/dmarkdown'
 
   import Timestamp from '@/components/Discord/Timestamp.vue'
-  import Highlight from '@/components/Discord/Highlight.vue'
 
   import { defineComponent, h, VNode } from 'vue'
 
@@ -18,7 +17,6 @@
           return markdownToVue(vNode.children, {
             components: {
               timestamp: Timestamp,
-              codeBlock: Highlight,
             },
           })
         })
