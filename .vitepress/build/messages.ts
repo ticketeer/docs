@@ -106,6 +106,7 @@ ${JSON.stringify(message.template, null, 2)}
 
 const file = `
 <script setup lang="ts">
+  import MessagePreview from '@/components/MessagePreview.vue'
   const templates = ${JSON.stringify(templates, null, 2)}
 </script>
 

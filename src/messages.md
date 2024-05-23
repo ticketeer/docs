@@ -1,5 +1,6 @@
 
 <script setup lang="ts">
+  import MessagePreview from '@/components/MessagePreview.vue'
   const templates = {
   "ticket_menu_opened": {
     "delete_after": 180,
