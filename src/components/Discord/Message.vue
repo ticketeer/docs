@@ -1,7 +1,8 @@
 <script setup lang="ts">
   import DiscordAuthorInfo from '@/components/Discord/AuthorInfo.vue'
 
-  import { options, fallback } from './_options'
+  import { computed, PropType, useSlots, inject } from 'vue'
+  import { options, fallback, defaultTimestamp, parseTimestamp } from './_options'
 
   const props = defineProps({
     author: String as PropType<string | null>,

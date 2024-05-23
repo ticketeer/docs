@@ -4,10 +4,6 @@ import { fileURLToPath } from 'url'
 import { HeadConfig, defineConfig } from 'vitepress'
 import timeline from "vitepress-markdown-timeline"
 
-import imports from 'unplugin-auto-import/vite'
-
-import RadixResolver from 'radix-vue/resolver'
-
 const name = "Ticketeer Docs"
 const tagline = "Support Made Simple"
 const description = "Official documentation for Ticketeer - A Discord ticket support bot!"
@@ -165,18 +161,5 @@ export default defineConfig({
         '@': path.resolve(__dirname, '../src'),
       }
     },
-    plugins: [
-      imports({
-        dts: '../.vitepress/types/auto-imports.d.ts',
-        include: [/\.vue$/, /\.md$/],
-        dirs: ['./lib/utils'],
-        vueTemplate: true,
-        imports: [
-          'vue',
-          'vue/macros',
-          '@vueuse/core',
-        ],
-      }),
-    ]
   }
 })

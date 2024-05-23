@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { vOnClickOutside } from '@vueuse/components'
   import { useFloating, flip } from '@floating-ui/vue'
+  import { ref } from 'vue'
 
   defineProps({
     placeholder: {

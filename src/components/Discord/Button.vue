@@ -2,6 +2,8 @@
   import Emoji from '@/components/Emoji.vue';
   import DiscordOutboundLinkIcon from '@/components/Discord/OutboundLinkIcon.vue';
 
+  import { computed, PropType } from 'vue'
+
   const props = defineProps({
     disabled: Boolean,
     emoji: String as PropType<string | null>,

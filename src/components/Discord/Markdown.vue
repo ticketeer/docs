@@ -1,8 +1,10 @@
 <script lang="ts">
   import { markdownToVue } from '@/lib/dmarkdown'
 
-  import Timestamp from './Timestamp.vue'
-  import Highlight from './Highlight.vue'
+  import Timestamp from '@/components/Discord/Timestamp.vue'
+  import Highlight from '@/components/Discord/Highlight.vue'
+
+  import { defineComponent, h, VNode } from 'vue'
 
   export default defineComponent({
     name: 'DiscordMarkdown',

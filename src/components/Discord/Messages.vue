@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import { options } from './_options'
+  import { computed, provide } from 'vue'
 
   const props = defineProps({
     compactMode: {

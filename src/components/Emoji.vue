@@ -1,4 +1,6 @@
 <script setup lang="ts">
+  import { computed, PropType } from 'vue'
+
   const props = defineProps({
     value: String as PropType<string | null>,
   })

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+  import { PropType } from 'vue'
+
   defineProps({
     label: String,
     description: String as PropType<string | null>,
