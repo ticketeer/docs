@@ -3,85 +3,112 @@ next:
   text: 'Commands'
   link: '/commands'
 ---
+
 # Getting Started
 
-Ticketeer is simply a Discord ticket support bot, built from the ground up to be one of the most customizable and easy to use ticket bots available. 
-
-<p align="center">
-  <img src="/images/simple_demo.gif" class="rounded-md" />
-</p>
+Ticketeer is a Discord ticket support bot, designed to be one of the most customizable and easy-to-use ticket bots available.
 
 ## Features
 
-- Fully customizable messages with an [advanced templating engine](/template-engine.md) (over 50 messages) 
-- Advanced menus, buttons and dropdown support
-- Highly customizable role and user permissions 
-- Thread based tickets (private or public threads)
-- Forum based tickets (public threads)
-- Channel based tickets (under a category)
-- Ticket locking, lock a ticket to stop conversation 
-- Ticket calming & assigning, let your staff claim or assign tickets to each other
-- Ticket expiring, expire tickets to automatically close after certain amount of time or inactivity
-- Ticket priorities, set the priority of the ticket
-- Ticket feedback and ratings, let your users rate their experience and give value feedback after the ticket is closed
-- Ticket transcripts, save the conversation between you and your users
-- Ticket limits, give your users/groups limits to how many tickets can be open at once.
-- Ticket forms, survey your users before they open a ticket
-- Ticket scheduling, only allow tickets to be opened during certain hours of the week
-- Ticket logs, log every ticket action in a channel
-- Private threads, create a private thread for support members (only when using channel tickets)
+- Fully customizable messages with an [advanced templating engine](/template-engine.md) (over 50 messages)
+- Advanced menus, buttons, and dropdown support
+- Highly customizable role and user permissions
+- Thread-based tickets (private or public threads)
+- Forum-based tickets (public threads)
+- Channel-based tickets (under a category)
+- Ticket locking to stop conversations
+- Ticket claiming & assigning for staff collaboration
+- Ticket expiration for automatic closure after inactivity
+- Ticket priorities to set the urgency of the ticket
+- Ticket feedback and ratings to gather user experiences
+- Ticket transcripts to save conversations
+- Ticket limits to control the number of open tickets
+- Ticket forms to survey users before opening a ticket
+- Ticket scheduling to restrict ticket creation to specific hours
+- Ticket logs to track all ticket actions
+- Private threads for support staff (only for channel tickets)
 - Custom user identity for opening tickets
 
 And more!
 
-## Quickstart
+## Quickstart Guide
 
-If you are familiar with discord bots, here is a quickstart guide to get you started:
+If you are familiar with Discord bots, follow this quickstart guide to get Ticketeer up and running:
 
-- [Invite Ticketeer](https://ticketeer.dev/invite)
-- [Login to dashboard](https://ticketeer.dev/guilds)
-- [Create a Ticket Group](#creating-a-group-via-web-portal)
-- [Create a Ticket Panel](#creating-a-panel-via-web-portal)
-- You're ready to go! You can now open a new ticket from the panel.
+1. [Invite Ticketeer](https://ticketeer.dev/invite) to your server.
+2. [Log in to the dashboard](https://ticketeer.dev/guilds).
+3. [Create a Ticket Group](#creating-a-group-via-web-portal).
+4. [Create a Ticket Panel](#creating-a-panel-via-web-portal).
+5. You're ready to go! You can now open a new ticket from the ticket panel or via the `/new` command.
 
 ## Inviting Ticketeer
 
-First you'll need to invite Ticketeer to your server, you can do this by clicking on [this link](https://ticketeer.dev/invite).
+First, invite Ticketeer to your server. Click the invite link and follow the prompts to select your server and grant Ticketeer the necessary permissions.
 
 <p align="center">
   <img src="/images/invite.gif" loading="lazy" class="rounded-md" />
 </p>
 
+::: info
+Ensure you have the `Manage Server` permission or you will not be able to access your server in the dashboard.
+:::
+## Setting Up Your First Ticket Group
 
-## Creating your first Ticket Group
+### Creating a Group via Web Portal
 
-You can now create a ticket group. A ticket groups is a way to organize your tickets into groups, you can create them two different ways via the command `/group create` of by logging in to the [web portal](https://ticketeer.dev/guilds). It is recommended you create your group via the web portal as it offers more options for you to customize. Learn more about [Ticket Groups](/groups.md).
+1. Log in to the [Ticketeer dashboard](https://ticketeer.dev/guilds).
+2. Navigate to the "Groups" section.
+3. Click "Create Group" and follow the prompts to set up your first ticket group. 
 
+<p align="center">
+  <img src="/images/create_group.gif" loading="lazy" class="rounded-md" />
+</p>
 
-### Creating a group via web portal
+### Creating a Group via Command
 
-Once you've added Ticketeer you can login to the panel and view the server if you have the  `Manage Server` permission.
+1. Once Ticketeer is in your server, run the `/group create` command.
+
+<p align="center">
+  <img src="/images/create_group_cmd.gif" loading="lazy" class="rounded-md" />
+</p>
+
+::: info
+You are required to have the `Manage Server` permission to create a ticket group.
+:::
+
+## Creating Your First Ticket Panel
+
+A ticket panel is a message sent via Ticketeer that allows your users to open a ticket from one or several ticket groups. There are two ways to create a ticket panel:
+
+### Creating a Panel via Web Portal
+
+1. Log in to the [web portal](https://ticketeer.dev/guilds).
+2. Navigate to the "Panels" section.
+3. Click "Create Panel" and attach one or more ticket groups to it. Customize the message and buttons as needed.
 
 <p align="center">
   <img src="/images/create_panel.gif" loading="lazy" class="rounded-md" />
 </p>
 
-### Creating a group via command
+### Creating a Panel via Command
 
-Once Ticketeer is in your server you can run the `/group create` if you have the `Manage Server` permission.
+1. Run the `/panel create` command to create a simple ticket panel.
+
+::: info
+The `/panel create` command offers limited customization options and you can only attach one ticket group. It is recommended to use the web portal for more advanced customization.
+:::
 
 <p align="center">
-  <img src="/images/panel_create_cmd.gif" loading="lazy" class="rounded-md" />
+  <img src="/images/create_panel_cmd.gif" loading="lazy" class="rounded-md" />
 </p>
 
-## Creating your first Ticket Panel
-You can now create a ticket panel, a ticket panel is just a message you can send via Ticketeer to have your users open a ticket from one or serval ticket groups. You can create ticket panels two diffrent ways, via `/panel create` or by logging in to the [web portal](https://ticketeer.dev/guilds). It is recommended you create your panel via the web portal as it offers more options for you to customize. Learn more about [Ticket Panels](/panels.md).
+## Opening Your First Ticket
 
-### Creating a panel via web portal
-Now that you have a ticket group you can create a ticket panel and attach one or many ticket groups to it. This panel will allow your users to create a ticket. The command will only fill in the default message. If you'd like to customize the message and buttons, please log into the [web portal](https://ticketeer.dev/guilds).
+Once your ticket panel is set up, you can open a ticket:
 
-### Creating a panel via command
-Now that you have a ticket group you can create a ticket panel and attach one or many ticket groups to it. This panel will allow your users to create a ticket.
+1. Send a message to the panel using the `/new` command.
+2. Alternatively, click the button in the ticket panel.
 
-## Opening your first Ticket
-
+<p align="center">
+  <img src="/images/creating_ticket.gif" class="rounded-md" />
+</p>

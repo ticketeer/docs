@@ -99,3 +99,4 @@ dist/
 # vitepress build output
 .vitepress/dist
 .vitepress/cache
+.vitepress/types
