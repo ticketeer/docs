@@ -1,4 +1,7 @@
 <script setup lang="ts">
+  import Tooltip from '@/components/Tooltip.vue'
+  import { TooltipProvider } from 'radix-vue'
+
   defineProps({
     timestamp: String,
     format: String,

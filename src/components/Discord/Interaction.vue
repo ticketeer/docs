@@ -1,4 +1,6 @@
 <script setup lang="ts">
+  import DiscordAuthorInfo from '@/components/Discord/AuthorInfo.vue'
+
   import { options, fallback } from './_options'
 
   const props = defineProps({

@@ -5,7 +5,6 @@ import { HeadConfig, defineConfig } from 'vitepress'
 import timeline from "vitepress-markdown-timeline"
 
 import imports from 'unplugin-auto-import/vite'
-import components from 'unplugin-vue-components/vite'
 
 import RadixResolver from 'radix-vue/resolver'
 
@@ -167,17 +166,6 @@ export default defineConfig({
       }
     },
     plugins: [
-      components({
-        dts: '../.vitepress/types/components.d.ts',
-        dirs: ['./components'],
-        include: [/\.vue$/, /\.md$/],
-        directoryAsNamespace: true,
-        deep: true,
-        resolvers: [
-          // @ts-ignore
-          RadixResolver(),
-        ]
-      }),
       imports({
         dts: '../.vitepress/types/auto-imports.d.ts',
         include: [/\.vue$/, /\.md$/],

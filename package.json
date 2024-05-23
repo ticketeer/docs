@@ -17,6 +17,7 @@
     "@vueuse/core": "^10.9.0",
     "date-fns": "^3.6.0",
     "highlight.js": "^11.9.0",
+    "radix-vue": "^1.8.1",
     "vitepress": "^1.2.2",
     "vitepress-markdown-timeline": "^1.2.1",
     "vue": "^3.4.27"
@@ -26,13 +27,11 @@
     "@types/node": "^20.12.12",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
-    "radix-vue": "^1.8.1",
     "sass": "^1.77.2",
     "tailwindcss": "^3.4.3",
     "tsx": "^4.10.5",
     "typescript": "^5.4.5",
     "unplugin-auto-import": "^0.17.6",
-    "unplugin-vue-components": "^0.27.0",
     "vue-tsc": "^2.0.19"
   },
   "packageManager": "pnpm@9.1.1"

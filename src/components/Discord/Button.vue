@@ -1,4 +1,7 @@
 <script setup lang="ts">
+  import Emoji from '@/components/Emoji.vue';
+  import DiscordOutboundLinkIcon from '@/components/Discord/OutboundLinkIcon.vue';
+
   const props = defineProps({
     disabled: Boolean,
     emoji: String as PropType<string | null>,

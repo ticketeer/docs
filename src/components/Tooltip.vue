@@ -1,4 +1,6 @@
 <script setup lang="ts">
+  import { TooltipRoot, TooltipTrigger, TooltipPortal, TooltipContent, TooltipArrow } from 'radix-vue'
+
   defineProps({
     text: {
       type: String,

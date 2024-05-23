@@ -1,5 +1,14 @@
 <script lang="ts" setup>
-  import type { MessageData } from '@/lib/constants'
+  import DiscordMessages from '@/components/Discord/Messages.vue'
+  import DiscordMessage from '@/components/Discord/Message.vue'
+  import DiscordMarkdown from '@/components/Discord/Markdown.vue'
+  import DiscordEmbed from '@/components/Discord/Embed.vue'
+  import DiscordEmbedFields from '@/components/Discord/EmbedFields.vue'
+  import DiscordEmbedField from '@/components/Discord/EmbedField.vue'
+  import DiscordSelect from '@/components/Discord/Select.vue'
+  import DiscordSelectItem from '@/components/Discord/SelectItem.vue'
+  import DiscordButtons from '@/components/Discord/Buttons.vue'
+  import DiscordButton from '@/components/Discord/Button.vue'
 
   const STYLE: Record<number, string> = {
     1: 'primary',
@@ -15,13 +24,13 @@
       default: '',
     },
     message: {
-      type: Object as PropType<MessageData>,
+      type: Object,
       default: () =>
         ({
           content: '',
           embeds: [],
           buttons: [],
-        }) as MessageData,
+        }),
     },
   })
 </script>
