@@ -8,6 +8,8 @@ import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
 
 import './style.scss'
 
+import MessagePreview from '@theme/components/MessagePreview.vue'
+
 export default {
   extends: DefaultTheme,
   Layout: () => {
@@ -17,5 +19,7 @@ export default {
   },
   enhanceApp({ app, router, siteData }) {
     enhanceAppWithTabs(app)
+
+    app.component('MessagePreview', MessagePreview)
   }
 } satisfies Theme

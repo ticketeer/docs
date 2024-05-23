@@ -1,4 +1,5 @@
 ---
+title: Getting Started
 next: 
   text: 'Commands'
   link: '/commands'

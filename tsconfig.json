@@ -13,15 +13,12 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
       "@theme/*": [".vitepress/theme/*"]
     }
   },
   "include": [
     "env.d.ts",
     "src/**/*",
-    "src/**/*",
-    ".vitepress/types/auto-imports.d.ts",
-    ".vitepress/types/components.d.ts",
+    ".vitepress/theme/**/*",
   ]
 }

@@ -1,3 +1,7 @@
+---
+title: Error Codes
+---
+
 # Error Codes
 
 ## Ticket Exceptions

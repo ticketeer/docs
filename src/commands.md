@@ -1,3 +1,7 @@
+---
+title: Commands
+---
+
 # Ticketeer Commands
 
 ## Global Slash Commands

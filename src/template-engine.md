@@ -1,4 +1,9 @@
+---
+title: Template Engine
+---
+
 # Template Engine
+
 Ticketeer uses an advanced template engine to allow for greater customization of the messages sent to users.
 
 ## Value injection
@@ -138,16 +143,6 @@ Use `!>` to catch exceptions and redirect them to the scope.
 
 Or use `!break` or `!continue` to break/continue a loop
 
-### Available Functions
-
-| Function Name           | Function Alias    | Description                                | Arguments       |
-|----------------|-------------------|--------------------------------------------|-----------------|
-|`break`|-|-|-|
-|`continue`|-|-|-|
-|`current_time`|`time` `now`|-|-|
-|`random`|`rand`|-|-|
-|`set`|-|-|-|
-
 ## Filters
 
 Call the filter with parameters (parameter-separator `:`):
@@ -161,37 +156,6 @@ Use this filter inside your template
 ```text
 {$someVariable|currency}
 ```
-
-### Available Filters
-
-> Note: These function only accept non array variables
-
-| Filter Name           | Filter Alias       | Description                                | Arguments       |
-|----------------|--------------------|--------------------------------------------|-----------------|
-|`clean`|-|-|-|
-|`escape`|`md`|-|-|
-|`timestamp`|`time` `ts`|-|-|
-|`codeblock`|`codeblock`|-|-|
-|`fallback`|`else` `fb`|-|-|
-|`singleLine`|-|-|-|
-|`maxLength`|`leng` `ml`|-|-|
-|`padLeft`|`pad` `lp` `pl`|-|-|
-|`padRight`|`pr` `rp`|-|-|
-|`fixedLength`|`fixed`|-|-|
-|`lowercase`|`lower` `lc`|-|-|
-|`uppercase`|`upper` `uc`|-|-|
-|`trim`|-|-|-|
-|`split`|`explode`|-|-|
-
-### Available Array Filters
-
-> Note: These function only accept array variables
-
-| Array Filter Name           | Array Filter Alias       | Description                                | Arguments       |
-|----------------|--------------------------|--------------------------------------------|-----------------|
-|`count`|-|-|-|
-|`join`|`implode`|-|-|
-
 
 ## Sections
 
@@ -210,15 +174,6 @@ Some Content
 
 {$out}
 ```
-
-### Available Sections
-
-| Section Name           | Section Alias       | Description                                | Arguments       |
-|----------------|---------------------|--------------------------------------------|-----------------|
-|`strip_empty_lines`|`strip`|-|-|
-|`trim`|-|-|-|
-|`uppercase`|-|-|-|
-|`lowercase`|-|-|-|
 
 ## Escaping
 
@@ -240,3 +195,361 @@ Template {# Some Comment #}
 Multiline
 Comment #}
 ``` 
+
+## Available Functions
+
+### `break`
+
+Break from a loop
+
+:::info 
+
+Aliases: `none`
+
+| Argument Name    | Argument Type | Default Value    | Description       |
+|------------------|---------------|------------------|-------------------|
+|-|-|-|-|
+
+:::
+
+### `continue`
+
+Continue in a loop
+
+:::info
+
+Aliases: `none`
+
+| Argument Name    | Argument Type | Default Value    | Description       |
+|------------------|---------------|------------------|-------------------|
+|-|-|-|-|
+
+:::
+
+### `current_time`
+
+Returns the current time measured in the number of seconds since the Unix Epoch (January 1 1970 00:00:00 GMT)
+
+:::info
+
+Aliases: `time`, `now`
+
+| Argument Name    | Argument Type | Default Value    | Description       |
+|------------------|---------------|------------------|-------------------|
+|-|-|-|-|
+
+:::
+
+### `random`
+
+Returns a random number between min and max or a random item from a list
+
+:::info
+
+Aliases: `rand`
+
+| Argument Name    | Argument Type | Default Value    | Description       |
+|------------------|---------------|------------------|-------------------|
+| `min` | `number` | `0` | Minimum number to return |
+| `max` | `number` | `100`| Maximum number to return |
+| `list` | `string` | - | Comma separated list |
+
+:::
+
+### `set`
+
+Set a variable in the context
+
+:::info
+
+Aliases: `none`
+
+| Argument Name    | Argument Type | Default Value    | Description       |
+|------------------|---------------|------------------|-------------------|
+| `name`| `string` | - | - | Variable name |
+| `value` | `string` | - | - | Variable value |
+
+:::
+
+## Available Filters
+
+::: warning
+These filters *only* accept **non array** variables
+:::
+
+### `escape`
+
+Escape various Discord formatting and markdown into a plain text:
+
+:::info 
+
+Aliases: `md`, `clean`
+
+| Argument Name    | Argument Type | Default Value    | Description       |
+|------------------|---------------|------------------|-------------------|
+|-|-|-|-|
+
+:::
+
+### `timestamp`
+
+Format a timestamp into discord's timestamp format
+
+:::info
+
+Aliases: `time`, `ts`
+
+| Argument Name    | Argument Type | Default Value    | Description       |
+|------------------|---------------|------------------|-------------------|
+|format|`format`|`R`|Format of the timestamp|
+
+Formats
+
+|Style|Input|Output (12-hour clock)|Output (24-hour clock)
+|--|--|--|--
+|Default|-|November 28, 2018 9:01 AM|28 November 2018 09:01
+|Short Time|`t`|9:01 AM|09:01
+|Long Time|`T`|9:01:00 AM|09:01:00
+|Short Date|`d`|11/28/2018|28/11/2018
+|Long Date|`D`|November 28, 2018|28 November 2018
+|Short Date/Time|`f`|November 28, 2018 9:01 AM|28 November 2018 09:01
+|Long Date/Time|`F`|Wednesday, November 28, 2018 9:01 AM|Wednesday, 28 November 2018 09:01
+|Relative Time|`R`|3 years ago|3 years ago
+
+:::
+
+### `codeblock`
+
+Wraps a variable in a codeblock
+
+:::info 
+
+Aliases: `code`
+
+| Argument Name    | Argument Type | Default Value    | Description       |
+|------------------|---------------|------------------|-------------------|
+|-|-|-|-|
+
+:::
+
+### `fallback`
+
+If a variable is empty, fallback to a default value
+
+:::info
+
+Aliases: `else`, `fb`
+
+| Argument Name    | Argument Type | Default Value    | Description       |
+|------------------|---------------|------------------|-------------------|
+|value|`string`|-|The value to fallback to|
+
+:::
+
+### `maxLength`
+
+Limits a string to a certain length
+
+:::info
+
+Aliases: `leng`, `ml`
+
+| Argument Name    | Argument Type | Default Value    | Description       |
+|------------------|---------------|------------------|-------------------|
+|length|`number`|-|The length to limit to|
+
+:::
+
+### `padLeft`
+
+Pads a string to the left with a certain character
+
+:::info
+
+Aliases: `pad`, `lp`, `pl`
+
+| Argument Name    | Argument Type | Default Value    | Description       |
+|------------------|---------------|------------------|-------------------|
+|length|`number`|-|The length to pad to|
+|char|`string`|-|The string to pad with|
+
+:::
+
+### `padRight`
+
+Pads a string to the right with a certain character
+
+:::info
+
+Aliases: `pr`, `rp`
+
+| Argument Name    | Argument Type | Default Value    | Description       |
+|------------------|---------------|------------------|-------------------|
+|length|`number`|-|The length to pad to|
+|char|`string`|-|The string to pad with|
+
+:::
+
+### `fixedLength`
+
+Fixes a string to a certain length
+
+:::info 
+
+Aliases: `fixed`
+
+| Argument Name    | Argument Type | Default Value    | Description       |
+|------------------|---------------|------------------|-------------------|
+|length|`number`|-|The length to fix to|
+
+:::
+
+### `lowercase`
+
+Converts a string to lowercase
+
+:::info
+
+Aliases: `lower`, `lc`
+
+| Argument Name    | Argument Type | Default Value    | Description       |
+|------------------|---------------|------------------|-------------------|
+|-|-|-|-|
+
+:::
+
+### `uppercase`
+
+Converts a string to uppercase
+
+:::info
+
+Aliases: `upper`, `uc`
+
+| Argument Name    | Argument Type | Default Value    | Description       |
+|------------------|---------------|------------------|-------------------|
+|-|-|-|-|
+
+:::
+
+### `trim`
+
+Trims whitespace from the beginning and end of a string
+
+:::info
+
+Aliases: `none`
+
+| Argument Name    | Argument Type | Default Value    | Description       |
+|------------------|---------------|------------------|-------------------|
+|-|-|-|-|
+
+:::
+
+### `split`
+
+Splits a string into an array
+
+:::info
+
+Aliases: `explode`
+
+| Argument Name    | Argument Type | Default Value    | Description       |
+|------------------|---------------|------------------|-------------------|
+|separator|`string`|`,`|The separator to split on|
+
+:::
+
+## Available Array Filters
+
+::: warning
+
+These filters *only* accept **array** variables
+
+:::
+
+### `count`
+
+Counts the number of items in an array
+
+:::info 
+
+Aliases: `none`
+
+| Argument Name    | Argument Type | Default Value    | Description       |
+|------------------|---------------|------------------|-------------------|
+|-|-|-|-|
+
+:::
+
+### `join`
+
+Joins an array into a string
+
+:::info
+
+Aliases: `implode`
+
+| Argument Name    | Argument Type | Default Value    | Description       |
+|------------------|---------------|------------------|-------------------|
+|separator|`string`|`,`|The separator to join on|
+
+:::
+
+## Available Sections
+
+### `strip_empty_lines`
+
+Strips empty lines from a section
+
+:::info
+
+Aliases: `strip`
+
+| Argument Name    | Argument Type | Default Value    | Description       |
+|------------------|---------------|------------------|-------------------|
+|-|-|-|-|
+
+:::
+
+### `trim`
+
+Trims whitespace from the beginning and end of a section
+
+:::info
+
+Aliases: `none`
+
+| Argument Name    | Argument Type | Default Value    | Description       |
+|------------------|---------------|------------------|-------------------|
+|-|-|-|-|
+
+:::
+
+### `uppercase`
+
+Converts a section to uppercase
+
+:::info
+
+Aliases: `none`
+
+| Argument Name    | Argument Type | Default Value    | Description       |
+|------------------|---------------|------------------|-------------------|
+|-|-|-|-|
+
+:::
+
+### `lowercase`
+
+Converts a section to lowercase
+
+:::info
+
+Aliases: `none`
+
+| Argument Name    | Argument Type | Default Value    | Description       |
+|------------------|---------------|------------------|-------------------|
+|-|-|-|-|
+
+:::

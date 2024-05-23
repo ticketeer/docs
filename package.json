@@ -9,6 +9,7 @@
     "preview": "vitepress preview",
     "preinstall": "npx only-allow pnpm",
     "messages": "tsx .vitepress/build/messages.ts",
+    "webp": "tsx .vitepress/build/webp.ts",
     "type": "vue-tsc --noEmit"
   },
   "dependencies": {
@@ -22,11 +23,14 @@
     "vue": "^3.4.27"
   },
   "devDependencies": {
+    "@types/glob": "^8.1.0",
     "@types/markdown-it": "^14.1.1",
     "@types/node": "^20.12.12",
     "autoprefixer": "^10.4.19",
+    "glob": "^10.3.16",
     "postcss": "^8.4.38",
     "sass": "^1.77.2",
+    "sharp": "^0.33.4",
     "tailwindcss": "^3.4.3",
     "tsx": "^4.10.5",
     "typescript": "^5.4.5",

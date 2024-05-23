@@ -98,6 +98,7 @@ export default defineConfig({
           },
           { text: 'Messages', link: '/messages' },
           { text: 'Template Engine', link: '/template-engine' },
+          { text: 'Markdown 101', link: '/markdown' },
         ]
       },
       {
@@ -105,14 +106,6 @@ export default defineConfig({
         items: [
           { text: 'Errors', link: '/errors' },
           { text: 'Troubleshooting', link: '/troubleshooting' },
-        ]
-      },
-      {
-        text: 'POLICY',
-        items: [
-          { text: 'Privacy Policy', link: '/policies#privacy-policy' },
-          { text: 'Terms of Service', link: '/policies#terms-of-service' },
-          { text: 'Refund Policy', link: '/policies#refund-policy' },
         ]
       },
     ],
@@ -150,6 +143,10 @@ export default defineConfig({
   },
 
   markdown: {
+    image: {
+      // image lazy loading is disabled by default
+      lazyLoading: true
+    },
     config: (md) => {
       // @ts-ignore
       md.use(timeline)
@@ -157,12 +154,4 @@ export default defineConfig({
       md.use(tabsMarkdownPlugin)
     },
   },
-
-  vite: {
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, '../src'),
-      }
-    },
-  }
 })

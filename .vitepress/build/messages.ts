@@ -104,9 +104,11 @@ ${JSON.stringify(message.template, null, 2)}
   }
 }
 
-const file = `
+const file = `---
+title: Messages
+---
+
 <script setup lang="ts">
-  import MessagePreview from '@/components/MessagePreview.vue'
   const templates = ${JSON.stringify(templates, null, 2)}
 </script>
 
