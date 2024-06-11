@@ -9,28 +9,61 @@ next:
 
 Ticketeer is a Discord ticket support bot, designed to be one of the most customizable and easy-to-use ticket bots available.
 
-## Features
+## 🚀 Features
 
-- Fully customizable messages with an [advanced templating engine](/template-engine.md) (over 50 messages)
-- Advanced menus, buttons, and dropdown support
-- Highly customizable role and user permissions
-- Thread-based tickets (private or public threads)
-- Forum-based tickets (public threads)
-- Channel-based tickets (under a category)
-- Ticket locking to stop conversations
-- Ticket claiming & assigning for staff collaboration
-- Ticket expiration for automatic closure after inactivity
-- Ticket priorities to set the urgency of the ticket
-- Ticket feedback and ratings to gather user experiences
-- Ticket transcripts to save conversations
-- Ticket limits to control the number of open tickets
-- Ticket forms to survey users before opening a ticket
-- Ticket scheduling to restrict ticket creation to specific hours
-- Ticket logs to track all ticket actions
-- Private threads for support staff (only for channel tickets)
-- Custom user identity for opening tickets
+🎨 **Fully Customizable Messages**  
+With an [advanced templating engine](/template-engine.md), customize over 50 messages to fit your server's style and tone.
 
-And more!
+🖱️ **Advanced Menus, Buttons, and Dropdown Support**  
+Create intuitive and interactive ticketing systems with ease.
+
+🔒 **Highly Customizable Role and User Permissions**  
+Tailor permissions to fit your server's unique needs.
+
+📂 **Thread-Based Tickets**  
+Choose between private or public threads for streamlined discussions.
+
+📝 **Forum-Based Tickets**  
+Public threads to engage your community and resolve issues collectively.
+
+📋 **Channel-Based Tickets**  
+Organize tickets under specific categories for better management.
+
+🔒 **Ticket Locking**  
+Pause conversations with ticket locking to keep things organized.
+
+👥 **Ticket Claiming & Assigning**  
+Enhance staff collaboration with ticket claiming and assigning features.
+
+⏰ **Ticket Expiration**  
+Automatic ticket closure after a period of inactivity.
+
+⚡ **Ticket Priorities**  
+Set the urgency of tickets to ensure critical issues are addressed promptly.
+
+🌟 **Ticket Feedback and Ratings**  
+Gather user experiences to improve your support services.
+
+📜 **Ticket Transcripts**  
+Save conversations for future reference and training.
+
+🔢 **Ticket Limits**  
+Control the number of open tickets to maintain efficiency.
+
+📄 **Ticket Forms**  
+Survey users before opening a ticket to gather necessary information.
+
+🕒 **Ticket Scheduling**  
+Restrict ticket creation to specific hours to manage support availability.
+
+📊 **Ticket Logs**  
+Track all ticket actions for transparency and accountability.
+
+🔐 **Private Threads for Support Staff**  
+Keep sensitive discussions private within channel tickets.
+
+🆔 **Custom User Identity for Opening Tickets**  
+Personalize the ticket opening process for your users.
 
 ## Quickstart Guide
 
