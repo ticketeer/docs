@@ -65,6 +65,10 @@ Keep sensitive discussions private within channel tickets.
 🆔 **Custom User Identity for Opening Tickets**  
 Personalize the ticket opening process for your users.
 
+## Setup Video 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FoGcyGynH2I?si=ug29UbS0kEiJSN4M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 ## Quickstart Guide
 
 If you are familiar with Discord bots, follow this quickstart guide to get Ticketeer up and running:
