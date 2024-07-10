@@ -94,7 +94,7 @@ This happens when you try to create a thread for a ticket that already has a pri
 
 :::
 
-### Interaction Request Exception
+## Interaction Request Exception
 
 ### Error `REQUEST_FORBIDDEN`
 
