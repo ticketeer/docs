@@ -5,7 +5,7 @@ import * as path from 'path'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const messages = JSON.parse(readFileSync(path.join(__dirname, 'messages.json'), 'utf-8'));
+const messages = JSON.parse(readFileSync(path.join(__dirname, 'messages.json'), 'utf-8'))
 
 const messageFieldTypes = {
   server: { name: 'Server', link: '#server-object' },
@@ -42,7 +42,7 @@ for (const section of Object.keys(messageSections)) {
   output += `## ${messageSections[section]} Messages\n\n`
 
   for (const id of Object.keys(messages)) {
-    const message = messages[id];
+    const message = messages[id]
 
     if (message.info.section === section) {
       let fields = ''
@@ -55,16 +55,16 @@ for (const section of Object.keys(messageSections)) {
         fields += `| \`${key}${field.nullable ? '?' : ''}\` | `
         if (messageFieldTypes[field.type]) {
           const { name, link } = messageFieldTypes[field.type]
-          fields += `[${name}${field.array? '[]' : ''}](${link})`
+          fields += `[${name}${field.array ? '[]' : ''}](${link})`
         } else {
-          fields += `${field.type}${field.array? '[]' : ''}`
+          fields += `${field.type}${field.array ? '[]' : ''}`
         }
 
         if (field.nullable) {
           fields += ' \\| `null`'
         }
 
-        fields += ` | ${ field.description } |\n`
+        fields += ` | ${field.description} |\n`
       }
 
       output += `### ${message.info.title} {#${id}}
@@ -99,7 +99,7 @@ ${JSON.stringify(message.template, null, 2)}
 \`\`\`
 
 :::
-`;
+`
     }
   }
 }
@@ -136,7 +136,7 @@ ${output}## Object Types
 |\`group.id\`| \`string\` | Group ID |
 |\`group.name\`| \`string\` | Group name|
 |\`group.count\`| \`number\` | Group count |
-|\`group.schedule_timestamp?\`| \`number\`\|\`null\` | Group next open schedule slot timestamp  |
+|\`group.schedule_timestamp?\`| \`number\`\\|\`null\` | Group next open schedule slot timestamp  |
 
 ### Ticket Object
 
@@ -144,23 +144,22 @@ ${output}## Object Types
 |----------------|------------|--------------------------------------------|
 |\`ticket\`| \`string\` | Ticket channel name or Ticket ID |
 |\`ticket.id\`| \`string\` | Ticket ID |
-|\`ticket.name?\`| \`string\`\|\`null\` | Ticket channel name |
+|\`ticket.name?\`| \`string\`\\|\`null\` | Ticket channel name |
 |\`ticket.number\`| \`number\` | Ticket number |
 |\`ticket.link\`| \`string\` | Link to the first message of the ticket |
 |\`ticket.priority\`| \`number\` | Ticket priority level |
-|\`ticket.priority.label?\`| \`string\`\|\`null\` | Ticket priority label |
-|\`ticket.priority.description?\`| \`string\`\|\`null\` | Ticket priority description |
-|\`ticket.priority.emoji?\`| \`string\`\|\`null\` | Ticket priority emoji |
-|\`ticket.priority.color?\`| \`string\`\|\`null\` | Ticket priority color |
-|\`ticket.rating\`| \`number\` | Average rating given to ticket |
-|\`ticket.form?\`| \`array\`\|\`null\` | The filled out form from opening a ticket |
-|\`ticket.form?.title\`| \`string\`\|\`null\` | Title of the form field |
-|\`ticket.form?.value\`| \`string\`\|\`null\` | Value of the form field |
-|\`ticket.closed_reason?\`| \`string\`\|\`null\` | Reason for closing the ticket |
+|\`ticket.priority.label?\`| \`string\`\\|\`null\` | Ticket priority label |
+|\`ticket.priority.description?\`| \`string\`\\|\`null\` | Ticket priority description |
+|\`ticket.priority.emoji?\`| \`string\`\\|\`null\` | Ticket priority emoji |
+|\`ticket.priority.color?\`| \`string\`\\|\`null\` | Ticket priority color |
+|\`ticket.form?\`| \`array\`\\|\`null\` | The filled out form from opening a ticket |
+|\`ticket.form?.title\`| \`string\`\\|\`null\` | Title of the form field |
+|\`ticket.form?.value\`| \`string\`\\|\`null\` | Value of the form field |
+|\`ticket.closed_reason?\`| \`string\`\\|\`null\` | Reason for closing the ticket |
 |\`ticket.owner\`| [User](#user-object) | Owner of ticket |
-|\`ticket.assigned?\`| [User](#user-object)\|\`null\` | Assigned user to ticket |
+|\`ticket.assigned?\`| [User](#user-object)\\|\`null\` | Assigned user to ticket |
 |\`ticket.group\`| [Group](#group-object) | Ticket Group |
-|\`ticket.channel?\`| [Channel](#user-channel)\|\`null\` | Ticket channel |
+|\`ticket.channel?\`| [Channel](#user-channel)\\|\`null\` | Ticket channel |
 
 ### Channel Object
 
@@ -187,7 +186,8 @@ ${output}## Object Types
 |\`user.icon\`| \`string\` | User icon |
 |\`user.tag\`| \`string\` |  User #tag (deprecated) |
 |\`user.full\`| \`string\` | User username#tag (deprecated) |
-|\`user.joined_at?\`| \`number\`\|\`null\` | Timestamp when user joined server |
+|\`user.roles\`| [Role[]](#role-object) | List of roles the user has in order of hierarchy |
+|\`user.joined_at?\`| \`number\`\\|\`null\` | Timestamp when user joined server |
 
 ### Role Object
 
@@ -213,6 +213,6 @@ ${output}## Object Types
 |\`message.timestamp\`| \`number\` | Timestamp of when message was created |
 |\`message.author\`| [User](#user-object) | Author of message |
 |\`message.channel\`| [Channel](#channel-object) | Channel message was created in |
-`;
+`
 
 writeFileSync(path.join(__dirname, '../../src/messages.md'), file)

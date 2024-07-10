@@ -183,6 +183,19 @@ title: Messages
       }
     ]
   },
+  "created_public_message": {
+    "content": "{$owner} requested help for {$group.name}!",
+    "embeds": [
+      {
+        "description": "Our team is ready to assist you and will respond shortly.",
+        "color": "#14b8a6",
+        "footer": {
+          "text": "Ticketeer Canary - Support Made Simple",
+          "icon_url": "https://ticketeer.dev/icon.png"
+        }
+      }
+    ]
+  },
   "created_welcome": {
     "content": "Welcome {$ticket.owner}!",
     "embeds": [
@@ -481,7 +494,45 @@ title: Messages
   "thread": {
     "embeds": [
       {
-        "description": "{$ticket.channel.name} private thread",
+        "description": "{$ticket.channel.name} notes thread",
+        "color": "#14b8a6",
+        "footer": {
+          "text": "Ticketeer Canary - Support Made Simple",
+          "icon_url": "https://ticketeer.dev/icon.png"
+        }
+      }
+    ]
+  },
+  "thread_created": {
+    "delete_after": 60,
+    "flags": 64,
+    "content": "Notes {$ticket.notes} created!",
+    "buttons": [
+      {
+        "label": "Go to notes",
+        "style": 5,
+        "action": "none",
+        "url": "{$ticket.notes.link}",
+        "emoji": "<:ticket_transcript:1236041551646556213>"
+      }
+    ]
+  },
+  "thread_member_added": {
+    "embeds": [
+      {
+        "description": "{$user} added {$added} to notes",
+        "color": "#14b8a6",
+        "footer": {
+          "text": "Ticketeer Canary - Support Made Simple",
+          "icon_url": "https://ticketeer.dev/icon.png"
+        }
+      }
+    ]
+  },
+  "thread_member_removed": {
+    "embeds": [
+      {
+        "description": "{$user} removed {$removed} from notes",
         "color": "#14b8a6",
         "footer": {
           "text": "Ticketeer Canary - Support Made Simple",
@@ -493,7 +544,7 @@ title: Messages
   "priority_change": {
     "embeds": [
       {
-        "description": "{$user} changed the ticket priority to \"{$ticket.priority}\"",
+        "description": "{$user} changed the ticket priority to \"{$ticket.priority.label}\"",
         "timestamp": true,
         "color": "#14b8a6",
         "footer": {
@@ -636,10 +687,6 @@ title: Messages
             "name": "Group Name",
             "value": "{$ticket.group.name}",
             "inline": true
-          },
-          {
-            "name": "Ticket Users",
-            "value": "{$ticket.users|join}"
           }
         ],
         "timestamp": true,
@@ -684,7 +731,7 @@ title: Messages
     "flags": 64,
     "embeds": [
       {
-        "description": "Thank you for your feedback!{if $rating < 3} We will work hard to improve your experience!{/if}",
+        "description": "Thank you for your feedback!{if $rating.number < 3} We will work hard to improve your experience!{/if}",
         "color": "#14b8a6",
         "footer": {
           "text": "Ticketeer Canary - Support Made Simple",
@@ -1088,6 +1135,64 @@ title: Messages
       }
     ]
   },
+  "name_set_log": {
+    "embeds": [
+      {
+        "description": "{$user} set the name for {$ticket.channel.name} ({$ticket.channel})!",
+        "fields": [
+          {
+            "name": "Ticket",
+            "value": "{$ticket.channel.name} ({$ticket.channel})"
+          },
+          {
+            "name": "Author",
+            "value": "{$user}",
+            "inline": true
+          },
+          {
+            "name": "Group",
+            "value": "{$ticket.group.name}",
+            "inline": true
+          }
+        ],
+        "timestamp": true,
+        "color": "#14b8a6",
+        "footer": {
+          "text": "Ticketeer Canary - Support Made Simple",
+          "icon_url": "https://ticketeer.dev/icon.png"
+        }
+      }
+    ]
+  },
+  "name_cleared_log": {
+    "embeds": [
+      {
+        "description": "{$user} cleared the name for {$ticket.channel.name} ({$ticket.channel})!",
+        "fields": [
+          {
+            "name": "Ticket",
+            "value": "{$ticket.channel.name} ({$ticket.channel})"
+          },
+          {
+            "name": "Author",
+            "value": "{$user}",
+            "inline": true
+          },
+          {
+            "name": "Group",
+            "value": "{$ticket.group.name}",
+            "inline": true
+          }
+        ],
+        "timestamp": true,
+        "color": "#14b8a6",
+        "footer": {
+          "text": "Ticketeer Canary - Support Made Simple",
+          "icon_url": "https://ticketeer.dev/icon.png"
+        }
+      }
+    ]
+  },
   "expired_log": {
     "embeds": [
       {
@@ -1163,7 +1268,94 @@ title: Messages
   "rating_log": {
     "embeds": [
       {
-        "description": "{$user} gave {$ticket.channel.name} a rating!",
+        "description": "{$user} gave {$ticket.channel.name} a \"{if $rating.emoji}{$rating.emoji} {/if}{$rating.label}\" rating!",
+        "color": "#14b8a6",
+        "footer": {
+          "text": "Ticketeer Canary - Support Made Simple",
+          "icon_url": "https://ticketeer.dev/icon.png"
+        }
+      }
+    ]
+  },
+  "thread_created_log": {
+    "embeds": [
+      {
+        "description": "{$user} created notes for {$ticket.channel.name} ({$ticket.channel})!",
+        "fields": [
+          {
+            "name": "Ticket",
+            "value": "{$ticket.channel.name} ({$ticket.channel})"
+          },
+          {
+            "name": "Author",
+            "value": "{$user}",
+            "inline": true
+          },
+          {
+            "name": "Group",
+            "value": "{$ticket.group.name}",
+            "inline": true
+          }
+        ],
+        "timestamp": true,
+        "color": "#14b8a6",
+        "footer": {
+          "text": "Ticketeer Canary - Support Made Simple",
+          "icon_url": "https://ticketeer.dev/icon.png"
+        }
+      }
+    ]
+  },
+  "thread_member_added_log": {
+    "embeds": [
+      {
+        "description": "{$user} added {$added} to notes for {$ticket.channel.name} ({$ticket.channel})!",
+        "fields": [
+          {
+            "name": "Ticket",
+            "value": "{$ticket.channel.name} ({$ticket.channel})"
+          },
+          {
+            "name": "Author",
+            "value": "{$user}",
+            "inline": true
+          },
+          {
+            "name": "Group",
+            "value": "{$ticket.group.name}",
+            "inline": true
+          }
+        ],
+        "timestamp": true,
+        "color": "#14b8a6",
+        "footer": {
+          "text": "Ticketeer Canary - Support Made Simple",
+          "icon_url": "https://ticketeer.dev/icon.png"
+        }
+      }
+    ]
+  },
+  "thread_member_removed_log": {
+    "embeds": [
+      {
+        "description": "{$user} removed {$removed} from notes for {$ticket.channel.name} ({$ticket.channel})!",
+        "fields": [
+          {
+            "name": "Ticket",
+            "value": "{$ticket.channel.name} ({$ticket.channel})"
+          },
+          {
+            "name": "Author",
+            "value": "{$user}",
+            "inline": true
+          },
+          {
+            "name": "Group",
+            "value": "{$ticket.group.name}",
+            "inline": true
+          }
+        ],
+        "timestamp": true,
         "color": "#14b8a6",
         "footer": {
           "text": "Ticketeer Canary - Support Made Simple",
@@ -1576,10 +1768,10 @@ This message is a reply to the user when a ticket is created.
 ```
 
 :::
-### Ticket Created Direct Message {#created_dm}
+### Ticket Created {#created_dm}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Created Direct Message" :message="templates['created_dm']" />
+<MessagePreview class="mt-3" title="Ticket Created" :message="templates['created_dm']" />
 </ClientOnly>
 
 ::: info
@@ -1627,10 +1819,62 @@ This message is sent to the owner of the ticket in a direct message when a ticke
 ```
 
 :::
-### Ticket Welcome Message {#created_welcome}
+### Ticket Public {#created_public_message}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Welcome Message" :message="templates['created_welcome']" />
+<MessagePreview class="mt-3" title="Ticket Public" :message="templates['created_public_message']" />
+</ClientOnly>
+
+::: info
+
+This message is sent in the channel the ticket will be created in, this message will be used as the start of a public thread.
+
+:::
+
+::: details Expand to see options and variables
+
+| Template Option  | Value      |
+|------------------|------------|
+| Can be disabled? | `Yes` |
+| Can be automatically deleted? | `No` |
+| Type | `message` |
+
+| Variable Name  | Type       | Description                                |
+|----------------|------------|--------------------------------------------|
+| `server` | [Server](#server-object) | The server that the ticket was created in |
+| `group` | [Group](#group-object) | The ticket group of the ticket |
+| `owner` | [User](#user-object) | The owner of the ticket |
+| `user` | [User](#user-object) | The user that triggered this action |
+| `from?` | [User](#user-object) \| `null` | The user that created the ticket for owner |
+| `form` | array | The answers of the form filled out before the ticket was created |
+| `form.*.title` | string | Title for the form field |
+| `form.*.value` | string | Value for the form field |
+
+:::
+
+::: details Expand to see default json template
+
+```json
+{
+  "content": "{$owner} requested help for {$group.name}!",
+  "embeds": [
+    {
+      "description": "Our team is ready to assist you and will respond shortly.",
+      "color": "#14b8a6",
+      "footer": {
+        "text": "Ticketeer Canary - Support Made Simple",
+        "icon_url": "https://ticketeer.dev/icon.png"
+      }
+    }
+  ]
+}
+```
+
+:::
+### Ticket Welcome {#created_welcome}
+
+<ClientOnly>
+<MessagePreview class="mt-3" title="Ticket Welcome" :message="templates['created_welcome']" />
 </ClientOnly>
 
 ::: info
@@ -1686,10 +1930,10 @@ This message is sent as the first message in the ticket's channel when it is cre
 ```
 
 :::
-### Ticket Created from Message {#created_from_message}
+### Ticket Created from {#created_from_message}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Created from Message" :message="templates['created_from_message']" />
+<MessagePreview class="mt-3" title="Ticket Created from" :message="templates['created_from_message']" />
 </ClientOnly>
 
 ::: info
@@ -1755,10 +1999,10 @@ This message is sent to the ticket channel (after the welcome message) when a ti
 ```
 
 :::
-### Ticket Created with Message {#created_with_message}
+### Ticket Created with {#created_with_message}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Created with Message" :message="templates['created_with_message']" />
+<MessagePreview class="mt-3" title="Ticket Created with" :message="templates['created_with_message']" />
 </ClientOnly>
 
 ::: info
@@ -1971,10 +2215,10 @@ This message is sent to the user to confirm they want to close a ticket.
 ```
 
 :::
-### Ticket Closed Direct Message {#closed_dm}
+### Ticket Closed {#closed_dm}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Closed Direct Message" :message="templates['closed_dm']" />
+<MessagePreview class="mt-3" title="Ticket Closed" :message="templates['closed_dm']" />
 </ClientOnly>
 
 ::: info
@@ -2360,10 +2604,10 @@ This message is sent to the ticket channel when a user is added to the ticket.
 ```
 
 :::
-### Ticket User Added Direct Message {#user_added_dm}
+### Ticket User Added {#user_added_dm}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket User Added Direct Message" :message="templates['user_added_dm']" />
+<MessagePreview class="mt-3" title="Ticket User Added" :message="templates['user_added_dm']" />
 </ClientOnly>
 
 ::: info
@@ -2463,10 +2707,10 @@ This message is sent to the ticket channel when a user is removed from the ticke
 ```
 
 :::
-### Ticket User Removed Direct Message {#user_removed_dm}
+### Ticket User Removed {#user_removed_dm}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket User Removed Direct Message" :message="templates['user_removed_dm']" />
+<MessagePreview class="mt-3" title="Ticket User Removed" :message="templates['user_removed_dm']" />
 </ClientOnly>
 
 ::: info
@@ -2571,10 +2815,10 @@ This message is sent to the ticket channel when the owner of the ticket has chan
 ```
 
 :::
-### Ticket Owner Change Direct Message {#owner_change_dm}
+### Ticket Owner Change {#owner_change_dm}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Owner Change Direct Message" :message="templates['owner_change_dm']" />
+<MessagePreview class="mt-3" title="Ticket Owner Change" :message="templates['owner_change_dm']" />
 </ClientOnly>
 
 ::: info
@@ -2625,15 +2869,15 @@ This message is sent to the new and old owner of the ticket in a direct message 
 :::
 ## Thread Messages
 
-### Ticket Thread {#thread}
+### Ticket Notes Thread {#thread}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Thread" :message="templates['thread']" />
+<MessagePreview class="mt-3" title="Ticket Notes Thread" :message="templates['thread']" />
 </ClientOnly>
 
 ::: info
 
-This is the first message that is sent in the private thread when a ticket is created.
+This is the first message that is sent in the notes private thread when a ticket is created.
 
 :::
 
@@ -2665,7 +2909,161 @@ This is the first message that is sent in the private thread when a ticket is cr
 {
   "embeds": [
     {
-      "description": "{$ticket.channel.name} private thread",
+      "description": "{$ticket.channel.name} notes thread",
+      "color": "#14b8a6",
+      "footer": {
+        "text": "Ticketeer Canary - Support Made Simple",
+        "icon_url": "https://ticketeer.dev/icon.png"
+      }
+    }
+  ]
+}
+```
+
+:::
+### Notes Thread Created {#thread_created}
+
+<ClientOnly>
+<MessagePreview class="mt-3" title="Notes Thread Created" :message="templates['thread_created']" />
+</ClientOnly>
+
+::: info
+
+
+
+:::
+
+::: details Expand to see options and variables
+
+| Template Option  | Value      |
+|------------------|------------|
+| Can be disabled? | `No` |
+| Can be automatically deleted? | `No` |
+| Type | `message` |
+
+| Variable Name  | Type       | Description                                |
+|----------------|------------|--------------------------------------------|
+| `server` | [Server](#server-object) | The server that the ticket was created in |
+| `ticket` | [Ticket](#ticket-object) | The ticket |
+| `group` | [Group](#group-object) | The ticket group of the ticket |
+| `owner` | [User](#user-object) | The owner of the ticket |
+| `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
+| `channel` | [Channel](#channel-object) | The channel the ticket was created in |
+| `user` | [User](#user-object) | The user that triggered this action |
+
+:::
+
+::: details Expand to see default json template
+
+```json
+{
+  "delete_after": 60,
+  "flags": 64,
+  "content": "Notes {$ticket.notes} created!",
+  "buttons": [
+    {
+      "label": "Go to notes",
+      "style": 5,
+      "action": "none",
+      "url": "{$ticket.notes.link}",
+      "emoji": "<:ticket_transcript:1236041551646556213>"
+    }
+  ]
+}
+```
+
+:::
+### Ticket Notes User Added {#thread_member_added}
+
+<ClientOnly>
+<MessagePreview class="mt-3" title="Ticket Notes User Added" :message="templates['thread_member_added']" />
+</ClientOnly>
+
+::: info
+
+This message is sent to the ticket notes thread when a user is added to the notes.
+
+:::
+
+::: details Expand to see options and variables
+
+| Template Option  | Value      |
+|------------------|------------|
+| Can be disabled? | `Yes` |
+| Can be automatically deleted? | `No` |
+| Type | `message` |
+
+| Variable Name  | Type       | Description                                |
+|----------------|------------|--------------------------------------------|
+| `server` | [Server](#server-object) | The server that the ticket was created in |
+| `ticket` | [Ticket](#ticket-object) | The ticket |
+| `group` | [Group](#group-object) | The ticket group of the ticket |
+| `owner` | [User](#user-object) | The owner of the ticket |
+| `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
+| `channel` | [Channel](#channel-object) | The channel the ticket was created in |
+| `user` | [User](#user-object) | The user that triggered this action |
+| `added` | [User](#user-object) | The user added to the notes |
+
+:::
+
+::: details Expand to see default json template
+
+```json
+{
+  "embeds": [
+    {
+      "description": "{$user} added {$added} to notes",
+      "color": "#14b8a6",
+      "footer": {
+        "text": "Ticketeer Canary - Support Made Simple",
+        "icon_url": "https://ticketeer.dev/icon.png"
+      }
+    }
+  ]
+}
+```
+
+:::
+### Ticket Notes User Removed {#thread_member_removed}
+
+<ClientOnly>
+<MessagePreview class="mt-3" title="Ticket Notes User Removed" :message="templates['thread_member_removed']" />
+</ClientOnly>
+
+::: info
+
+This message is sent to the notes thread when a user is removed from the notes.
+
+:::
+
+::: details Expand to see options and variables
+
+| Template Option  | Value      |
+|------------------|------------|
+| Can be disabled? | `Yes` |
+| Can be automatically deleted? | `No` |
+| Type | `message` |
+
+| Variable Name  | Type       | Description                                |
+|----------------|------------|--------------------------------------------|
+| `server` | [Server](#server-object) | The server that the ticket was created in |
+| `ticket` | [Ticket](#ticket-object) | The ticket |
+| `group` | [Group](#group-object) | The ticket group of the ticket |
+| `owner` | [User](#user-object) | The owner of the ticket |
+| `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
+| `channel` | [Channel](#channel-object) | The channel the ticket was created in |
+| `user` | [User](#user-object) | The user that triggered this action |
+| `removed` | [User](#user-object) | The user removed from the notes |
+
+:::
+
+::: details Expand to see default json template
+
+```json
+{
+  "embeds": [
+    {
+      "description": "{$user} removed {$removed} from notes",
       "color": "#14b8a6",
       "footer": {
         "text": "Ticketeer Canary - Support Made Simple",
@@ -2717,7 +3115,7 @@ This message is sent to the ticket channel when the priority of the ticket has c
 {
   "embeds": [
     {
-      "description": "{$user} changed the ticket priority to \"{$ticket.priority}\"",
+      "description": "{$user} changed the ticket priority to \"{$ticket.priority.label}\"",
       "timestamp": true,
       "color": "#14b8a6",
       "footer": {
@@ -3218,10 +3616,6 @@ This message is sent to the transcript channel when a transcript is created.
           "name": "Group Name",
           "value": "{$ticket.group.name}",
           "inline": true
-        },
-        {
-          "name": "Ticket Users",
-          "value": "{$ticket.users|join}"
         }
       ],
       "timestamp": true,
@@ -3236,10 +3630,10 @@ This message is sent to the transcript channel when a transcript is created.
 ```
 
 :::
-### Ticket Transcript Direct Message {#transcript_dm}
+### Ticket Transcript {#transcript_dm}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Transcript Direct Message" :message="templates['transcript_dm']" />
+<MessagePreview class="mt-3" title="Ticket Transcript" :message="templates['transcript_dm']" />
 </ClientOnly>
 
 ::: info
@@ -3369,6 +3763,11 @@ This message is sent to the user when they give a rating on a ticket.
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
+| `rating.number` | number | The rating number in the list of ratings |
+| `rating.label` | string | The rating label configured in the ticket group |
+| `rating.description?` | string \| `null` | The rating description configured in the ticket group |
+| `rating.emoji?` | string \| `null` | The rating emoji configured in the ticket group |
+| `rating.color` | string | The rating color configured in the ticket group |
 
 :::
 
@@ -3380,7 +3779,7 @@ This message is sent to the user when they give a rating on a ticket.
   "flags": 64,
   "embeds": [
     {
-      "description": "Thank you for your feedback!{if $rating < 3} We will work hard to improve your experience!{/if}",
+      "description": "Thank you for your feedback!{if $rating.number < 3} We will work hard to improve your experience!{/if}",
       "color": "#14b8a6",
       "footer": {
         "text": "Ticketeer Canary - Support Made Simple",
@@ -4350,6 +4749,144 @@ This message is sent in the log channels when the priority of a ticket has chang
 ```
 
 :::
+### Ticket Name Set Log {#name_set_log}
+
+<ClientOnly>
+<MessagePreview class="mt-3" title="Ticket Name Set Log" :message="templates['name_set_log']" />
+</ClientOnly>
+
+::: info
+
+This message is sent in the log channels when a ticket name is set.
+
+:::
+
+::: details Expand to see options and variables
+
+| Template Option  | Value      |
+|------------------|------------|
+| Can be disabled? | `No` |
+| Can be automatically deleted? | `No` |
+| Type | `message` |
+
+| Variable Name  | Type       | Description                                |
+|----------------|------------|--------------------------------------------|
+| `server` | [Server](#server-object) | The server that the ticket was created in |
+| `ticket` | [Ticket](#ticket-object) | The ticket |
+| `group` | [Group](#group-object) | The ticket group of the ticket |
+| `owner` | [User](#user-object) | The owner of the ticket |
+| `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
+| `channel` | [Channel](#channel-object) | The channel the ticket was created in |
+| `user` | [User](#user-object) | The user that triggered this action |
+| `event` | string | Ticket log event |
+| `message` | string | Ticket log event message |
+
+:::
+
+::: details Expand to see default json template
+
+```json
+{
+  "embeds": [
+    {
+      "description": "{$user} set the name for {$ticket.channel.name} ({$ticket.channel})!",
+      "fields": [
+        {
+          "name": "Ticket",
+          "value": "{$ticket.channel.name} ({$ticket.channel})"
+        },
+        {
+          "name": "Author",
+          "value": "{$user}",
+          "inline": true
+        },
+        {
+          "name": "Group",
+          "value": "{$ticket.group.name}",
+          "inline": true
+        }
+      ],
+      "timestamp": true,
+      "color": "#14b8a6",
+      "footer": {
+        "text": "Ticketeer Canary - Support Made Simple",
+        "icon_url": "https://ticketeer.dev/icon.png"
+      }
+    }
+  ]
+}
+```
+
+:::
+### Ticket Name Cleared Log {#name_cleared_log}
+
+<ClientOnly>
+<MessagePreview class="mt-3" title="Ticket Name Cleared Log" :message="templates['name_cleared_log']" />
+</ClientOnly>
+
+::: info
+
+This message is sent in the log channels when a tickets name is cleared.
+
+:::
+
+::: details Expand to see options and variables
+
+| Template Option  | Value      |
+|------------------|------------|
+| Can be disabled? | `No` |
+| Can be automatically deleted? | `No` |
+| Type | `message` |
+
+| Variable Name  | Type       | Description                                |
+|----------------|------------|--------------------------------------------|
+| `server` | [Server](#server-object) | The server that the ticket was created in |
+| `ticket` | [Ticket](#ticket-object) | The ticket |
+| `group` | [Group](#group-object) | The ticket group of the ticket |
+| `owner` | [User](#user-object) | The owner of the ticket |
+| `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
+| `channel` | [Channel](#channel-object) | The channel the ticket was created in |
+| `user` | [User](#user-object) | The user that triggered this action |
+| `event` | string | Ticket log event |
+| `message` | string | Ticket log event message |
+
+:::
+
+::: details Expand to see default json template
+
+```json
+{
+  "embeds": [
+    {
+      "description": "{$user} cleared the name for {$ticket.channel.name} ({$ticket.channel})!",
+      "fields": [
+        {
+          "name": "Ticket",
+          "value": "{$ticket.channel.name} ({$ticket.channel})"
+        },
+        {
+          "name": "Author",
+          "value": "{$user}",
+          "inline": true
+        },
+        {
+          "name": "Group",
+          "value": "{$ticket.group.name}",
+          "inline": true
+        }
+      ],
+      "timestamp": true,
+      "color": "#14b8a6",
+      "footer": {
+        "text": "Ticketeer Canary - Support Made Simple",
+        "icon_url": "https://ticketeer.dev/icon.png"
+      }
+    }
+  ]
+}
+```
+
+:::
 ### Ticket Expired Log {#expired_log}
 
 <ClientOnly>
@@ -4581,6 +5118,11 @@ This message is sent in the log channels when a ticket is given a rating.
 | `user` | [User](#user-object) | The user that triggered this action |
 | `event` | string | Ticket log event |
 | `message` | string | Ticket log event message |
+| `rating.number` | number | The rating number in the list of ratings |
+| `rating.label` | string | The rating label configured in the ticket group |
+| `rating.description?` | string \| `null` | The rating description configured in the ticket group |
+| `rating.emoji?` | string \| `null` | The rating emoji configured in the ticket group |
+| `rating.color` | string | The rating color configured in the ticket group |
 
 :::
 
@@ -4590,7 +5132,216 @@ This message is sent in the log channels when a ticket is given a rating.
 {
   "embeds": [
     {
-      "description": "{$user} gave {$ticket.channel.name} a rating!",
+      "description": "{$user} gave {$ticket.channel.name} a \"{if $rating.emoji}{$rating.emoji} {/if}{$rating.label}\" rating!",
+      "color": "#14b8a6",
+      "footer": {
+        "text": "Ticketeer Canary - Support Made Simple",
+        "icon_url": "https://ticketeer.dev/icon.png"
+      }
+    }
+  ]
+}
+```
+
+:::
+### Ticket Notes Created Log {#thread_created_log}
+
+<ClientOnly>
+<MessagePreview class="mt-3" title="Ticket Notes Created Log" :message="templates['thread_created_log']" />
+</ClientOnly>
+
+::: info
+
+This message is sent in the log channels when a ticket notes are created.
+
+:::
+
+::: details Expand to see options and variables
+
+| Template Option  | Value      |
+|------------------|------------|
+| Can be disabled? | `No` |
+| Can be automatically deleted? | `No` |
+| Type | `message` |
+
+| Variable Name  | Type       | Description                                |
+|----------------|------------|--------------------------------------------|
+| `server` | [Server](#server-object) | The server that the ticket was created in |
+| `ticket` | [Ticket](#ticket-object) | The ticket |
+| `group` | [Group](#group-object) | The ticket group of the ticket |
+| `owner` | [User](#user-object) | The owner of the ticket |
+| `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
+| `channel` | [Channel](#channel-object) | The channel the ticket was created in |
+| `user` | [User](#user-object) | The user that triggered this action |
+| `event` | string | Ticket log event |
+| `message` | string | Ticket log event message |
+
+:::
+
+::: details Expand to see default json template
+
+```json
+{
+  "embeds": [
+    {
+      "description": "{$user} created notes for {$ticket.channel.name} ({$ticket.channel})!",
+      "fields": [
+        {
+          "name": "Ticket",
+          "value": "{$ticket.channel.name} ({$ticket.channel})"
+        },
+        {
+          "name": "Author",
+          "value": "{$user}",
+          "inline": true
+        },
+        {
+          "name": "Group",
+          "value": "{$ticket.group.name}",
+          "inline": true
+        }
+      ],
+      "timestamp": true,
+      "color": "#14b8a6",
+      "footer": {
+        "text": "Ticketeer Canary - Support Made Simple",
+        "icon_url": "https://ticketeer.dev/icon.png"
+      }
+    }
+  ]
+}
+```
+
+:::
+### Ticket Notes Member Added Log {#thread_member_added_log}
+
+<ClientOnly>
+<MessagePreview class="mt-3" title="Ticket Notes Member Added Log" :message="templates['thread_member_added_log']" />
+</ClientOnly>
+
+::: info
+
+This message is sent in the log channels when a member is added to a ticket notes.
+
+:::
+
+::: details Expand to see options and variables
+
+| Template Option  | Value      |
+|------------------|------------|
+| Can be disabled? | `No` |
+| Can be automatically deleted? | `No` |
+| Type | `message` |
+
+| Variable Name  | Type       | Description                                |
+|----------------|------------|--------------------------------------------|
+| `server` | [Server](#server-object) | The server that the ticket was created in |
+| `ticket` | [Ticket](#ticket-object) | The ticket |
+| `group` | [Group](#group-object) | The ticket group of the ticket |
+| `owner` | [User](#user-object) | The owner of the ticket |
+| `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
+| `channel` | [Channel](#channel-object) | The channel the ticket was created in |
+| `user` | [User](#user-object) | The user that triggered this action |
+| `event` | string | Ticket log event |
+| `message` | string | Ticket log event message |
+| `added` | [User](#user-object) | The user added to the notes |
+
+:::
+
+::: details Expand to see default json template
+
+```json
+{
+  "embeds": [
+    {
+      "description": "{$user} added {$added} to notes for {$ticket.channel.name} ({$ticket.channel})!",
+      "fields": [
+        {
+          "name": "Ticket",
+          "value": "{$ticket.channel.name} ({$ticket.channel})"
+        },
+        {
+          "name": "Author",
+          "value": "{$user}",
+          "inline": true
+        },
+        {
+          "name": "Group",
+          "value": "{$ticket.group.name}",
+          "inline": true
+        }
+      ],
+      "timestamp": true,
+      "color": "#14b8a6",
+      "footer": {
+        "text": "Ticketeer Canary - Support Made Simple",
+        "icon_url": "https://ticketeer.dev/icon.png"
+      }
+    }
+  ]
+}
+```
+
+:::
+### Ticket Notes Member Removed Log {#thread_member_removed_log}
+
+<ClientOnly>
+<MessagePreview class="mt-3" title="Ticket Notes Member Removed Log" :message="templates['thread_member_removed_log']" />
+</ClientOnly>
+
+::: info
+
+This message is sent in the log channels when a member is removed from a ticket notes.
+
+:::
+
+::: details Expand to see options and variables
+
+| Template Option  | Value      |
+|------------------|------------|
+| Can be disabled? | `No` |
+| Can be automatically deleted? | `No` |
+| Type | `message` |
+
+| Variable Name  | Type       | Description                                |
+|----------------|------------|--------------------------------------------|
+| `server` | [Server](#server-object) | The server that the ticket was created in |
+| `ticket` | [Ticket](#ticket-object) | The ticket |
+| `group` | [Group](#group-object) | The ticket group of the ticket |
+| `owner` | [User](#user-object) | The owner of the ticket |
+| `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
+| `channel` | [Channel](#channel-object) | The channel the ticket was created in |
+| `user` | [User](#user-object) | The user that triggered this action |
+| `event` | string | Ticket log event |
+| `message` | string | Ticket log event message |
+| `removed` | [User](#user-object) | The user removed from the notes |
+
+:::
+
+::: details Expand to see default json template
+
+```json
+{
+  "embeds": [
+    {
+      "description": "{$user} removed {$removed} from notes for {$ticket.channel.name} ({$ticket.channel})!",
+      "fields": [
+        {
+          "name": "Ticket",
+          "value": "{$ticket.channel.name} ({$ticket.channel})"
+        },
+        {
+          "name": "Author",
+          "value": "{$user}",
+          "inline": true
+        },
+        {
+          "name": "Group",
+          "value": "{$ticket.group.name}",
+          "inline": true
+        }
+      ],
+      "timestamp": true,
       "color": "#14b8a6",
       "footer": {
         "text": "Ticketeer Canary - Support Made Simple",
@@ -4622,7 +5373,7 @@ This message is sent in the log channels when a ticket is given a rating.
 |`group.id`| `string` | Group ID |
 |`group.name`| `string` | Group name|
 |`group.count`| `number` | Group count |
-|`group.schedule_timestamp?`| `number`|`null` | Group next open schedule slot timestamp  |
+|`group.schedule_timestamp?`| `number`\|`null` | Group next open schedule slot timestamp  |
 
 ### Ticket Object
 
@@ -4630,23 +5381,22 @@ This message is sent in the log channels when a ticket is given a rating.
 |----------------|------------|--------------------------------------------|
 |`ticket`| `string` | Ticket channel name or Ticket ID |
 |`ticket.id`| `string` | Ticket ID |
-|`ticket.name?`| `string`|`null` | Ticket channel name |
+|`ticket.name?`| `string`\|`null` | Ticket channel name |
 |`ticket.number`| `number` | Ticket number |
 |`ticket.link`| `string` | Link to the first message of the ticket |
 |`ticket.priority`| `number` | Ticket priority level |
-|`ticket.priority.label?`| `string`|`null` | Ticket priority label |
-|`ticket.priority.description?`| `string`|`null` | Ticket priority description |
-|`ticket.priority.emoji?`| `string`|`null` | Ticket priority emoji |
-|`ticket.priority.color?`| `string`|`null` | Ticket priority color |
-|`ticket.rating`| `number` | Average rating given to ticket |
-|`ticket.form?`| `array`|`null` | The filled out form from opening a ticket |
-|`ticket.form?.title`| `string`|`null` | Title of the form field |
-|`ticket.form?.value`| `string`|`null` | Value of the form field |
-|`ticket.closed_reason?`| `string`|`null` | Reason for closing the ticket |
+|`ticket.priority.label?`| `string`\|`null` | Ticket priority label |
+|`ticket.priority.description?`| `string`\|`null` | Ticket priority description |
+|`ticket.priority.emoji?`| `string`\|`null` | Ticket priority emoji |
+|`ticket.priority.color?`| `string`\|`null` | Ticket priority color |
+|`ticket.form?`| `array`\|`null` | The filled out form from opening a ticket |
+|`ticket.form?.title`| `string`\|`null` | Title of the form field |
+|`ticket.form?.value`| `string`\|`null` | Value of the form field |
+|`ticket.closed_reason?`| `string`\|`null` | Reason for closing the ticket |
 |`ticket.owner`| [User](#user-object) | Owner of ticket |
-|`ticket.assigned?`| [User](#user-object)|`null` | Assigned user to ticket |
+|`ticket.assigned?`| [User](#user-object)\|`null` | Assigned user to ticket |
 |`ticket.group`| [Group](#group-object) | Ticket Group |
-|`ticket.channel?`| [Channel](#user-channel)|`null` | Ticket channel |
+|`ticket.channel?`| [Channel](#user-channel)\|`null` | Ticket channel |
 
 ### Channel Object
 
@@ -4673,7 +5423,8 @@ This message is sent in the log channels when a ticket is given a rating.
 |`user.icon`| `string` | User icon |
 |`user.tag`| `string` |  User #tag (deprecated) |
 |`user.full`| `string` | User username#tag (deprecated) |
-|`user.joined_at?`| `number`|`null` | Timestamp when user joined server |
+|`user.roles`| [Role[]](#role-object) | List of roles the user has in order of hierarchy |
+|`user.joined_at?`| `number`\|`null` | Timestamp when user joined server |
 
 ### Role Object
 
