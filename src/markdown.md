@@ -51,6 +51,12 @@ To create a header, you need to include a specific number of the hash/pound sign
 
 ![headers](https://i.imgur.com/9dhQ4SE.png)
 
+# Tiny Header
+
+To create a tiny header, you can use `-#`
+
+![tiny headers](https://i.imgur.com/rX0IK1Z.png)
+
 ### Masked Links
 
 You can use masked links to make text a clickable or pressable hyperlink. To do so, you need to include the text you want displayed in brackets and then the URL in parentheses. For example:
