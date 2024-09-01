@@ -100,3 +100,5 @@ dist/
 .vitepress/dist
 .vitepress/cache
 .vitepress/types
+
+**/images/*.png

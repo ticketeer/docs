@@ -80,28 +80,64 @@ export default defineConfig({
       { text: 'Home', link: '/' },
       { text: 'Getting Started', link: '/getting-started' },
       { text: 'Change Logs', link: '/changelog' },
+      { text: 'Web Panel Tour', link: '/tour' },
       { text: 'FAQs', link: '/faq' },
       {
-        text: 'General',
+        text: 'General Help',
         items: [
-          { text: 'Commands', link: '/commands' },
           {
-            text: 'Dashboard Tour',
-            link: '/dashboard',
+            text: 'Dashboard',
+            link: '/server/dashboard',
+          },
+          {
+            text: 'Ticket Group',
+            link: '/ticket/group',
             items: [
-              { text: 'Server Dashboard', link: '/dashboard#server-dashboard' },
-              { text: 'Ticket Groups', link: '/dashboard#ticket-groups' },
-              { text: 'Ticket Panels', link: '/dashboard#ticket-panels' },
-              { text: 'Ticket Statistics', link: '/dashboard#ticket-statistics' },
-              { text: 'Ticket Transcripts', link: '/dashboard#ticket-transcripts' },
-              { text: 'Ticket Logs', link: '/dashboard#ticket-logs' },
-              { text: 'Server Settings', link: '/dashboard#server-settings' },
-              { text: 'Message Editor', link: '/dashboard#message-editor' },
+              { text: 'Open Section', link: '/ticket/group/open' },
+              { text: 'Private Thread Section', link: '/ticket/group/private-thread' },
+              { text: 'Closing Section', link: '/ticket/group/closing' },
+              { text: 'Locking Section', link: '/ticket/group/locking' },
+              { text: 'Assigning Section', link: '/ticket/group/assigning' },
+              { text: 'Expiring Section', link: '/ticket/group/expiring' },
+              { text: 'Transcripts Section', link: '/ticket/group/transcript' },
+              { text: 'Form Section', link: '/ticket/group/form' },
+              { text: 'Feedback Section', link: '/ticket/group/feedback' },
+              { text: 'Ratings Section', link: '/ticket/group/rating' },
+              { text: 'Priorities Section', link: '/ticket/group/priority' },
+              { text: 'Logging Section', link: '/ticket/group/logging' },
+              { text: 'Scheduling Section', link: '/ticket/group/scheduling' },
+              { text: 'Permissions Section', link: '/ticket/group/permissions' },
+              { text: 'Messages Section', link: '/ticket/group/messages' },
+              { text: 'Message Editor', link: '/ticket/group/message' },
             ],
           },
+          {
+            text: 'Ticket Panel',
+            link: '/ticket/panel',
+          },
+          {
+            text: 'Ticket View',
+            link: '/ticket/view',
+          },
+          {
+            text: 'Logs & Statistics',
+            items: [
+              { text: 'Server Logs', link: '/server/logs' },
+              { text: 'Ticket Logs', link: '/ticket/logs' },
+              { text: 'Ticket Statistics', link: '/ticket/stats' },
+            ],
+          },
+          {
+            text: 'Settings',
+            items: [
+              { text: 'Server Settings', link: '/server/settings' },
+              { text: 'Server Permissions', link: '/server/permissions' },
+            ],
+          },
+          { text: 'Commands', link: '/commands' },
           { text: 'Messages', link: '/messages' },
-          { text: 'Template Engine', link: '/template-engine' },
           { text: 'Markdown 101', link: '/markdown' },
+          { text: 'Template Engine', link: '/template-engine' },
         ],
       },
       {
@@ -162,9 +198,9 @@ export default defineConfig({
     template: {
       compilerOptions: {
         isCustomElement: (tag) => {
-          return tag.startsWith('discord-');
-        }
-      }
-    }
+          return tag.startsWith('discord-')
+        },
+      },
+    },
   },
 })
