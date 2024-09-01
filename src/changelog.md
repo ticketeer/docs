@@ -11,7 +11,7 @@ title: Changelogs
 - Added a new button action "Close Ticket without Reason". This will close the ticket without confirmation or a reason
 - Added ticket logs to the dashboard (in the logs section), this will show you all the actions that have been taken on all tickets
 - Added two new export options for ticket groups, one for forms (feedback forms and opening forms) and one for completed ticket, these cans be accessed from the 3 dot menu in the ticket group page
-- Added a new commands `/bulk close` and `/bulk delete`, these are experiential and will likely fail if it tries to close a lot of tickets at once
+- Added new commands `/bulk close` and `/bulk delete`, these are experiential and will likely fail if it tries to close a lot of tickets at once
 - Added a new button action "Change Priority", this will allow you to change the priority of a ticket through a button/dropdown interaction
 - Added new "Form Results" message, this message is sent right after the welcome message if a form is submitted. (Disabled by default)
 - Added view mode ticket group editor, the "List View" mode will display all the settings for the ticket group on one page where you can toggle each section on/off.
