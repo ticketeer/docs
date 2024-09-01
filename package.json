@@ -10,32 +10,34 @@
     "preinstall": "npx only-allow pnpm",
     "messages": "tsx .vitepress/build/messages.ts",
     "webp": "tsx .vitepress/build/webp.ts",
-    "type": "vue-tsc --noEmit"
+    "type": "vue-tsc --noEmit",
+    "deps": "pnpm update -i"
   },
   "dependencies": {
-    "@floating-ui/vue": "^1.0.6",
-    "@vueuse/components": "^10.9.0",
-    "@vueuse/core": "^10.9.0",
+    "@floating-ui/vue": "^1.1.4",
+    "@skyra/discord-components-core": "4.0.0-alpha.34",
+    "@vueuse/components": "^10.11.1",
+    "@vueuse/core": "^10.11.1",
     "date-fns": "^3.6.0",
-    "radix-vue": "^1.8.1",
-    "vitepress": "^1.2.2",
+    "radix-vue": "^1.9.5",
+    "vitepress": "^1.3.4",
     "vitepress-markdown-timeline": "^1.2.1",
-    "vue": "^3.4.27"
+    "vue": "^3.4.38"
   },
   "devDependencies": {
     "@types/glob": "^8.1.0",
-    "@types/markdown-it": "^14.1.1",
-    "@types/node": "^20.12.12",
-    "autoprefixer": "^10.4.19",
-    "glob": "^10.3.16",
-    "postcss": "^8.4.38",
-    "sass": "^1.77.2",
-    "sharp": "^0.33.4",
-    "tailwindcss": "^3.4.3",
-    "tsx": "^4.10.5",
-    "typescript": "^5.4.5",
+    "@types/markdown-it": "^14.1.2",
+    "@types/node": "^20.16.2",
+    "autoprefixer": "^10.4.20",
+    "glob": "^10.4.5",
+    "postcss": "^8.4.41",
+    "sass": "^1.77.8",
+    "sharp": "^0.33.5",
+    "tailwindcss": "^3.4.10",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.4",
     "vitepress-plugin-tabs": "^0.5.0",
-    "vue-tsc": "^2.0.19"
+    "vue-tsc": "^2.1.5"
   },
   "packageManager": "pnpm@9.1.1"
 }

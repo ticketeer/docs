@@ -94,6 +94,14 @@ This happens when you try to create a thread for a ticket that already has a pri
 
 :::
 
+### Error `STEAM_REQUIRED`
+
+::: info `Steam Account Required`
+
+This error happens when you do an action that requires you to link your steam account with Ticketeer
+
+:::
+
 ## Interaction Request Exception
 
 ### Error `REQUEST_FORBIDDEN`
@@ -117,6 +125,14 @@ Ticketeer tried to send something to discord that was not valid.
 ::: info `Too Many Requests`
 
 Ticketeer is being rate limited.
+
+:::
+
+### Error `REQUEST_TIMEOUT`
+
+::: info `Request Timeout`
+
+Discord is taking too long to respond to a request. This could be due to an [outage](https://discordstatus.com/).
 
 :::
 

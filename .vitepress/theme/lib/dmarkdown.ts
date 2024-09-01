@@ -9,10 +9,10 @@
  */
 
 import type { State as MDState, VueOutput, HtmlOutput, Capture } from './markdown'
-import { defaultRules, outputFor, parserFor, anyScopeRegex, htmlTag, inlineRegex } from './markdown'
+import { defaultRules, outputFor, parserFor, anyScopeRegex, htmlTag, inlineRegex, parseInline } from './markdown'
 import { formatDistanceToNow } from 'date-fns/formatDistanceToNow'
 import { format as formatDate } from 'date-fns/format'
-import { VNode, h } from 'vue'
+import { VNode, Component, h } from 'vue'
 
 function hexToRgb(hex: string): { r: number; g: number; b: number } {
   var bigint = parseInt(hex, 16);
@@ -122,6 +122,7 @@ type Rules = {
   readonly strike: DefaultInOutRule
   readonly spoiler: DefaultInOutRule
   readonly heading: DefaultInOutRule
+  readonly subtext: DefaultInOutRule
   readonly list: DefaultInOutRule
 }
 
@@ -467,11 +468,11 @@ const discordRules: Rules = {
     requiredFirstCharacters: ['<'],
     match: (source) => /^<@&(\d+)>/.exec(source),
     parse(capture, parse, state) {
-      const [_, id] = capture
+      const [mention, id] = capture
       const resolve: ResolveRoleFn = state.resolve?.role || defaultRoleResolver
       const role = resolve(id)
 
-      let rgba: any = null
+      let rgba = null
       if (role?.color && role.color !== '#b9bbbe') {
         rgba = hexToRgb(role.color)
       }
@@ -485,7 +486,7 @@ const discordRules: Rules = {
         content: [
           {
             type: 'text',
-            content: `@${role ? role.name : 'role'}`,
+            content: `${role ? role.name : 'role'}`,
           },
         ],
       }
@@ -498,7 +499,7 @@ const discordRules: Rules = {
     requiredFirstCharacters: ['<'],
     match: (source) => /^<#(\d+)>/.exec(source),
     parse(capture, parse, state) {
-      const [_, id] = capture
+      const [mention, id] = capture
 
       const resolve: ResolveChannelFn = state.resolve?.channel || defaultChannelResolver
       const channel = resolve(id)
@@ -511,7 +512,7 @@ const discordRules: Rules = {
         content: [
           {
             type: 'text',
-            content: `#${channel ? channel.name : 'channel'}`,
+            content: `${channel ? channel.name : 'channel'}`,
           },
         ],
       }
@@ -523,7 +524,7 @@ const discordRules: Rules = {
     ...defaultRules.text,
     match: (source) => /^<@!?(\d+)>|^(@(?:everyone|here))/.exec(source),
     parse(capture, parse, state) {
-      const [_, id, _everyone] = capture
+      const [mention, id, _everyone] = capture
       const everyone = _everyone ? _everyone.substring(1) : null
 
       if (everyone) {
@@ -533,7 +534,7 @@ const discordRules: Rules = {
           content: [
             {
               type: 'text',
-              content: `@${everyone}`,
+              content: `${everyone}`,
             },
           ],
         }
@@ -542,7 +543,7 @@ const discordRules: Rules = {
       const resolve: ResolveUserFn = state.resolve?.user || defaultUserResolver
       const user = resolve(id)
 
-      let rgba: any = null
+      let rgba = null
       if (user?.color && user.color !== '#b9bbbe') {
         rgba = hexToRgb(user.color)
       }
@@ -556,26 +557,62 @@ const discordRules: Rules = {
         content: [
           {
             type: 'text',
-            content: `@${user ? user.name : 'user'}`,
+            content: `${user ? user.name : 'user'}`,
           },
         ],
       }
     },
     vue: function (node, output, state) {
+      let tag: string | Component = 'span'
+      if (state.components?.mention || state.tags?.mention) {
+        tag = state.components?.mention || state.tags?.mention!
+      } else if (node.context === 'here' && (state.components?.hereMention || state.tags?.hereMention)) {
+        tag = state.components?.hereMention || state.tags?.hereMention!
+      } else if (node.context === 'everyone' && (state.components?.everyoneMention || state.tags?.everyoneMention)) {
+        tag = state.components?.everyoneMention || state.tags?.everyoneMention!
+      } else if (node.context === 'user' && (state.components?.userMention || state.tags?.userMention)) {
+        tag = state.components?.userMention || state.tags?.userMention!
+      } else if (node.context === 'channel' && (state.components?.channelMention || state.tags?.channelMention)) {
+        tag = state.components?.channelMention || state.tags?.channelMention!
+      } else if (node.context === 'role' && (state.components?.roleMention || state.tags?.roleMention)) {
+        tag = state.components?.roleMention || state.tags?.roleMention!
+      }
+
       return h(
-        state.components?.mention || 'span',
-        {
-          dataId: node.id,
-          class: `mention ${node.context}`,
-          style: node.color
-            ? `background-color:rgba(${node.color.r},${node.color.g},${node.color.b},0.1);color:rgba(${node.color.r},${node.color.g},${node.color.b})`
-            : null,
-        },
-        output(node.content, state),
+        tag,
+        typeof tag === 'string'
+          ? {
+              dataId: node.id,
+              style: node.color
+                ? `background-color:rgba(${node.color.r},${node.color.g},${node.color.b},0.1);color:rgba(${node.color.r},${node.color.g},${node.color.b})`
+                : null,
+            }
+          : {
+              id: node.id,
+              context: node.context,
+              color: node.color,
+              info: node.info,
+            },
+        () => output(node.content, state),
       )
     },
     html: function (node, output, state) {
-      return htmlTag('span', output(node.content, state), {
+      let tag = 'span'
+      if (state.tags?.mention) {
+        tag = state.tags?.mention
+      } else if (node.context === 'here' && state.tags?.hereMention) {
+        tag = state.tags?.hereMention
+      } else if (node.context === 'everyone' && state.tags?.everyoneMention) {
+        tag = state.tags?.everyoneMention
+      } else if (node.context === 'user' && state.tags?.userMention) {
+        tag = state.tags?.userMention
+      } else if (node.context === 'channel' && state.tags?.channelMention) {
+        tag = state.tags?.channelMention
+      } else if (node.context === 'role' && state.tags?.roleMention) {
+        tag = state.tags?.roleMention
+      }
+
+      return htmlTag(tag, output(node.content, state), {
         dataId: node.id,
         class: `mention ${node.context}`,
         style: node.color
@@ -628,7 +665,7 @@ const discordRules: Rules = {
     order: defaultRules.text.order,
     match: (source) => /^<(a?):(\w+):(\d{5,32})>/.exec(source),
     parse(capture, parse, state) {
-      const [_, _animated, name, id] = capture
+      const [matched, _animated, name, id] = capture
       const animated = _animated === 'a'
 
       const resolve: ResolveCustomEmojiFn = state.resolve?.customEmoji || defaultCustomEmojiResolver
@@ -638,6 +675,7 @@ const discordRules: Rules = {
         type: 'emoji',
         custom: true,
         emoji: null,
+        content: matched,
         ...emoji,
       }
     },
@@ -661,6 +699,7 @@ const discordRules: Rules = {
             animated: false,
             name: name,
             emoji: emoji,
+            content: match,
           }
         : {
             type: 'text',
@@ -673,17 +712,32 @@ const discordRules: Rules = {
       }
 
       if (node.custom) {
-        return h('img', { 'data-id': node.id, 'data-emoji': node.name, class: `emoji-custom`, src: node.url, alt: `:${node.name}:` })
+        return h(state.tags?.customEmoji || 'img', { 'data-id': node.id, 'data-emoji': node.name, class: `emoji-custom`, src: node.url, alt: `:${node.name}:` })
       }
 
-      return h('span', { 'data-id': node.id, 'data-emoji': node.name, class: `emoji`, alt: `:${node.name}:` }, node.content ? node.content : `:${node.name}:`)
+      return h(
+        state.tags?.emoji || 'span',
+        { 'data-id': node.id, 'data-emoji': node.name, class: `emoji`, alt: `:${node.name}:` },
+        node.content ? node.content : `:${node.name}:`,
+      )
     },
     html: function (node, output, state) {
       if (node.custom) {
-        return htmlTag('img', '', { 'data-id': node.id, 'data-emoji': node.name, class: `emoji-custom`, src: node.url, alt: `:${node.name}:` })
+        return htmlTag(state.tags?.customEmoji || 'img', '', {
+          'data-id': node.id,
+          'data-emoji': node.name,
+          class: `emoji-custom`,
+          src: node.url,
+          alt: `:${node.name}:`,
+        })
       }
 
-      return htmlTag('span', '', { 'data-id': node.id, 'data-emoji': node.name, class: `emoji`, alt: node.content ? node.content : `:${node.name}:` })
+      return htmlTag(state.tags?.emoji || 'span', '', {
+        'data-id': node.id,
+        'data-emoji': node.name,
+        class: `emoji`,
+        alt: node.content ? node.content : `:${node.name}:`,
+      })
     },
   },
   timestamp: {
@@ -718,10 +772,10 @@ const discordRules: Rules = {
             full: node.full,
             formatted: node.formatted,
           })
-        : h('span', { class: 'timestamp', 'aria-label': node.full }, node.formatted)
+        : h(state.tags?.timestamp || 'span', { class: 'timestamp', 'aria-label': node.full }, node.formatted)
     },
     html: function (node, output, state) {
-      return htmlTag('span', node.formatted, { class: 'timestamp' })
+      return htmlTag(state.tags?.timestamp || 'span', node.formatted, { class: 'timestamp' })
     },
   },
   strike: {
@@ -730,10 +784,10 @@ const discordRules: Rules = {
     match: inlineRegex(/^~~([\s\S]+?)~~(?!_)/),
     parse: defaultRules.u.parse,
     vue: function (node, output, state) {
-      return h(state.components?.strike || 's', output(node.content, state))
+      return h(state.components?.strikethrough || state.tags?.strikethrough || 's', output(node.content, state))
     },
     html: function (node, output, state) {
-      return htmlTag('s', output(node.content, state))
+      return htmlTag(state.tags?.strikethrough || 's', output(node.content, state))
     },
   },
   spoiler: {
@@ -741,17 +795,44 @@ const discordRules: Rules = {
     requiredFirstCharacters: ['|'],
     match: inlineRegex(/^\|\|([\s\S]+?)\|\|/),
     parse(capture, parse, state) {
-      const [_, content] = capture
+      const [match, content] = capture
       return {
         type: 'spoiler',
         content: parse(content, state),
       }
     },
     vue: function (node, output, state) {
-      return h(state.components?.spoiler || 'span', { class: 'spoiler' }, output(node.content, state))
+      return h(state.components?.spoiler || state.tags?.spoiler || 'span', { class: 'spoiler' }, output(node.content, state))
     },
     html: function (node, output, state) {
-      return htmlTag('span', output(node.content, state), { class: 'spoiler' })
+      return htmlTag(state.tags?.spoiler || 'span', output(node.content, state), { class: 'spoiler' })
+    },
+  },
+  subtext: {
+    order: defaultRules.heading.order,
+    requiredFirstCharacters: ['-'],
+    match(source, state, prev) {
+      if (state.allowSubtext === false) {
+        return null
+      }
+
+      if (prev == null || prev === '' || prev.match(/\n$/) != null) {
+        return anyScopeRegex(/^ *-# +((?!(-#)+)[^\n]+?) *(?:\n|$)/)(source, state, prev)
+      }
+
+      return null
+    },
+    parse: function (capture, parse, state) {
+      return {
+        type: 'subtext',
+        content: parseInline(parse, capture[1].trim(), state),
+      }
+    },
+    vue: function (node, output, state) {
+      return h(state.components?.subtext || state.tags?.subtext || 'small', output(node.content, state))
+    },
+    html: function (node, output, state) {
+      return htmlTag(state.tags?.subtext || 'small', output(node.content, state))
     },
   },
   heading: {

@@ -2,7 +2,7 @@
   import Tooltip from '@theme/components/Tooltip.vue'
   import { TooltipProvider } from 'radix-vue'
 
-  defineProps({
+  const props = defineProps({
     timestamp: String,
     format: String,
     full: String,
@@ -12,11 +12,11 @@
 </script>
 
 <template>
-  <span class="timestamp">
-    <TooltipProvider>
-      <Tooltip side="top" :text="full!">
+  <TooltipProvider>
+    <discord-time>
+      <Tooltip as="span" side="top" :text="full!">
         {{ formatted }}
       </Tooltip>
-    </TooltipProvider>
-  </span>
+    </discord-time>
+  </TooltipProvider>
 </template>

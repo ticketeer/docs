@@ -4,8 +4,8 @@ title: Support Made Simple
 layout: home
 
 hero:
-  name: "Ticketeer Docs"
-  text: "Support Made Simple"
+  name: 'Ticketeer Docs'
+  text: 'Support Made Simple'
   tagline: Official documentation for the Ticketeer discord bot!
   actions:
     - theme: brand

@@ -6,6 +6,14 @@ title: Frequently Asked Questions
 
 ## General
 
+::: details How do I make the tickets channels
+In the "Opening Ticket Settings" section if you set the "Open Ticket Channel" to a category type channel, your tickets will be channels.
+:::
+
+::: details How do I make the tickets threads
+In the "Opening Ticket Settings" section if you set the "Open Ticket Channel" to a text type channel, your tickets will be threads.
+:::
+
 ::: details Why does Ticketeer need permission to read my messages?
 This permission is required to create transcripts of tickets.
 :::

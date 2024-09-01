@@ -3,7 +3,7 @@
   import { useFloating, flip } from '@floating-ui/vue'
   import { ref } from 'vue'
 
-  defineProps({
+  const props = defineProps({
     placeholder: {
       type: String,
       default: 'Make a selection',
@@ -32,6 +32,80 @@
     middleware: [flip()],
   })
 </script>
+
+<style scoped lang="scss">
+  .discord-select {
+    max-width: 400px;
+    min-width: 150px;
+    width: 100%;
+
+    .discord-select-button {
+      cursor: pointer;
+      user-select: none;
+      border: 1px solid transparent;
+      background-color: rgb(32, 34, 37);
+      border-color: rgb(32, 34, 37);
+      font-size: 16px;
+      border-radius: 4px;
+      padding: 5px;
+      padding-left: 8px;
+      display: flex;
+      transition: border-color 250ms;
+
+      &:hover {
+        border-color: rgb(4, 4, 5);
+      }
+
+      &.open {
+        &.top {
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+        }
+
+        &.bottom {
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+
+        .discord-select-icon {
+          transform: rotate(180deg);
+        }
+      }
+
+      .discord-select-placeholder {
+        color: rgb(163, 166, 170);
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+
+      .discord-select-icon {
+        transition: all 250ms;
+        margin-left: auto;
+      }
+    }
+  }
+
+  .discord-select-container {
+    max-width: 400px;
+    min-width: 150px;
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid rgb(33, 35, 38);
+    border-top: none;
+    background: rgb(43, 45, 49);
+
+    &.top {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    &.bottom {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+  }
+</style>
 
 <template>
   <div class="discord-select">

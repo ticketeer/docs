@@ -157,4 +157,14 @@ export default defineConfig({
       md.use(tabsMarkdownPlugin)
     },
   },
+
+  vue: {
+    template: {
+      compilerOptions: {
+        isCustomElement: (tag) => {
+          return tag.startsWith('discord-');
+        }
+      }
+    }
+  },
 })

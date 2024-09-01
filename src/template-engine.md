@@ -30,7 +30,7 @@ Current Name: {$curName}
 {/for}
 ```
 
-Inside each loop, there are to magic-values ```@index0``` (index starting with 0) and ```@index1``` for a
+Inside each loop, there are to magic-values `@index0` (index starting with 0) and `@index1` for a
 index starting with amp1.
 
 ```text
@@ -40,7 +40,6 @@ Line {$@index1}: {$curName}
 ```
 
 Inside loops you can `{break}` or `{continue}` the loop.
-
 
 ## Conditions (if)
 
@@ -90,16 +89,17 @@ You can use filters on values used in comparisons.
 
 ### Operators
 
-| Operator       | Description                                |
-|----------------|--------------------------------------------|
-| ==             | Equal                                      |
-| !=             | Not equal                                  |
-| \>             | Greater than                               |
-| <              | Less than                                  |
-| >=             | Greater than or equal                      |
-| <=             | Less than or equal                         |
+| Operator | Description           |
+| -------- | --------------------- |
+| ==       | Equal                 |
+| !=       | Not equal             |
+| \>       | Greater than          |
+| <        | Less than             |
+| >=       | Greater than or equal |
+| <=       | Less than or equal    |
 
 ## Conditions (else)
+
 ```text
 {if $someVarName == "SomeValue"}
 Hello World
@@ -183,7 +183,7 @@ Use `{literal}{/literal}` to escape a block
 {literal}
   {$foo} will not be parsed!
 {/literal}
-``` 
+```
 
 ## Comments
 
@@ -194,7 +194,7 @@ Template {# Some Comment #}
 {# Some
 Multiline
 Comment #}
-``` 
+```
 
 ## Available Functions
 
@@ -202,13 +202,13 @@ Comment #}
 
 Break from a loop
 
-:::info 
+:::info
 
 Aliases: `none`
 
-| Argument Name    | Argument Type | Default Value    | Description       |
-|------------------|---------------|------------------|-------------------|
-|-|-|-|-|
+| Argument Name | Argument Type | Default Value | Description |
+| ------------- | ------------- | ------------- | ----------- |
+| -             | -             | -             | -           |
 
 :::
 
@@ -220,9 +220,9 @@ Continue in a loop
 
 Aliases: `none`
 
-| Argument Name    | Argument Type | Default Value    | Description       |
-|------------------|---------------|------------------|-------------------|
-|-|-|-|-|
+| Argument Name | Argument Type | Default Value | Description |
+| ------------- | ------------- | ------------- | ----------- |
+| -             | -             | -             | -           |
 
 :::
 
@@ -234,9 +234,9 @@ Returns the current time measured in the number of seconds since the Unix Epoch 
 
 Aliases: `time`, `now`
 
-| Argument Name    | Argument Type | Default Value    | Description       |
-|------------------|---------------|------------------|-------------------|
-|-|-|-|-|
+| Argument Name | Argument Type | Default Value | Description |
+| ------------- | ------------- | ------------- | ----------- |
+| -             | -             | -             | -           |
 
 :::
 
@@ -248,11 +248,11 @@ Returns a random number between min and max or a random item from a list
 
 Aliases: `rand`
 
-| Argument Name    | Argument Type | Default Value    | Description       |
-|------------------|---------------|------------------|-------------------|
-| `min` | `number` | `0` | Minimum number to return |
-| `max` | `number` | `100`| Maximum number to return |
-| `list` | `string` | - | Comma separated list |
+| Argument Name | Argument Type | Default Value | Description              |
+| ------------- | ------------- | ------------- | ------------------------ |
+| `min`         | `number`      | `0`           | Minimum number to return |
+| `max`         | `number`      | `100`         | Maximum number to return |
+| `list`        | `string`      | -             | Comma separated list     |
 
 :::
 
@@ -264,30 +264,30 @@ Set a variable in the context
 
 Aliases: `none`
 
-| Argument Name    | Argument Type | Default Value    | Description       |
-|------------------|---------------|------------------|-------------------|
-| `name`| `string` | - | - | Variable name |
-| `value` | `string` | - | - | Variable value |
+| Argument Name | Argument Type | Default Value | Description |
+| ------------- | ------------- | ------------- | ----------- | -------------- |
+| `name`        | `string`      | -             | -           | Variable name  |
+| `value`       | `string`      | -             | -           | Variable value |
 
 :::
 
 ## Available Filters
 
 ::: warning
-These filters *only* accept **non array** variables
+These filters _only_ accept **non array** variables
 :::
 
 ### `escape`
 
 Escape various Discord formatting and markdown into a plain text:
 
-:::info 
+:::info
 
 Aliases: `md`, `clean`
 
-| Argument Name    | Argument Type | Default Value    | Description       |
-|------------------|---------------|------------------|-------------------|
-|-|-|-|-|
+| Argument Name | Argument Type | Default Value | Description |
+| ------------- | ------------- | ------------- | ----------- |
+| -             | -             | -             | -           |
 
 :::
 
@@ -299,22 +299,22 @@ Format a timestamp into discord's timestamp format
 
 Aliases: `time`, `ts`
 
-| Argument Name    | Argument Type | Default Value    | Description       |
-|------------------|---------------|------------------|-------------------|
-|format|`format`|`R`|Format of the timestamp|
+| Argument Name | Argument Type | Default Value | Description             |
+| ------------- | ------------- | ------------- | ----------------------- |
+| format        | `format`      | `R`           | Format of the timestamp |
 
 Formats
 
-|Style|Input|Output (12-hour clock)|Output (24-hour clock)
-|--|--|--|--
-|Default|-|November 28, 2018 9:01 AM|28 November 2018 09:01
-|Short Time|`t`|9:01 AM|09:01
-|Long Time|`T`|9:01:00 AM|09:01:00
-|Short Date|`d`|11/28/2018|28/11/2018
-|Long Date|`D`|November 28, 2018|28 November 2018
-|Short Date/Time|`f`|November 28, 2018 9:01 AM|28 November 2018 09:01
-|Long Date/Time|`F`|Wednesday, November 28, 2018 9:01 AM|Wednesday, 28 November 2018 09:01
-|Relative Time|`R`|3 years ago|3 years ago
+| Style           | Input | Output (12-hour clock)               | Output (24-hour clock)            |
+| --------------- | ----- | ------------------------------------ | --------------------------------- |
+| Default         | -     | November 28, 2018 9:01 AM            | 28 November 2018 09:01            |
+| Short Time      | `t`   | 9:01 AM                              | 09:01                             |
+| Long Time       | `T`   | 9:01:00 AM                           | 09:01:00                          |
+| Short Date      | `d`   | 11/28/2018                           | 28/11/2018                        |
+| Long Date       | `D`   | November 28, 2018                    | 28 November 2018                  |
+| Short Date/Time | `f`   | November 28, 2018 9:01 AM            | 28 November 2018 09:01            |
+| Long Date/Time  | `F`   | Wednesday, November 28, 2018 9:01 AM | Wednesday, 28 November 2018 09:01 |
+| Relative Time   | `R`   | 3 years ago                          | 3 years ago                       |
 
 :::
 
@@ -322,13 +322,13 @@ Formats
 
 Wraps a variable in a codeblock
 
-:::info 
+:::info
 
 Aliases: `code`
 
-| Argument Name    | Argument Type | Default Value    | Description       |
-|------------------|---------------|------------------|-------------------|
-|-|-|-|-|
+| Argument Name | Argument Type | Default Value | Description |
+| ------------- | ------------- | ------------- | ----------- |
+| -             | -             | -             | -           |
 
 :::
 
@@ -340,23 +340,24 @@ If a variable is empty, fallback to a default value
 
 Aliases: `else`, `fb`
 
-| Argument Name    | Argument Type | Default Value    | Description       |
-|------------------|---------------|------------------|-------------------|
-|value|`string`|-|The value to fallback to|
+| Argument Name | Argument Type | Default Value | Description              |
+| ------------- | ------------- | ------------- | ------------------------ |
+| value         | `string`      | -             | The value to fallback to |
 
 :::
 
-### `maxLength`
+### `truncate`
 
 Limits a string to a certain length
 
 :::info
 
-Aliases: `leng`, `ml`
+Aliases: `leng`, `ml`, `maxLength`
 
-| Argument Name    | Argument Type | Default Value    | Description       |
-|------------------|---------------|------------------|-------------------|
-|length|`number`|-|The length to limit to|
+| Argument Name | Argument Type | Default Value | Description                            |
+| ------------- | ------------- | ------------- | -------------------------------------- |
+| length        | `number`      | -             | The length to limit to                 |
+| dots          | `string`      | '...'         | Add to the end of the truncated string |
 
 :::
 
@@ -368,10 +369,10 @@ Pads a string to the left with a certain character
 
 Aliases: `pad`, `lp`, `pl`
 
-| Argument Name    | Argument Type | Default Value    | Description       |
-|------------------|---------------|------------------|-------------------|
-|length|`number`|-|The length to pad to|
-|char|`string`|-|The string to pad with|
+| Argument Name | Argument Type | Default Value | Description            |
+| ------------- | ------------- | ------------- | ---------------------- |
+| length        | `number`      | -             | The length to pad to   |
+| char          | `string`      | -             | The string to pad with |
 
 :::
 
@@ -383,10 +384,10 @@ Pads a string to the right with a certain character
 
 Aliases: `pr`, `rp`
 
-| Argument Name    | Argument Type | Default Value    | Description       |
-|------------------|---------------|------------------|-------------------|
-|length|`number`|-|The length to pad to|
-|char|`string`|-|The string to pad with|
+| Argument Name | Argument Type | Default Value | Description            |
+| ------------- | ------------- | ------------- | ---------------------- |
+| length        | `number`      | -             | The length to pad to   |
+| char          | `string`      | -             | The string to pad with |
 
 :::
 
@@ -394,13 +395,13 @@ Aliases: `pr`, `rp`
 
 Fixes a string to a certain length
 
-:::info 
+:::info
 
 Aliases: `fixed`
 
-| Argument Name    | Argument Type | Default Value    | Description       |
-|------------------|---------------|------------------|-------------------|
-|length|`number`|-|The length to fix to|
+| Argument Name | Argument Type | Default Value | Description          |
+| ------------- | ------------- | ------------- | -------------------- |
+| length        | `number`      | -             | The length to fix to |
 
 :::
 
@@ -412,9 +413,9 @@ Converts a string to lowercase
 
 Aliases: `lower`, `lc`
 
-| Argument Name    | Argument Type | Default Value    | Description       |
-|------------------|---------------|------------------|-------------------|
-|-|-|-|-|
+| Argument Name | Argument Type | Default Value | Description |
+| ------------- | ------------- | ------------- | ----------- |
+| -             | -             | -             | -           |
 
 :::
 
@@ -426,9 +427,9 @@ Converts a string to uppercase
 
 Aliases: `upper`, `uc`
 
-| Argument Name    | Argument Type | Default Value    | Description       |
-|------------------|---------------|------------------|-------------------|
-|-|-|-|-|
+| Argument Name | Argument Type | Default Value | Description |
+| ------------- | ------------- | ------------- | ----------- |
+| -             | -             | -             | -           |
 
 :::
 
@@ -440,9 +441,9 @@ Trims whitespace from the beginning and end of a string
 
 Aliases: `none`
 
-| Argument Name    | Argument Type | Default Value    | Description       |
-|------------------|---------------|------------------|-------------------|
-|-|-|-|-|
+| Argument Name | Argument Type | Default Value | Description |
+| ------------- | ------------- | ------------- | ----------- |
+| -             | -             | -             | -           |
 
 :::
 
@@ -454,9 +455,9 @@ Splits a string into an array
 
 Aliases: `explode`
 
-| Argument Name    | Argument Type | Default Value    | Description       |
-|------------------|---------------|------------------|-------------------|
-|separator|`string`|`,`|The separator to split on|
+| Argument Name | Argument Type | Default Value | Description               |
+| ------------- | ------------- | ------------- | ------------------------- |
+| separator     | `string`      | `,`           | The separator to split on |
 
 :::
 
@@ -464,7 +465,7 @@ Aliases: `explode`
 
 ::: warning
 
-These filters *only* accept **array** variables
+These filters _only_ accept **array** variables
 
 :::
 
@@ -472,13 +473,13 @@ These filters *only* accept **array** variables
 
 Counts the number of items in an array
 
-:::info 
+:::info
 
 Aliases: `none`
 
-| Argument Name    | Argument Type | Default Value    | Description       |
-|------------------|---------------|------------------|-------------------|
-|-|-|-|-|
+| Argument Name | Argument Type | Default Value | Description |
+| ------------- | ------------- | ------------- | ----------- |
+| -             | -             | -             | -           |
 
 :::
 
@@ -490,9 +491,9 @@ Joins an array into a string
 
 Aliases: `implode`
 
-| Argument Name    | Argument Type | Default Value    | Description       |
-|------------------|---------------|------------------|-------------------|
-|separator|`string`|`,`|The separator to join on|
+| Argument Name | Argument Type | Default Value | Description              |
+| ------------- | ------------- | ------------- | ------------------------ |
+| separator     | `string`      | `,`           | The separator to join on |
 
 :::
 
@@ -506,9 +507,9 @@ Strips empty lines from a section
 
 Aliases: `strip`
 
-| Argument Name    | Argument Type | Default Value    | Description       |
-|------------------|---------------|------------------|-------------------|
-|-|-|-|-|
+| Argument Name | Argument Type | Default Value | Description |
+| ------------- | ------------- | ------------- | ----------- |
+| -             | -             | -             | -           |
 
 :::
 
@@ -520,9 +521,9 @@ Trims whitespace from the beginning and end of a section
 
 Aliases: `none`
 
-| Argument Name    | Argument Type | Default Value    | Description       |
-|------------------|---------------|------------------|-------------------|
-|-|-|-|-|
+| Argument Name | Argument Type | Default Value | Description |
+| ------------- | ------------- | ------------- | ----------- |
+| -             | -             | -             | -           |
 
 :::
 
@@ -534,9 +535,9 @@ Converts a section to uppercase
 
 Aliases: `none`
 
-| Argument Name    | Argument Type | Default Value    | Description       |
-|------------------|---------------|------------------|-------------------|
-|-|-|-|-|
+| Argument Name | Argument Type | Default Value | Description |
+| ------------- | ------------- | ------------- | ----------- |
+| -             | -             | -             | -           |
 
 :::
 
@@ -548,8 +549,8 @@ Converts a section to lowercase
 
 Aliases: `none`
 
-| Argument Name    | Argument Type | Default Value    | Description       |
-|------------------|---------------|------------------|-------------------|
-|-|-|-|-|
+| Argument Name | Argument Type | Default Value | Description |
+| ------------- | ------------- | ------------- | ----------- |
+| -             | -             | -             | -           |
 
 :::

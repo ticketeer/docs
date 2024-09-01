@@ -9,5 +9,15 @@
   "htmlWhitespaceSensitivity": "ignore",
   "endOfLine": "lf",
   "braceStyle": "1tbs",
-  "singleAttributePerLine": false
+  "singleAttributePerLine": false,
+  "overrides": [
+    {
+      "files": [
+        "*.vue"
+      ],
+      "options": {
+        "vueIndentScriptAndStyle": true
+      }
+    }
+  ]
 }

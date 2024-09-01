@@ -7,6 +7,7 @@
   vertical-align: bottom;
   height: 40px;
   width: 40px;
+  background-position:100% 100%;
   &.blank{background-image: none;}
   &[data-emoji='hash'] {background-position:0% 0%;content-visibility:hidden;}
   &[data-emoji='asterisk'] {background-position:0% 1.639344262295082%;content-visibility:hidden;}

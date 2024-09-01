@@ -1,42 +1,31 @@
 <script lang="ts" setup>
-  import DiscordMessages from '@theme/components/Discord/Messages.vue'
-  import DiscordMessage from '@theme/components/Discord/Message.vue'
-  import DiscordMarkdown from '@theme/components/Discord/Markdown.vue'
-  import DiscordEmbed from '@theme/components/Discord/Embed.vue'
-  import DiscordEmbedFields from '@theme/components/Discord/EmbedFields.vue'
-  import DiscordEmbedField from '@theme/components/Discord/EmbedField.vue'
-  import DiscordSelect from '@theme/components/Discord/Select.vue'
-  import DiscordSelectItem from '@theme/components/Discord/SelectItem.vue'
-  import DiscordButtons from '@theme/components/Discord/Buttons.vue'
-  import DiscordButton from '@theme/components/Discord/Button.vue'
+  import DiscordMarkdown from './Discord/Markdown.vue'
+  import DiscordButton from './Discord/Button.vue'
+  import DiscordSelect from './Discord/Select.vue'
+  import DiscordSelectItem from './Discord/SelectItem.vue'
 
   const STYLE: Record<number, string> = {
     1: 'primary',
     2: 'secondary',
     3: 'success',
-    4: 'danger',
-    5: 'link',
+    4: 'destructive',
+    5: 'secondary',
   }
 
   defineProps({
-    title: {
-      type: String,
-      default: '',
-    },
     message: {
       type: Object,
-      default: () =>
-        ({
-          content: '',
-          embeds: [],
-          buttons: [],
-        }),
+      default: () => ({
+        content: '',
+        embeds: [],
+        buttons: [],
+      }),
     },
   })
 </script>
 
 <template>
-  <DiscordMessages class="p-2 rounded-md">
+  <discord-messages class="p-2 rounded-md">
     <template
       v-if="
         (message.embeds && message.embeds.length > 0) ||
@@ -44,44 +33,62 @@
         (message.dropdown && message.dropdown.length > 0) ||
         message.content
       ">
-      <DiscordMessage profile="bot" :author="title">
+      <discord-message author="Ticketeer" avatar="/icon.png" bot verified class="my-0">
         <DiscordMarkdown>
           {{ message.content }}
         </DiscordMarkdown>
-        <DiscordEmbed
+
+        <discord-embed
           v-for="embed in message.embeds"
+          :embed-title="embed.title"
           :url="embed.url"
-          :timestamp="embed.timestamp ? new Date() : undefined"
+          :timestamp="embed.timestamp ? new Date() : ''"
           :thumbnail="embed.thumbnail"
           :image="embed.image"
-          :footer-icon="embed.footer ? embed.footer.icon_url : ''"
-          :embed-title="embed.title"
-          :border-color="embed.color"
+          :color="embed.color"
           :author-url="embed.author ? embed.author.url : ''"
           :author-name="embed.author ? embed.author.name : ''"
-          :author-icon="embed.author ? embed.author.icon_url : ''">
-          <DiscordMarkdown>
-            {{ embed.description }}
-          </DiscordMarkdown>
-          <template v-if="embed.footer ? embed.footer.text : false" #footer>{{ embed.footer!.text }}</template>
-          <template v-if="embed.fields && embed.fields.length" #fields>
-            <DiscordEmbedFields>
-              <DiscordEmbedField v-for="field in embed.fields" :field-title="field.name" :inline="field.inline">{{ field.value }}</DiscordEmbedField>
-            </DiscordEmbedFields>
-          </template>
-        </DiscordEmbed>
-        <DiscordSelect v-if="message.dropdown && message.dropdown.length > 0">
-          <DiscordSelectItem v-for="option in message.dropdown" :label="option.label" :description="option.description" :emoji="option.emoji" />
-        </DiscordSelect>
-        <DiscordButtons v-if="message.buttons && message.buttons.length > 0">
-          <DiscordButton v-for="button in message.buttons" :type="STYLE[button.style]" :emoji="button.emoji">{{ button.label }}</DiscordButton>
-        </DiscordButtons>
-      </DiscordMessage>
+          :author-icon="embed.author ? embed.author.icon_url : ''"
+          slot="embeds">
+          <discord-embed-description slot="description">
+            <DiscordMarkdown>
+              {{ embed.description }}
+            </DiscordMarkdown>
+          </discord-embed-description>
+
+          <discord-embed-fields slot="fields" v-if="embed.fields && embed.fields.length">
+            <discord-embed-field v-for="field in embed.fields" :field-title="field.name" :inline="field.inline">
+              <DiscordMarkdown>
+                {{ field.value }}
+              </DiscordMarkdown>
+            </discord-embed-field>
+          </discord-embed-fields>
+
+          <discord-embed-footer
+            v-if="embed.footer || embed.timestamp"
+            slot="footer"
+            :footer-image="embed.footer?.icon_url"
+            :timestamp="embed.timestamp ? new Date() : ''">
+            <DiscordMarkdown>
+              {{ embed.footer?.text }}
+            </DiscordMarkdown>
+          </discord-embed-footer>
+        </discord-embed>
+        <discord-attachments slot="components">
+          <discord-action-row v-if="message.buttons && message.buttons.length > 0">
+            <DiscordButton v-for="button in message.buttons" :type="STYLE[button.style]" :emoji="button.emoji">{{ button.label }}</DiscordButton>
+          </discord-action-row>
+
+          <discord-action-row v-if="message.dropdown && message.dropdown.length > 0">
+            <DiscordSelect>
+              <DiscordSelectItem v-for="option in message.dropdown" :label="option.label" :description="option.description" :emoji="option.emoji" />
+            </DiscordSelect>
+          </discord-action-row>
+        </discord-attachments>
+      </discord-message>
     </template>
-    <DiscordMessage v-else profile="bot" :author="title">
-      <div class="mr-14 py-4 text-center">
-        <h3 class="mt-2 text-sm font-medium text-white">No message content</h3>
-      </div>
-    </DiscordMessage>
-  </DiscordMessages>
+    <div v-else class="py-4 text-center">
+      <h3 class="mt-2 text-sm font-medium text-white">No message content</h3>
+    </div>
+  </discord-messages>
 </template>

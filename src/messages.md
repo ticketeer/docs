@@ -260,6 +260,40 @@ title: Messages
       }
     ]
   },
+  "form_results": {
+    "disabled": true,
+    "embeds": [
+      {
+        "fields": [
+          {
+            "name": "{$ticket.form.0.title|else:Title 1}",
+            "value": "{$ticket.form.0.value|length:1024|else:No Response}"
+          },
+          {
+            "name": "{$ticket.form.1.title|else:Title 2}",
+            "value": "{$ticket.form.1.value|length:1024|else:No Response}"
+          },
+          {
+            "name": "{$ticket.form.2.title|else:Title 3}",
+            "value": "{$ticket.form.2.value|length:1024|else:No Response}"
+          },
+          {
+            "name": "{$ticket.form.3.title|else:Title 4}",
+            "value": "{$ticket.form.3.value|length:1024|else:No Response}"
+          },
+          {
+            "name": "{$ticket.form.4.title|else:Title 5}",
+            "value": "{$ticket.form.4.value|length:1024|else:No Response}"
+          }
+        ],
+        "color": "#14b8a6",
+        "footer": {
+          "text": "Ticketeer Canary - Support Made Simple",
+          "icon_url": "https://ticketeer.dev/icon.png"
+        }
+      }
+    ]
+  },
   "opened": {
     "embeds": [
       {
@@ -346,7 +380,19 @@ title: Messages
   "deleting": {
     "embeds": [
       {
-        "description": "This ticket is queued to be deleted in {$timestamp|time:r}...",
+        "description": "This ticket is queued to be deleted {$timestamp|time:r}...",
+        "color": "#14b8a6",
+        "footer": {
+          "text": "Ticketeer Canary - Support Made Simple",
+          "icon_url": "https://ticketeer.dev/icon.png"
+        }
+      }
+    ]
+  },
+  "missing_member": {
+    "embeds": [
+      {
+        "description": "{$ticket.owner.name} has left the server.",
         "color": "#14b8a6",
         "footer": {
           "text": "Ticketeer Canary - Support Made Simple",
@@ -554,6 +600,11 @@ title: Messages
       }
     ]
   },
+  "priority_menu": {
+    "delete_after": 60,
+    "flags": 64,
+    "content": "Select a priority to change the ticket to."
+  },
   "expired": {
     "embeds": [
       {
@@ -594,7 +645,7 @@ title: Messages
     "embeds": [
       {
         "title": "Ticket Log",
-        "description": "${user} made {$ticket.channel.name} ({$ticket.channel}) expire at {$expire.timestamp|time:r}{if $expire.activity} if it remains inactive.{/if}",
+        "description": "{$user} made {$ticket.channel.name} ({$ticket.channel}) expire at {$expire.timestamp|time:r}{if $expire.activity} if it remains inactive.{/if}",
         "fields": [
           {
             "name": "Ticket",
@@ -623,7 +674,7 @@ title: Messages
   "eternal": {
     "embeds": [
       {
-        "description": "{if $eternal}This ticket is will never expire.{else}This ticket is no longer immune to expiring.{/if}",
+        "description": "{if $eternal}This ticket will never expire.{else}This ticket is no longer immune to expiring.{/if}",
         "color": "#14b8a6",
         "footer": {
           "text": "Ticketeer Canary - Support Made Simple",
@@ -716,7 +767,7 @@ title: Messages
     "embeds": [
       {
         "title": "Saving Transcript",
-        "description": "Transcript is being created and {if $transcript.channel}will be saved in {$transcript.channel}.{else}will be sent to {$transcript.user} when it is ready.{/if}",
+        "description": "Transcript is being processed{if $transcript.channel} and will be saved in {$transcript.channel} when it is ready.{elseif $transcript.user} and will be sent to {$transcript.user} when it is ready{else} and will be available shortly{/if}.",
         "timestamp": true,
         "color": "#14b8a6",
         "footer": {
@@ -1227,7 +1278,7 @@ title: Messages
     "embeds": [
       {
         "title": "Ticket Log",
-        "description": "${user} made {$ticket.channel.name} ({$ticket.channel}) {if $eternal}eternal{else}no longer immune to expiring{/if}!",
+        "description": "{$user} made {$ticket.channel.name} ({$ticket.channel}) {if $eternal}eternal{else}no longer immune to expiring{/if}!",
         "fields": [
           {
             "name": "Ticket",
@@ -1373,10 +1424,10 @@ This is a complete list of all the messages that can be used in Ticketeer along 
 
 ## Menu Messages
 
-### Ticket Menu (Opened) {#ticket_menu_opened}
+### Ticket Menu (Opened) Message {#ticket_menu_opened}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Menu (Opened)" :message="templates['ticket_menu_opened']" />
+<MessagePreview class="mt-3" :message="templates['ticket_menu_opened']" />
 </ClientOnly>
 
 ::: info
@@ -1398,7 +1449,7 @@ This is the ticket menu shown to the user when the ticket status is open.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -1439,10 +1490,10 @@ This is the ticket menu shown to the user when the ticket status is open.
 ```
 
 :::
-### Ticket Menu (Locked) {#ticket_menu_locked}
+### Ticket Menu (Locked) Message {#ticket_menu_locked}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Menu (Locked)" :message="templates['ticket_menu_locked']" />
+<MessagePreview class="mt-3" :message="templates['ticket_menu_locked']" />
 </ClientOnly>
 
 ::: info
@@ -1464,7 +1515,7 @@ This is the ticket menu shown to the user when the ticket status is locked.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -1505,10 +1556,10 @@ This is the ticket menu shown to the user when the ticket status is locked.
 ```
 
 :::
-### Ticket Menu (Assigned) {#ticket_menu_assigned}
+### Ticket Menu (Assigned) Message {#ticket_menu_assigned}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Menu (Assigned)" :message="templates['ticket_menu_assigned']" />
+<MessagePreview class="mt-3" :message="templates['ticket_menu_assigned']" />
 </ClientOnly>
 
 ::: info
@@ -1530,7 +1581,7 @@ This is the ticket menu shown to the user when the ticket status is assigned.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -1571,10 +1622,10 @@ This is the ticket menu shown to the user when the ticket status is assigned.
 ```
 
 :::
-### Ticket Menu (Closed) {#ticket_menu_closed}
+### Ticket Menu (Closed) Message {#ticket_menu_closed}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Menu (Closed)" :message="templates['ticket_menu_closed']" />
+<MessagePreview class="mt-3" :message="templates['ticket_menu_closed']" />
 </ClientOnly>
 
 ::: info
@@ -1596,7 +1647,7 @@ This is the ticket menu shown to the user when the ticket status is closed.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -1649,10 +1700,10 @@ This is the ticket menu shown to the user when the ticket status is closed.
 ```
 
 :::
-### Ticket Menu (Deleted) {#ticket_menu_deleted}
+### Ticket Menu (Deleted) Message {#ticket_menu_deleted}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Menu (Deleted)" :message="templates['ticket_menu_deleted']" />
+<MessagePreview class="mt-3" :message="templates['ticket_menu_deleted']" />
 </ClientOnly>
 
 ::: info
@@ -1674,7 +1725,7 @@ This is the ticket menu shown to the user when the ticket status is deleted.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -1717,10 +1768,10 @@ This is the ticket menu shown to the user when the ticket status is deleted.
 :::
 ## Opening Messages
 
-### Ticket Created {#created}
+### Ticket Created Message {#created}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Created" :message="templates['created']" />
+<MessagePreview class="mt-3" :message="templates['created']" />
 </ClientOnly>
 
 ::: info
@@ -1742,7 +1793,7 @@ This message is a reply to the user when a ticket is created.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
 
@@ -1768,15 +1819,15 @@ This message is a reply to the user when a ticket is created.
 ```
 
 :::
-### Ticket Created {#created_dm}
+### Ticket Created Direct Message {#created_dm}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Created" :message="templates['created_dm']" />
+<MessagePreview class="mt-3" :message="templates['created_dm']" />
 </ClientOnly>
 
 ::: info
 
-This message is sent to the owner of the ticket in a direct message when a ticket is created.
+This message is sent to The owner/creator of the ticket in a direct message when a ticket is created.
 
 :::
 
@@ -1793,7 +1844,7 @@ This message is sent to the owner of the ticket in a direct message when a ticke
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
 | `from?` | [User](#user-object) \| `null` | The user that created the ticket for owner |
@@ -1819,10 +1870,10 @@ This message is sent to the owner of the ticket in a direct message when a ticke
 ```
 
 :::
-### Ticket Public {#created_public_message}
+### Ticket Public Message {#created_public_message}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Public" :message="templates['created_public_message']" />
+<MessagePreview class="mt-3" :message="templates['created_public_message']" />
 </ClientOnly>
 
 ::: info
@@ -1843,7 +1894,7 @@ This message is sent in the channel the ticket will be created in, this message 
 |----------------|------------|--------------------------------------------|
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `user` | [User](#user-object) | The user that triggered this action |
 | `from?` | [User](#user-object) \| `null` | The user that created the ticket for owner |
 | `form` | array | The answers of the form filled out before the ticket was created |
@@ -1871,10 +1922,10 @@ This message is sent in the channel the ticket will be created in, this message 
 ```
 
 :::
-### Ticket Welcome {#created_welcome}
+### Ticket Welcome Message {#created_welcome}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Welcome" :message="templates['created_welcome']" />
+<MessagePreview class="mt-3" :message="templates['created_welcome']" />
 </ClientOnly>
 
 ::: info
@@ -1896,7 +1947,7 @@ This message is sent as the first message in the ticket's channel when it is cre
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
 | `from?` | [User](#user-object) \| `null` | The user that created the ticket for owner |
@@ -1930,10 +1981,10 @@ This message is sent as the first message in the ticket's channel when it is cre
 ```
 
 :::
-### Ticket Created from {#created_from_message}
+### Ticket Created from Message {#created_from_message}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Created from" :message="templates['created_from_message']" />
+<MessagePreview class="mt-3" :message="templates['created_from_message']" />
 </ClientOnly>
 
 ::: info
@@ -1955,7 +2006,7 @@ This message is sent to the ticket channel (after the welcome message) when a ti
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
 | `from` | [User](#user-object) | The user that created the ticket for owner |
@@ -1999,10 +2050,10 @@ This message is sent to the ticket channel (after the welcome message) when a ti
 ```
 
 :::
-### Ticket Created with {#created_with_message}
+### Ticket Created with Message {#created_with_message}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Created with" :message="templates['created_with_message']" />
+<MessagePreview class="mt-3" :message="templates['created_with_message']" />
 </ClientOnly>
 
 ::: info
@@ -2024,7 +2075,7 @@ This message is sent to the ticket channel (after the welcome message) when a ti
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
 | `from` | [User](#user-object) | The user that created the ticket for owner |
@@ -2051,10 +2102,81 @@ This message is sent to the ticket channel (after the welcome message) when a ti
 ```
 
 :::
-### Ticket Opened {#opened}
+### Form Results Message {#form_results}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Opened" :message="templates['opened']" />
+<MessagePreview class="mt-3" :message="templates['form_results']" />
+</ClientOnly>
+
+::: info
+
+This message is sent right after the welcome message if a form is submitted.
+
+:::
+
+::: details Expand to see options and variables
+
+| Template Option  | Value      |
+|------------------|------------|
+| Can be disabled? | `Yes` |
+| Can be automatically deleted? | `No` |
+| Type | `message` |
+
+| Variable Name  | Type       | Description                                |
+|----------------|------------|--------------------------------------------|
+| `server` | [Server](#server-object) | The server that the ticket was created in |
+| `ticket` | [Ticket](#ticket-object) | The ticket |
+| `group` | [Group](#group-object) | The ticket group of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
+| `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
+| `channel` | [Channel](#channel-object) | The channel the ticket was created in |
+
+:::
+
+::: details Expand to see default json template
+
+```json
+{
+  "disabled": true,
+  "embeds": [
+    {
+      "fields": [
+        {
+          "name": "{$ticket.form.0.title|else:Title 1}",
+          "value": "{$ticket.form.0.value|length:1024|else:No Response}"
+        },
+        {
+          "name": "{$ticket.form.1.title|else:Title 2}",
+          "value": "{$ticket.form.1.value|length:1024|else:No Response}"
+        },
+        {
+          "name": "{$ticket.form.2.title|else:Title 3}",
+          "value": "{$ticket.form.2.value|length:1024|else:No Response}"
+        },
+        {
+          "name": "{$ticket.form.3.title|else:Title 4}",
+          "value": "{$ticket.form.3.value|length:1024|else:No Response}"
+        },
+        {
+          "name": "{$ticket.form.4.title|else:Title 5}",
+          "value": "{$ticket.form.4.value|length:1024|else:No Response}"
+        }
+      ],
+      "color": "#14b8a6",
+      "footer": {
+        "text": "Ticketeer Canary - Support Made Simple",
+        "icon_url": "https://ticketeer.dev/icon.png"
+      }
+    }
+  ]
+}
+```
+
+:::
+### Ticket Opened Message {#opened}
+
+<ClientOnly>
+<MessagePreview class="mt-3" :message="templates['opened']" />
 </ClientOnly>
 
 ::: info
@@ -2076,7 +2198,7 @@ This message is sent to the ticket channel when a ticket is opened.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -2104,10 +2226,10 @@ This message is sent to the ticket channel when a ticket is opened.
 :::
 ## Closing Messages
 
-### Ticket Closed {#closed}
+### Ticket Closed Message {#closed}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Closed" :message="templates['closed']" />
+<MessagePreview class="mt-3" :message="templates['closed']" />
 </ClientOnly>
 
 ::: info
@@ -2129,7 +2251,7 @@ This message is sent to the ticket channel when a ticket is closed.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -2160,10 +2282,10 @@ This message is sent to the ticket channel when a ticket is closed.
 ```
 
 :::
-### Ticket Close Confirm {#close_confirm}
+### Ticket Close Confirm Message {#close_confirm}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Close Confirm" :message="templates['close_confirm']" />
+<MessagePreview class="mt-3" :message="templates['close_confirm']" />
 </ClientOnly>
 
 ::: info
@@ -2185,7 +2307,7 @@ This message is sent to the user to confirm they want to close a ticket.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -2215,10 +2337,10 @@ This message is sent to the user to confirm they want to close a ticket.
 ```
 
 :::
-### Ticket Closed {#closed_dm}
+### Ticket Closed Direct Message {#closed_dm}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Closed" :message="templates['closed_dm']" />
+<MessagePreview class="mt-3" :message="templates['closed_dm']" />
 </ClientOnly>
 
 ::: info
@@ -2240,7 +2362,7 @@ This message is sent to all members of the ticket in a direct message when a it 
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -2289,10 +2411,10 @@ This message is sent to all members of the ticket in a direct message when a it 
 ```
 
 :::
-### Ticket Deleting {#deleting}
+### Ticket Deleting Message {#deleting}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Deleting" :message="templates['deleting']" />
+<MessagePreview class="mt-3" :message="templates['deleting']" />
 </ClientOnly>
 
 ::: info
@@ -2314,7 +2436,7 @@ This message is sent to the ticket channel when a ticket is about to be deleted.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -2327,7 +2449,56 @@ This message is sent to the ticket channel when a ticket is about to be deleted.
 {
   "embeds": [
     {
-      "description": "This ticket is queued to be deleted in {$timestamp|time:r}...",
+      "description": "This ticket is queued to be deleted {$timestamp|time:r}...",
+      "color": "#14b8a6",
+      "footer": {
+        "text": "Ticketeer Canary - Support Made Simple",
+        "icon_url": "https://ticketeer.dev/icon.png"
+      }
+    }
+  ]
+}
+```
+
+:::
+### Ticket Member Missing Message {#missing_member}
+
+<ClientOnly>
+<MessagePreview class="mt-3" :message="templates['missing_member']" />
+</ClientOnly>
+
+::: info
+
+This message is sent to the ticket channel when the owner/creator of the ticket leaves the server.
+
+:::
+
+::: details Expand to see options and variables
+
+| Template Option  | Value      |
+|------------------|------------|
+| Can be disabled? | `No` |
+| Can be automatically deleted? | `No` |
+| Type | `message` |
+
+| Variable Name  | Type       | Description                                |
+|----------------|------------|--------------------------------------------|
+| `server` | [Server](#server-object) | The server that the ticket was created in |
+| `ticket` | [Ticket](#ticket-object) | The ticket |
+| `group` | [Group](#group-object) | The ticket group of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
+| `assigned` | [User](#user-object) | The assigned user of the ticket |
+| `channel` | [Channel](#channel-object) | The channel the ticket was created in |
+
+:::
+
+::: details Expand to see default json template
+
+```json
+{
+  "embeds": [
+    {
+      "description": "{$ticket.owner.name} has left the server.",
       "color": "#14b8a6",
       "footer": {
         "text": "Ticketeer Canary - Support Made Simple",
@@ -2341,10 +2512,10 @@ This message is sent to the ticket channel when a ticket is about to be deleted.
 :::
 ## Locking Messages
 
-### Ticket Locked {#locked}
+### Ticket Locked Message {#locked}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Locked" :message="templates['locked']" />
+<MessagePreview class="mt-3" :message="templates['locked']" />
 </ClientOnly>
 
 ::: info
@@ -2366,7 +2537,7 @@ This message is sent to the ticket channel when a ticket is locked.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -2399,10 +2570,10 @@ This message is sent to the ticket channel when a ticket is locked.
 ```
 
 :::
-### Ticket Unlocked {#unlocked}
+### Ticket Unlocked Message {#unlocked}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Unlocked" :message="templates['unlocked']" />
+<MessagePreview class="mt-3" :message="templates['unlocked']" />
 </ClientOnly>
 
 ::: info
@@ -2424,7 +2595,7 @@ This message is sent to the ticket channel when a ticket is unlocked.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -2451,10 +2622,10 @@ This message is sent to the ticket channel when a ticket is unlocked.
 :::
 ## Assigning Messages
 
-### Ticket Assigned {#assigned}
+### Ticket Assigned Message {#assigned}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Assigned" :message="templates['assigned']" />
+<MessagePreview class="mt-3" :message="templates['assigned']" />
 </ClientOnly>
 
 ::: info
@@ -2476,7 +2647,7 @@ This message is sent to the ticket channel when a ticket is assigned.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned` | [User](#user-object) | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -2501,10 +2672,10 @@ This message is sent to the ticket channel when a ticket is assigned.
 ```
 
 :::
-### Ticket Unassigned {#unassigned}
+### Ticket Unassigned Message {#unassigned}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Unassigned" :message="templates['unassigned']" />
+<MessagePreview class="mt-3" :message="templates['unassigned']" />
 </ClientOnly>
 
 ::: info
@@ -2526,7 +2697,7 @@ This message is sent to the ticket channel when a ticket is unassigned.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
 | `unassigned` | [User](#user-object) | The unassigned user of the ticket |
@@ -2553,10 +2724,10 @@ This message is sent to the ticket channel when a ticket is unassigned.
 :::
 ## User Messages
 
-### Ticket User Added {#user_added}
+### Ticket User Added Message {#user_added}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket User Added" :message="templates['user_added']" />
+<MessagePreview class="mt-3" :message="templates['user_added']" />
 </ClientOnly>
 
 ::: info
@@ -2578,7 +2749,7 @@ This message is sent to the ticket channel when a user is added to the ticket.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -2604,10 +2775,10 @@ This message is sent to the ticket channel when a user is added to the ticket.
 ```
 
 :::
-### Ticket User Added {#user_added_dm}
+### Ticket User Added Direct Message {#user_added_dm}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket User Added" :message="templates['user_added_dm']" />
+<MessagePreview class="mt-3" :message="templates['user_added_dm']" />
 </ClientOnly>
 
 ::: info
@@ -2629,7 +2800,7 @@ This message is sent to the user added to the ticket in a direct message.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -2656,10 +2827,10 @@ This message is sent to the user added to the ticket in a direct message.
 ```
 
 :::
-### Ticket User Removed {#user_removed}
+### Ticket User Removed Message {#user_removed}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket User Removed" :message="templates['user_removed']" />
+<MessagePreview class="mt-3" :message="templates['user_removed']" />
 </ClientOnly>
 
 ::: info
@@ -2681,7 +2852,7 @@ This message is sent to the ticket channel when a user is removed from the ticke
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -2707,10 +2878,10 @@ This message is sent to the ticket channel when a user is removed from the ticke
 ```
 
 :::
-### Ticket User Removed {#user_removed_dm}
+### Ticket User Removed Direct Message {#user_removed_dm}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket User Removed" :message="templates['user_removed_dm']" />
+<MessagePreview class="mt-3" :message="templates['user_removed_dm']" />
 </ClientOnly>
 
 ::: info
@@ -2732,7 +2903,7 @@ This message is sent to the user removed from the ticket in a direct message.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -2764,15 +2935,15 @@ This message is sent to the user removed from the ticket in a direct message.
 ```
 
 :::
-### Ticket Owner Change {#owner_change}
+### Ticket Owner Change Message {#owner_change}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Owner Change" :message="templates['owner_change']" />
+<MessagePreview class="mt-3" :message="templates['owner_change']" />
 </ClientOnly>
 
 ::: info
 
-This message is sent to the ticket channel when the owner of the ticket has changed.
+This message is sent to the ticket channel when The owner/creator of the ticket has changed.
 
 :::
 
@@ -2789,7 +2960,7 @@ This message is sent to the ticket channel when the owner of the ticket has chan
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -2815,15 +2986,15 @@ This message is sent to the ticket channel when the owner of the ticket has chan
 ```
 
 :::
-### Ticket Owner Change {#owner_change_dm}
+### Ticket Owner Change Direct Message {#owner_change_dm}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Owner Change" :message="templates['owner_change_dm']" />
+<MessagePreview class="mt-3" :message="templates['owner_change_dm']" />
 </ClientOnly>
 
 ::: info
 
-This message is sent to the new and old owner of the ticket in a direct message when the owner of the ticket has changed.
+This message is sent to the new and old owner of the ticket in a direct message when The owner/creator of the ticket has changed.
 
 :::
 
@@ -2840,7 +3011,7 @@ This message is sent to the new and old owner of the ticket in a direct message 
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -2869,10 +3040,10 @@ This message is sent to the new and old owner of the ticket in a direct message 
 :::
 ## Thread Messages
 
-### Ticket Notes Thread {#thread}
+### Ticket Notes Thread Message {#thread}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Notes Thread" :message="templates['thread']" />
+<MessagePreview class="mt-3" :message="templates['thread']" />
 </ClientOnly>
 
 ::: info
@@ -2894,7 +3065,7 @@ This is the first message that is sent in the notes private thread when a ticket
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -2921,10 +3092,10 @@ This is the first message that is sent in the notes private thread when a ticket
 ```
 
 :::
-### Notes Thread Created {#thread_created}
+### Notes Thread Created Message {#thread_created}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Notes Thread Created" :message="templates['thread_created']" />
+<MessagePreview class="mt-3" :message="templates['thread_created']" />
 </ClientOnly>
 
 ::: info
@@ -2946,7 +3117,7 @@ This is the first message that is sent in the notes private thread when a ticket
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -2973,10 +3144,10 @@ This is the first message that is sent in the notes private thread when a ticket
 ```
 
 :::
-### Ticket Notes User Added {#thread_member_added}
+### Ticket Notes User Added Message {#thread_member_added}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Notes User Added" :message="templates['thread_member_added']" />
+<MessagePreview class="mt-3" :message="templates['thread_member_added']" />
 </ClientOnly>
 
 ::: info
@@ -2998,7 +3169,7 @@ This message is sent to the ticket notes thread when a user is added to the note
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -3024,10 +3195,10 @@ This message is sent to the ticket notes thread when a user is added to the note
 ```
 
 :::
-### Ticket Notes User Removed {#thread_member_removed}
+### Ticket Notes User Removed Message {#thread_member_removed}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Notes User Removed" :message="templates['thread_member_removed']" />
+<MessagePreview class="mt-3" :message="templates['thread_member_removed']" />
 </ClientOnly>
 
 ::: info
@@ -3049,7 +3220,7 @@ This message is sent to the notes thread when a user is removed from the notes.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -3077,10 +3248,10 @@ This message is sent to the notes thread when a user is removed from the notes.
 :::
 ## Priority Messages
 
-### Ticket Priority Change {#priority_change}
+### Ticket Priority Change Message {#priority_change}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Priority Change" :message="templates['priority_change']" />
+<MessagePreview class="mt-3" :message="templates['priority_change']" />
 </ClientOnly>
 
 ::: info
@@ -3102,7 +3273,7 @@ This message is sent to the ticket channel when the priority of the ticket has c
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -3128,12 +3299,55 @@ This message is sent to the ticket channel when the priority of the ticket has c
 ```
 
 :::
-## Expiration Messages
-
-### Ticket Expired {#expired}
+### Ticket Priority Menu Message {#priority_menu}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Expired" :message="templates['expired']" />
+<MessagePreview class="mt-3" :message="templates['priority_menu']" />
+</ClientOnly>
+
+::: info
+
+This message is the menu shown to the user when they are changing the priority of a ticket.
+
+:::
+
+::: details Expand to see options and variables
+
+| Template Option  | Value      |
+|------------------|------------|
+| Can be disabled? | `No` |
+| Can be automatically deleted? | `Yes` |
+| Type | `reply` |
+
+| Variable Name  | Type       | Description                                |
+|----------------|------------|--------------------------------------------|
+| `server` | [Server](#server-object) | The server that the ticket was created in |
+| `ticket` | [Ticket](#ticket-object) | The ticket |
+| `group` | [Group](#group-object) | The ticket group of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
+| `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
+| `channel` | [Channel](#channel-object) | The channel the ticket was created in |
+| `user` | [User](#user-object) | The user that triggered this action |
+
+:::
+
+::: details Expand to see default json template
+
+```json
+{
+  "delete_after": 60,
+  "flags": 64,
+  "content": "Select a priority to change the ticket to."
+}
+```
+
+:::
+## Expiration Messages
+
+### Ticket Expired Message {#expired}
+
+<ClientOnly>
+<MessagePreview class="mt-3" :message="templates['expired']" />
 </ClientOnly>
 
 ::: info
@@ -3155,7 +3369,7 @@ This message is sent to the ticket channel when a ticket has expired.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -3184,10 +3398,10 @@ This message is sent to the ticket channel when a ticket has expired.
 ```
 
 :::
-### Ticket Expiring {#expiring}
+### Ticket Expiring Message {#expiring}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Expiring" :message="templates['expiring']" />
+<MessagePreview class="mt-3" :message="templates['expiring']" />
 </ClientOnly>
 
 ::: info
@@ -3209,7 +3423,7 @@ This message is sent to the ticket channel when a ticket is going to automatical
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -3237,10 +3451,10 @@ This message is sent to the ticket channel when a ticket is going to automatical
 ```
 
 :::
-### Ticket Expire {#expire}
+### Ticket Expire Message {#expire}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Expire" :message="templates['expire']" />
+<MessagePreview class="mt-3" :message="templates['expire']" />
 </ClientOnly>
 
 ::: info
@@ -3262,7 +3476,7 @@ This message is sent when the <code>/expire</code> command is ran.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -3290,10 +3504,10 @@ This message is sent when the <code>/expire</code> command is ran.
 ```
 
 :::
-### Ticket Expire Log {#expire_log}
+### Ticket Expire Log Message {#expire_log}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Expire Log" :message="templates['expire_log']" />
+<MessagePreview class="mt-3" :message="templates['expire_log']" />
 </ClientOnly>
 
 ::: info
@@ -3315,7 +3529,7 @@ This message is sent in the log channels when the expire is set to expire.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -3331,7 +3545,7 @@ This message is sent in the log channels when the expire is set to expire.
   "embeds": [
     {
       "title": "Ticket Log",
-      "description": "${user} made {$ticket.channel.name} ({$ticket.channel}) expire at {$expire.timestamp|time:r}{if $expire.activity} if it remains inactive.{/if}",
+      "description": "{$user} made {$ticket.channel.name} ({$ticket.channel}) expire at {$expire.timestamp|time:r}{if $expire.activity} if it remains inactive.{/if}",
       "fields": [
         {
           "name": "Ticket",
@@ -3360,10 +3574,10 @@ This message is sent in the log channels when the expire is set to expire.
 ```
 
 :::
-### Ticket Eternal {#eternal}
+### Ticket Eternal Message {#eternal}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Eternal" :message="templates['eternal']" />
+<MessagePreview class="mt-3" :message="templates['eternal']" />
 </ClientOnly>
 
 ::: info
@@ -3385,7 +3599,7 @@ This message is sent when the <code>/eternal</code> command is ran.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -3399,7 +3613,7 @@ This message is sent when the <code>/eternal</code> command is ran.
 {
   "embeds": [
     {
-      "description": "{if $eternal}This ticket is will never expire.{else}This ticket is no longer immune to expiring.{/if}",
+      "description": "{if $eternal}This ticket will never expire.{else}This ticket is no longer immune to expiring.{/if}",
       "color": "#14b8a6",
       "footer": {
         "text": "Ticketeer Canary - Support Made Simple",
@@ -3413,10 +3627,10 @@ This message is sent when the <code>/eternal</code> command is ran.
 :::
 ## Schedule Messages
 
-### Ticket Schedule Error {#schedule_error}
+### Ticket Schedule Error Message {#schedule_error}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Schedule Error" :message="templates['schedule_error']" />
+<MessagePreview class="mt-3" :message="templates['schedule_error']" />
 </ClientOnly>
 
 ::: info
@@ -3461,10 +3675,10 @@ This message is sent to the user when they attempt to open a ticket while out of
 ```
 
 :::
-### Ticket Schedule Notice {#schedule_notice}
+### Ticket Schedule Notice Message {#schedule_notice}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Schedule Notice" :message="templates['schedule_notice']" />
+<MessagePreview class="mt-3" :message="templates['schedule_notice']" />
 </ClientOnly>
 
 ::: info
@@ -3486,7 +3700,7 @@ This message is sent to the ticket channel (after the welcome message) when a ti
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -3513,10 +3727,10 @@ This message is sent to the ticket channel (after the welcome message) when a ti
 :::
 ## Feedback Messages
 
-### Ticket Feedback {#feedback_response}
+### Ticket Feedback Message {#feedback_response}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Feedback" :message="templates['feedback_response']" />
+<MessagePreview class="mt-3" :message="templates['feedback_response']" />
 </ClientOnly>
 
 ::: info
@@ -3538,7 +3752,7 @@ This message is sent to the user when they give feedback on a ticket.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -3567,10 +3781,10 @@ This message is sent to the user when they give feedback on a ticket.
 :::
 ## Transcript Messages
 
-### Ticket Transcript {#transcript}
+### Ticket Transcript Message {#transcript}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Transcript" :message="templates['transcript']" />
+<MessagePreview class="mt-3" :message="templates['transcript']" />
 </ClientOnly>
 
 ::: info
@@ -3592,7 +3806,7 @@ This message is sent to the transcript channel when a transcript is created.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 
@@ -3630,10 +3844,10 @@ This message is sent to the transcript channel when a transcript is created.
 ```
 
 :::
-### Ticket Transcript {#transcript_dm}
+### Ticket Transcript Direct Message {#transcript_dm}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Transcript" :message="templates['transcript_dm']" />
+<MessagePreview class="mt-3" :message="templates['transcript_dm']" />
 </ClientOnly>
 
 ::: info
@@ -3655,7 +3869,7 @@ This message is sent in a direct message to a user that has requested a transcri
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 
@@ -3679,10 +3893,10 @@ This message is sent in a direct message to a user that has requested a transcri
 ```
 
 :::
-### Ticket Transcript Saving {#transcript_saving}
+### Ticket Transcript Saving Message {#transcript_saving}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Transcript Saving" :message="templates['transcript_saving']" />
+<MessagePreview class="mt-3" :message="templates['transcript_saving']" />
 </ClientOnly>
 
 ::: info
@@ -3704,7 +3918,7 @@ This message is sent to the user that has requested a transcript.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 
@@ -3719,7 +3933,7 @@ This message is sent to the user that has requested a transcript.
   "embeds": [
     {
       "title": "Saving Transcript",
-      "description": "Transcript is being created and {if $transcript.channel}will be saved in {$transcript.channel}.{else}will be sent to {$transcript.user} when it is ready.{/if}",
+      "description": "Transcript is being processed{if $transcript.channel} and will be saved in {$transcript.channel} when it is ready.{elseif $transcript.user} and will be sent to {$transcript.user} when it is ready{else} and will be available shortly{/if}.",
       "timestamp": true,
       "color": "#14b8a6",
       "footer": {
@@ -3734,10 +3948,10 @@ This message is sent to the user that has requested a transcript.
 :::
 ## Rating Messages
 
-### Ticket Rating {#rating_response}
+### Ticket Rating Message {#rating_response}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Rating" :message="templates['rating_response']" />
+<MessagePreview class="mt-3" :message="templates['rating_response']" />
 </ClientOnly>
 
 ::: info
@@ -3759,7 +3973,7 @@ This message is sent to the user when they give a rating on a ticket.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -3791,10 +4005,10 @@ This message is sent to the user when they give a rating on a ticket.
 ```
 
 :::
-### Ticket Rating Menu {#rating_menu}
+### Ticket Rating Menu Message {#rating_menu}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Rating Menu" :message="templates['rating_menu']" />
+<MessagePreview class="mt-3" :message="templates['rating_menu']" />
 </ClientOnly>
 
 ::: info
@@ -3816,7 +4030,7 @@ This message is the menu shown to the user when they are rating a ticket.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -3836,10 +4050,10 @@ This message is the menu shown to the user when they are rating a ticket.
 :::
 ## Logs Messages
 
-### Ticket Created Log {#created_log}
+### Ticket Created Log Message {#created_log}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Created Log" :message="templates['created_log']" />
+<MessagePreview class="mt-3" :message="templates['created_log']" />
 </ClientOnly>
 
 ::: info
@@ -3861,7 +4075,7 @@ This message is sent in the log channels when a ticket is created.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
 | `event` | string | Ticket log event |
@@ -3906,10 +4120,10 @@ This message is sent in the log channels when a ticket is created.
 ```
 
 :::
-### Ticket Opened Log {#opened_log}
+### Ticket Opened Log Message {#opened_log}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Opened Log" :message="templates['opened_log']" />
+<MessagePreview class="mt-3" :message="templates['opened_log']" />
 </ClientOnly>
 
 ::: info
@@ -3931,7 +4145,7 @@ This message is sent in the log channels when a ticket is opened.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -3976,10 +4190,10 @@ This message is sent in the log channels when a ticket is opened.
 ```
 
 :::
-### Ticket Closed Log {#closed_log}
+### Ticket Closed Log Message {#closed_log}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Closed Log" :message="templates['closed_log']" />
+<MessagePreview class="mt-3" :message="templates['closed_log']" />
 </ClientOnly>
 
 ::: info
@@ -4001,7 +4215,7 @@ This message is sent in the log channels when a ticket is closed.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -4046,10 +4260,10 @@ This message is sent in the log channels when a ticket is closed.
 ```
 
 :::
-### Ticket Locked Log {#locked_log}
+### Ticket Locked Log Message {#locked_log}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Locked Log" :message="templates['locked_log']" />
+<MessagePreview class="mt-3" :message="templates['locked_log']" />
 </ClientOnly>
 
 ::: info
@@ -4071,7 +4285,7 @@ This message is sent in the log channels when a ticket is locked.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -4116,10 +4330,10 @@ This message is sent in the log channels when a ticket is locked.
 ```
 
 :::
-### Ticket Unlocked Log {#unlocked_log}
+### Ticket Unlocked Log Message {#unlocked_log}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Unlocked Log" :message="templates['unlocked_log']" />
+<MessagePreview class="mt-3" :message="templates['unlocked_log']" />
 </ClientOnly>
 
 ::: info
@@ -4141,7 +4355,7 @@ This message is sent in the log channels when a ticket is unlocked.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -4186,10 +4400,10 @@ This message is sent in the log channels when a ticket is unlocked.
 ```
 
 :::
-### Ticket Assigned Log {#assigned_log}
+### Ticket Assigned Log Message {#assigned_log}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Assigned Log" :message="templates['assigned_log']" />
+<MessagePreview class="mt-3" :message="templates['assigned_log']" />
 </ClientOnly>
 
 ::: info
@@ -4211,7 +4425,7 @@ This message is sent in the log channels when a ticket is assigned.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned` | [User](#user-object) | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -4256,10 +4470,10 @@ This message is sent in the log channels when a ticket is assigned.
 ```
 
 :::
-### Ticket Unassigned Log {#unassigned_log}
+### Ticket Unassigned Log Message {#unassigned_log}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Unassigned Log" :message="templates['unassigned_log']" />
+<MessagePreview class="mt-3" :message="templates['unassigned_log']" />
 </ClientOnly>
 
 ::: info
@@ -4281,7 +4495,7 @@ This message is sent in the log channels when a ticket is unassigned.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
 | `event` | string | Ticket log event |
@@ -4326,10 +4540,10 @@ This message is sent in the log channels when a ticket is unassigned.
 ```
 
 :::
-### Ticket Deleting Log {#deleted_log}
+### Ticket Deleting Log Message {#deleted_log}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Deleting Log" :message="templates['deleted_log']" />
+<MessagePreview class="mt-3" :message="templates['deleted_log']" />
 </ClientOnly>
 
 ::: info
@@ -4351,7 +4565,7 @@ This message is sent in the log channels when a ticket has been deleted.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -4396,10 +4610,10 @@ This message is sent in the log channels when a ticket has been deleted.
 ```
 
 :::
-### Ticket Transcript Log {#transcript_log}
+### Ticket Transcript Log Message {#transcript_log}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Transcript Log" :message="templates['transcript_log']" />
+<MessagePreview class="mt-3" :message="templates['transcript_log']" />
 </ClientOnly>
 
 ::: info
@@ -4421,7 +4635,7 @@ This message is sent in the log channels when a transcript is created.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -4466,10 +4680,10 @@ This message is sent in the log channels when a transcript is created.
 ```
 
 :::
-### Ticket User Added Log {#user_added_log}
+### Ticket User Added Log Message {#user_added_log}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket User Added Log" :message="templates['user_added_log']" />
+<MessagePreview class="mt-3" :message="templates['user_added_log']" />
 </ClientOnly>
 
 ::: info
@@ -4491,7 +4705,7 @@ This message is sent in the log channels when a user is added to a ticket.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -4537,10 +4751,10 @@ This message is sent in the log channels when a user is added to a ticket.
 ```
 
 :::
-### Ticket User Removed Log {#user_removed_log}
+### Ticket User Removed Log Message {#user_removed_log}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket User Removed Log" :message="templates['user_removed_log']" />
+<MessagePreview class="mt-3" :message="templates['user_removed_log']" />
 </ClientOnly>
 
 ::: info
@@ -4562,7 +4776,7 @@ This message is sent in the log channels when a user is removed from a ticket.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -4608,15 +4822,15 @@ This message is sent in the log channels when a user is removed from a ticket.
 ```
 
 :::
-### Ticket Owner Change Log {#owner_change_log}
+### Ticket Owner Change Log Message {#owner_change_log}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Owner Change Log" :message="templates['owner_change_log']" />
+<MessagePreview class="mt-3" :message="templates['owner_change_log']" />
 </ClientOnly>
 
 ::: info
 
-This message is sent in the log channels when the owner of the ticket has changed.
+This message is sent in the log channels when The owner/creator of the ticket has changed.
 
 :::
 
@@ -4633,7 +4847,7 @@ This message is sent in the log channels when the owner of the ticket has change
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -4679,10 +4893,10 @@ This message is sent in the log channels when the owner of the ticket has change
 ```
 
 :::
-### Ticket Priority Change Log {#priority_change_log}
+### Ticket Priority Change Log Message {#priority_change_log}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Priority Change Log" :message="templates['priority_change_log']" />
+<MessagePreview class="mt-3" :message="templates['priority_change_log']" />
 </ClientOnly>
 
 ::: info
@@ -4704,7 +4918,7 @@ This message is sent in the log channels when the priority of a ticket has chang
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -4749,10 +4963,10 @@ This message is sent in the log channels when the priority of a ticket has chang
 ```
 
 :::
-### Ticket Name Set Log {#name_set_log}
+### Ticket Name Set Log Message {#name_set_log}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Name Set Log" :message="templates['name_set_log']" />
+<MessagePreview class="mt-3" :message="templates['name_set_log']" />
 </ClientOnly>
 
 ::: info
@@ -4774,7 +4988,7 @@ This message is sent in the log channels when a ticket name is set.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -4818,10 +5032,10 @@ This message is sent in the log channels when a ticket name is set.
 ```
 
 :::
-### Ticket Name Cleared Log {#name_cleared_log}
+### Ticket Name Cleared Log Message {#name_cleared_log}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Name Cleared Log" :message="templates['name_cleared_log']" />
+<MessagePreview class="mt-3" :message="templates['name_cleared_log']" />
 </ClientOnly>
 
 ::: info
@@ -4843,7 +5057,7 @@ This message is sent in the log channels when a tickets name is cleared.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -4887,10 +5101,10 @@ This message is sent in the log channels when a tickets name is cleared.
 ```
 
 :::
-### Ticket Expired Log {#expired_log}
+### Ticket Expired Log Message {#expired_log}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Expired Log" :message="templates['expired_log']" />
+<MessagePreview class="mt-3" :message="templates['expired_log']" />
 </ClientOnly>
 
 ::: info
@@ -4912,7 +5126,7 @@ This message is sent in the log channels when a ticket has expired.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -4961,10 +5175,10 @@ This message is sent in the log channels when a ticket has expired.
 ```
 
 :::
-### Ticket Eternal Log {#eternal_log}
+### Ticket Eternal Log Message {#eternal_log}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Eternal Log" :message="templates['eternal_log']" />
+<MessagePreview class="mt-3" :message="templates['eternal_log']" />
 </ClientOnly>
 
 ::: info
@@ -4986,7 +5200,7 @@ This message is sent in the log channels when the ticket eternal status changes.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -5003,7 +5217,7 @@ This message is sent in the log channels when the ticket eternal status changes.
   "embeds": [
     {
       "title": "Ticket Log",
-      "description": "${user} made {$ticket.channel.name} ({$ticket.channel}) {if $eternal}eternal{else}no longer immune to expiring{/if}!",
+      "description": "{$user} made {$ticket.channel.name} ({$ticket.channel}) {if $eternal}eternal{else}no longer immune to expiring{/if}!",
       "fields": [
         {
           "name": "Ticket",
@@ -5032,10 +5246,10 @@ This message is sent in the log channels when the ticket eternal status changes.
 ```
 
 :::
-### Ticket Feedback Log {#feedback_log}
+### Ticket Feedback Log Message {#feedback_log}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Feedback Log" :message="templates['feedback_log']" />
+<MessagePreview class="mt-3" :message="templates['feedback_log']" />
 </ClientOnly>
 
 ::: info
@@ -5057,7 +5271,7 @@ This message is sent in the log channels when a ticket is given feedback.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -5087,10 +5301,10 @@ This message is sent in the log channels when a ticket is given feedback.
 ```
 
 :::
-### Ticket Rating Log {#rating_log}
+### Ticket Rating Log Message {#rating_log}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Rating Log" :message="templates['rating_log']" />
+<MessagePreview class="mt-3" :message="templates['rating_log']" />
 </ClientOnly>
 
 ::: info
@@ -5112,7 +5326,7 @@ This message is sent in the log channels when a ticket is given a rating.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -5144,10 +5358,10 @@ This message is sent in the log channels when a ticket is given a rating.
 ```
 
 :::
-### Ticket Notes Created Log {#thread_created_log}
+### Ticket Notes Created Log Message {#thread_created_log}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Notes Created Log" :message="templates['thread_created_log']" />
+<MessagePreview class="mt-3" :message="templates['thread_created_log']" />
 </ClientOnly>
 
 ::: info
@@ -5169,7 +5383,7 @@ This message is sent in the log channels when a ticket notes are created.
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -5213,10 +5427,10 @@ This message is sent in the log channels when a ticket notes are created.
 ```
 
 :::
-### Ticket Notes Member Added Log {#thread_member_added_log}
+### Ticket Notes Member Added Log Message {#thread_member_added_log}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Notes Member Added Log" :message="templates['thread_member_added_log']" />
+<MessagePreview class="mt-3" :message="templates['thread_member_added_log']" />
 </ClientOnly>
 
 ::: info
@@ -5238,7 +5452,7 @@ This message is sent in the log channels when a member is added to a ticket note
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -5283,10 +5497,10 @@ This message is sent in the log channels when a member is added to a ticket note
 ```
 
 :::
-### Ticket Notes Member Removed Log {#thread_member_removed_log}
+### Ticket Notes Member Removed Log Message {#thread_member_removed_log}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="Ticket Notes Member Removed Log" :message="templates['thread_member_removed_log']" />
+<MessagePreview class="mt-3" :message="templates['thread_member_removed_log']" />
 </ClientOnly>
 
 ::: info
@@ -5308,7 +5522,7 @@ This message is sent in the log channels when a member is removed from a ticket 
 | `server` | [Server](#server-object) | The server that the ticket was created in |
 | `ticket` | [Ticket](#ticket-object) | The ticket |
 | `group` | [Group](#group-object) | The ticket group of the ticket |
-| `owner` | [User](#user-object) | The owner of the ticket |
+| `owner` | [User](#user-object) | The owner/creator of the ticket |
 | `assigned?` | [User](#user-object) \| `null` | The assigned user of the ticket |
 | `channel` | [Channel](#channel-object) | The channel the ticket was created in |
 | `user` | [User](#user-object) | The user that triggered this action |
@@ -5364,6 +5578,10 @@ This message is sent in the log channels when a member is removed from a ticket 
 |`server.name`| `string` | Server name |
 |`server.icon`| `string` | Server icon |
 |`server.description`| `string` | Server description |
+|`server.tickets`| `number` | Count of opended tickets for your server |
+|`server.tickets.opened`| `number` | Count of opended tickets for your server |
+|`server.tickets.closed`| `number` | Count of closed tickets for your server |
+|`server.tickets.deleted`| `number` | Count of deleted tickets for your server |
 
 ### Group Object
 
@@ -5389,14 +5607,30 @@ This message is sent in the log channels when a member is removed from a ticket 
 |`ticket.priority.description?`| `string`\|`null` | Ticket priority description |
 |`ticket.priority.emoji?`| `string`\|`null` | Ticket priority emoji |
 |`ticket.priority.color?`| `string`\|`null` | Ticket priority color |
-|`ticket.form?`| `array`\|`null` | The filled out form from opening a ticket |
-|`ticket.form?.title`| `string`\|`null` | Title of the form field |
-|`ticket.form?.value`| `string`\|`null` | Value of the form field |
+|`ticket.form?`| `Array[]`\|`null` | The filled out form from opening a ticket |
+|`ticket.form.[0-4?].title`| `string`\|`null` | Title of the form field |
+|`ticket.form.[0-4?].value`| `string`\|`null` | Value of the form field |
 |`ticket.closed_reason?`| `string`\|`null` | Reason for closing the ticket |
 |`ticket.owner`| [User](#user-object) | Owner of ticket |
 |`ticket.assigned?`| [User](#user-object)\|`null` | Assigned user to ticket |
 |`ticket.group`| [Group](#group-object) | Ticket Group |
-|`ticket.channel?`| [Channel](#user-channel)\|`null` | Ticket channel |
+|`ticket.channel?`| [Channel](#channel-object)\|`null` | Ticket channel |
+|`ticket.thread?`| [Channel](#channel-object)\|`null` | Ticket private thread |
+|`ticket.users`| [User[]](#user-object) | Array of all users in the ticket |
+|`ticket.rating`| number | The agrage rating the ticket has recieved |
+|`ticket.ratings`| `Array[]` | Array of ratings given to the ticket |
+|`ticket.ratings.[0-24?]`| `number` | The rating in number form given to the ticket |
+|`ticket.ratings.[0-24?].rating`| `number` | The rating in number form given to the ticket |
+|`ticket.ratings.[0-24?].label?`| `string`\|`null` | The rating level label |
+|`ticket.ratings.[0-24?].description?`| `string`\|`null` | The rating level description |
+|`ticket.ratings.[0-24?].emoji?`| `string`\|`null` | The rating level emoji |
+|`ticket.ratings.[0-24?].color?`| `string`\|`null` | The rating level color |
+|`ticket.ratings.[0-24?].user`| [User](#user-object) | The user that gave the rating |
+|`ticket.feedback`| `Array[]` | Array of feedback given to the ticket |
+|`ticket.feedback[0-24?].form`| `Array[]` | The filled out feedback from |
+|`ticket.feedback[0-24?].form.[0-4?].title`| `string`\|`null` | Title of the form field |
+|`ticket.feedback[0-24?].form.[0-4?].value`| `string`\|`null` | Value of the form field |
+|`ticket.feedback[0-24?].user`| [User[]](#user-object) | The user that gave the feedback |
 
 ### Channel Object
 
@@ -5410,6 +5644,7 @@ This message is sent in the log channels when a member is removed from a ticket 
 |`channel.nsfw`| `boolean` | True if channel nsfw |
 |`channel.locked`| `boolean` | True if channel is locked |
 |`channel.invitable`| `boolean` | True if channel invitable |
+|`channel.users?`| [User[]](#user-object)\|`null` | Array of all users in the channel |
 
 ### User Object
 
@@ -5425,6 +5660,21 @@ This message is sent in the log channels when a member is removed from a ticket 
 |`user.full`| `string` | User username#tag (deprecated) |
 |`user.roles`| [Role[]](#role-object) | List of roles the user has in order of hierarchy |
 |`user.joined_at?`| `number`\|`null` | Timestamp when user joined server |
+|`user.steam?`| [Steam User](#steam-user-object)\|`null` | Steam account info of user if linked |
+
+
+### Steam User Object
+
+| Variable Name  | Type       | Description                                |
+|----------------|------------|--------------------------------------------|
+|`steam`| `string` | SteamID (STEAM_0:1:########) |
+|`steam.id`| `string` | SteamID (STEAM_0:1:########) |
+|`steam.id_3`| `string` | SteamID v3 ([U:1:########]) |
+|`steam.id_64`| `number` | SteamID 64 (7656119##########) |
+|`steam.account_id`| `number` | Steam account id |
+|`steam.name`| `string` | Steam account name |
+|`steam.avatar`| `string` | URL to Steam account avatar |
+|`steam.profile`| `string` | URL to Steam account profile |
 
 ### Role Object
 

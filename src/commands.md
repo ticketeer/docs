@@ -38,6 +38,12 @@ Displays help panel.
 Displays information about premium features, and status of your premium subscription.
 :::
 
+### `/app vote`
+
+::: info
+Vote for Ticketeer to redeem free premium keys! Displays how to vote and what your current vote stats are. You can also redeem your votes here.
+:::
+
 ### `/help setup`
 
 ::: info
@@ -174,6 +180,18 @@ Rate your experience with the current ticket
 Give feedback about the current ticket
 :::
 
+### `/notes create {name}`
+
+::: info
+Creates a notes private thread attacked to the ticket (channel tickets only)
+:::
+
+### `/notes add {user}`
+
+::: info
+Adds a user to the private notes thread
+:::
+
 ## Admin Slash Commands
 
 These commands are only available to members with the `Manage Server` permission.
@@ -212,6 +230,18 @@ Send a ticket to a panel to a channel.
 
 ::: info
 Deletes a ticket panel.
+:::
+
+### `/bulk close {group} {reason?}`
+
+::: info
+Bulk closes every ticket in a ticket group
+:::
+
+### `/bulk delete {group} {reason?}`
+
+::: info
+Bulk deletes every ticket in a ticket group
 :::
 
 ## User Commands

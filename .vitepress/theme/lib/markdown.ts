@@ -49,6 +49,7 @@ type State = {
   key?: string | number | undefined
   inline?: boolean | null | undefined
   components?: Record<string, Component>
+  tags?: Record<string, string> & { heading?: string | string[]; codeBlock?: string | [string, string] }
   [key: string]: any
 }
 
@@ -791,12 +792,36 @@ const defaultRules: DefaultRules = {
       }
     },
     vue: function (node, output, state) {
-      return state.components?.heading
-        ? h(state.components.heading, { level: node.level }, output(node.content, state))
-        : h(`h${node.level}`, output(node.content, state))
+      if (state.components?.heading) {
+        return h(state.components.heading, { level: node.level }, () => output(node.content, state))
+      }
+
+      let tag = `h${node.level}`
+      if (state.tags?.heading) {
+        if (Array.isArray(state.tags.heading)) {
+          if (state.tags.heading[node.level]) {
+            tag = state.tags.heading[node.level]
+          } else {
+            tag = state.tags.heading[0]
+          }
+        } else {
+          tag = state.tags.heading
+        }
+      }
+
+      return h(tag, output(node.content, state))
     },
     html: function (node, output, state) {
-      return htmlTag(`h${node.level}`, output(node.content, state))
+      let tag = `h${node.level}`
+      if (state.tags?.heading) {
+        if (Array.isArray(state.tags.heading)) {
+          tag = state.tags.heading[node.level - 1]
+        } else {
+          tag = state.tags.heading
+        }
+      }
+
+      return htmlTag(tag, output(node.content, state))
     },
   },
   nptable: {
@@ -824,10 +849,10 @@ const defaultRules: DefaultRules = {
     match: blockRegex(/^( *[-*_]){3,} *(?:\n *)+\n/),
     parse: ignoreCapture,
     vue: function (node, output, state) {
-      return h(state.components?.hr || 'hr')
+      return h(state.components?.hr || state.tags?.hr || 'hr')
     },
     html: function (node, output, state) {
-      return '<hr>'
+      return `<${state.tags?.hr || 'hr'}>`
     },
   },
   codeBlock: {
@@ -841,17 +866,44 @@ const defaultRules: DefaultRules = {
       }
     },
     vue: function (node, output, state) {
-      return state.components?.codeBlock
-        ? h(state.components.codeBlock, { lang: node.lang, content: node.content })
-        : h('pre', h('code', { class: node.lang ? 'markdown-code-' + node.lang : undefined }, node.content))
+      if (state.components?.codeBlock) {
+        return h(state.components.codeBlock, { lang: node.lang, content: node.content })
+      }
+
+      let pre = 'pre'
+      let code = 'code'
+      if (state.tags?.codeBlock) {
+        const { codeBlock } = state.tags
+        if (Array.isArray(codeBlock)) {
+          pre = codeBlock[0]
+          code = codeBlock[1] || 'code'
+        } else {
+          pre = codeBlock
+        }
+      }
+
+      return h(pre, h(code, { class: node.lang ? 'markdown-code-' + node.lang : undefined }, node.content))
     },
     html: function (node, output, state) {
       const className = node.lang ? 'markdown-code-' + node.lang : undefined
 
-      const codeBlock = htmlTag('code', sanitizeText(node.content), {
+      let pre = 'pre'
+      let code = 'code'
+      if (state.tags?.codeBlock) {
+        const { codeBlock } = state.tags
+        if (Array.isArray(codeBlock)) {
+          pre = codeBlock[0]
+          code = codeBlock[1] || 'code'
+        } else {
+          pre = codeBlock
+        }
+      }
+
+      const codeBlock = htmlTag(code, sanitizeText(node.content), {
         class: className,
       })
-      return htmlTag('pre', codeBlock)
+
+      return htmlTag(pre, codeBlock)
     },
   },
   fence: {
@@ -877,10 +929,10 @@ const defaultRules: DefaultRules = {
       }
     },
     vue: function (node, output, state) {
-      return h(state.components?.blockquote || 'blockquote', output(node.content, state))
+      return h(state.components?.blockquote || state.tags?.blockquote || 'blockquote', output(node.content, state))
     },
     html: function (node, output, state) {
-      return htmlTag('blockquote', output(node.content, state))
+      return htmlTag(state.tags?.blockquote || 'blockquote', output(node.content, state))
     },
   },
   list: {
@@ -985,24 +1037,24 @@ const defaultRules: DefaultRules = {
       }
     },
     vue: function (node, output, state) {
-      const ListWrapper = node.ordered ? 'ol' : 'ul'
+      const listWrapper = state.components?.list || state.tags?.list || node.ordered ? state.tags?.orderedList || 'ol' : state.tags?.unorderedList || 'ul'
 
       return h(
-        state.components?.list || ListWrapper,
+        listWrapper,
         state.components?.list ? { start: node.start, ordered: node.ordered } : null,
         node.items.map(function (item: ASTNode, i: number) {
-          return h(state.components?.listItem || 'li', output(item, state))
+          return h(state.components?.listItem || state.tags?.listItem || 'li', output(item, state))
         }),
       )
     },
     html: function (node, output, state) {
       const listItems = node.items
         .map(function (item: ASTNode) {
-          return htmlTag('li', output(item, state))
+          return htmlTag(state.tags?.listItem || 'li', output(item, state))
         })
         .join('')
 
-      const listTag = node.ordered ? 'ol' : 'ul'
+      const listTag = state.tags?.list || node.ordered ? state.tags?.orderedList || 'ol' : state.tags?.unorderedList || 'ul'
       const attributes = {
         start: node.start,
       }
@@ -1076,9 +1128,16 @@ const defaultRules: DefaultRules = {
             }
       }
 
+      const tableHead = state.components?.tableHead || state.tags?.tableHead || 'thead'
+      const tableHeader = state.components?.tableHeader || state.tags?.tableHeader || 'th'
+      const tableBody = state.components?.tableBody || state.tags?.tableBody || 'tbody'
+      const tableRow = state.components?.tableRow || state.tags?.tableRow || 'tr'
+      const tableCell = state.components?.tableCell || state.tags?.tableCell || 'td'
+      const table = state.components?.table || state.tags?.table || 'table'
+
       const headers = node.header.map(function (content: ASTNode, i: number) {
         return h(
-          state.components?.th || 'th',
+          tableHeader,
           {
             style: getStyle(i),
             scope: 'col',
@@ -1089,10 +1148,10 @@ const defaultRules: DefaultRules = {
 
       const rows = node.cells.map(function (row: Array<ASTNode>, r: number) {
         return h(
-          state.components?.tr || 'tr',
+          tableRow,
           row.map(function (content: ASTNode, c: number) {
             return h(
-              state.components?.td || 'td',
+              tableCell,
               {
                 style: getStyle(c),
               },
@@ -1102,19 +1161,23 @@ const defaultRules: DefaultRules = {
         )
       })
 
-      return h(state.components?.table || 'table', [
-        h(state.components?.thead || 'thead', h(state.components?.tr || 'tr', headers)),
-        h(state.components?.tbody || 'tbody', rows),
-      ])
+      return h(table, [h(tableHead, h(tableRow)), h(tableBody, headers)])
     },
     html: function (node, output, state) {
       const getStyle = function (colIndex: number): string {
         return node.align[colIndex] == null ? '' : 'text-align:' + node.align[colIndex] + ';'
       }
 
+      const tableHead = state.tags?.tableHead || 'thead'
+      const tableHeader = state.tags?.tableHeader || 'th'
+      const tableBody = state.tags?.tableBody || 'tbody'
+      const tableRow = state.tags?.tableRow || 'tr'
+      const tableCell = state.tags?.tableCell || 'td'
+      const table = state.tags?.table || 'table'
+
       const headers = node.header
         .map(function (content: ASTNode, i: number) {
-          return htmlTag('th', output(content, state), {
+          return htmlTag(tableHeader, output(content, state), {
             style: getStyle(i),
             scope: 'col',
           })
@@ -1125,20 +1188,20 @@ const defaultRules: DefaultRules = {
         .map(function (row: Array<ASTNode>) {
           const cols = row
             .map(function (content: ASTNode, c: number) {
-              return htmlTag('td', output(content, state), {
+              return htmlTag(tableCell, output(content, state), {
                 style: getStyle(c),
               })
             })
             .join('')
 
-          return htmlTag('tr', cols)
+          return htmlTag(tableRow, cols)
         })
         .join('')
 
-      const thead = htmlTag('thead', htmlTag('tr', headers))
-      const tbody = htmlTag('tbody', rows)
+      const thead = htmlTag(tableHead, htmlTag(tableRow, headers))
+      const tbody = htmlTag(tableBody, rows)
 
-      return htmlTag('table', thead + tbody)
+      return htmlTag(table, thead + tbody)
     },
   },
   newline: {
@@ -1158,10 +1221,10 @@ const defaultRules: DefaultRules = {
     match: blockRegex(/^((?:[^\n]|\n(?! *\n))+)(?:\n *)+\n/),
     parse: parseCaptureInline,
     vue: function (node, output, state) {
-      return h(state.components?.paragraph || 'p', output(node.content, state))
+      return h(state.components?.paragraph || state.tags?.paragraph || 'p', output(node.content, state))
     },
     html: function (node, output, state) {
-      return htmlTag('p', output(node.content, state))
+      return htmlTag(state.tags?.paragraph || 'p', output(node.content, state))
     },
   },
   escape: {
@@ -1279,7 +1342,7 @@ const defaultRules: DefaultRules = {
     },
     vue: function (node, output, state) {
       return h(
-        state.components?.link || 'a',
+        state.components?.anchor || state.tags?.anchor || 'a',
         {
           href: sanitizeUrl(node.target),
           title: node.title,
@@ -1293,7 +1356,7 @@ const defaultRules: DefaultRules = {
         title: node.title,
       }
 
-      return htmlTag('a', output(node.content, state), attributes)
+      return htmlTag(state.tags?.anchor || 'a', output(node.content, state), attributes)
     },
   },
   image: {
@@ -1308,7 +1371,7 @@ const defaultRules: DefaultRules = {
       return image
     },
     vue: function (node, output, state) {
-      return h(state.components?.image || 'img', {
+      return h(state.components?.image || state.tags?.image || 'img', {
         src: sanitizeUrl(node.target),
         alt: node.alt,
         title: node.title,
@@ -1321,7 +1384,7 @@ const defaultRules: DefaultRules = {
         title: node.title,
       }
 
-      return htmlTag('img', '', attributes, false)
+      return htmlTag(state.tags?.image || 'img', '', attributes, false)
     },
   },
   reflink: {
@@ -1406,10 +1469,10 @@ const defaultRules: DefaultRules = {
       }
     },
     vue: function (node, output, state) {
-      return h(state.components?.em || 'em', output(node.content, state))
+      return h(state.components?.emphasized || state.tags?.emphasized || 'em', output(node.content, state))
     },
     html: function (node, output, state) {
-      return htmlTag('em', output(node.content, state))
+      return htmlTag(state.tags?.emphasized || 'em', output(node.content, state))
     },
   },
   strong: {
@@ -1422,10 +1485,10 @@ const defaultRules: DefaultRules = {
     },
     parse: parseCaptureInline,
     vue: function (node, output, state) {
-      return h(state.components?.strong || 'strong', output(node.content, state))
+      return h(state.components?.strong || state.tags?.strong || 'strong', output(node.content, state))
     },
     html: function (node, output, state) {
-      return htmlTag('strong', output(node.content, state))
+      return htmlTag(state.tags?.strong || 'strong', output(node.content, state))
     },
   },
   u: {
@@ -1438,10 +1501,10 @@ const defaultRules: DefaultRules = {
     },
     parse: parseCaptureInline,
     vue: function (node, output, state) {
-      return h(state.components?.u || 'u', output(node.content, state))
+      return h(state.components?.underline || state.tags?.underline || 'u', output(node.content, state))
     },
     html: function (node, output, state) {
-      return htmlTag('u', output(node.content, state))
+      return htmlTag(state.tags?.underline || 'u', output(node.content, state))
     },
   },
   del: {
@@ -1450,10 +1513,10 @@ const defaultRules: DefaultRules = {
     match: inlineRegex(/^~~(?=\S)((?:\\[\s\S]|~(?!~)|[^\s~\\]|\s(?!~~))+?)~~/),
     parse: parseCaptureInline,
     vue: function (node, output, state) {
-      return h(state.components?.del || 'del', output(node.content, state))
+      return h(state.components?.strikethrough || state.tags?.strikethrough || 'del', output(node.content, state))
     },
     html: function (node, output, state) {
-      return htmlTag('del', output(node.content, state))
+      return htmlTag(state.tags?.strikethrough || 'del', output(node.content, state))
     },
   },
   inlineCode: {
@@ -1466,22 +1529,22 @@ const defaultRules: DefaultRules = {
       }
     },
     vue: function (node, output, state) {
-      return h(state.components?.inlineCode || 'code', node.content)
+      return h(state.components?.inlineCode || state.tags?.inlineCode || 'code', node.content)
     },
     html: function (node, output, state) {
-      return htmlTag('code', sanitizeText(node.content))
+      return htmlTag(state.tags?.inlineCode || 'code', sanitizeText(node.content))
     },
   },
   br: {
     order: currOrder++,
-    requiredFirstCharacters: ['`'],
+    requiredFirstCharacters: [' '],
     match: anyScopeRegex(/^ {2,}\n/),
     parse: ignoreCapture,
     vue: function (node, output, state) {
-      return h(state.components?.br || 'br')
+      return h(state.components?.lineBreak || state.tags?.lineBreak || 'br')
     },
     html: function (node, output, state) {
-      return '<br>'
+      return htmlTag(state.tags?.lineBreak || 'br', '')
     },
   },
   text: {
@@ -1497,10 +1560,12 @@ const defaultRules: DefaultRules = {
       }
     },
     vue: function (node, output, state) {
-      return state.components?.text ? h(state.components?.text, node.content) : node.content
+      let vueNode = state.components?.text || state.tags?.text
+
+      return vueNode ? h(vueNode, node.content) : node.content
     },
     html: function (node, output, state) {
-      return sanitizeText(node.content)
+      return state.tags?.text ? htmlTag(state.tags?.text, sanitizeText(node.content)) : sanitizeText(node.content)
     },
   },
 }
@@ -1541,6 +1606,7 @@ const outputFor = function <Rule>(rules: OutputRules<Rule>, property: keyof Rule
         'Please see the docs for details on specifying an Array rule.',
     )
   }
+
   const arrayRuleOutput = arrayRuleCheck
 
   const nestedOutput: Output<any> = function (ast, state) {
@@ -1559,6 +1625,7 @@ const outputFor = function <Rule>(rules: OutputRules<Rule>, property: keyof Rule
     latestState = populateInitialState(state, defaultState)
     return nestedOutput(ast, latestState)
   }
+
   return outerOutput
 }
 
@@ -1605,9 +1672,10 @@ const VueMarkdown = function (props: Props): VNode {
       divProps[prop] = props[prop]
     }
   }
+
   divProps.children = markdownToVue(props.source)
 
-  return h('div', divProps)
+  return h(divProps)
 }
 
 type Exports = {

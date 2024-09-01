@@ -10,7 +10,6 @@ title: Dashboard Tour
   <img src="/images/server_list.webp" loading="lazy" class="rounded-md" />
 </p>
 
-
 ## Server Dashboard
 
 <p align="center">
@@ -46,8 +45,7 @@ title: Dashboard Tour
   <img src="/images/group.webp" loading="lazy" class="rounded-md" />
 </p>
 
-
-### Opening Options 
+### Opening Options
 
 <p align="center">
   <img src="/images/group_opening.webp" loading="lazy" class="rounded-md" />
@@ -71,7 +69,7 @@ title: Dashboard Tour
   <img src="/images/group_priorities.webp" loading="lazy" class="rounded-md" />
 </p>
 
-### Closing Options 
+### Closing Options
 
 <p align="center">
   <img src="/images/group_closing.webp" loading="lazy" class="rounded-md" />
@@ -143,7 +141,7 @@ title: Dashboard Tour
 </p>
 
 ## Ticket Panels
-  
+
 :::tabs
 == List of Panels
 

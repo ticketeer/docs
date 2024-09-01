@@ -1,4 +1,7 @@
+import '@skyra/discord-components-core'
+
 // https://vitepress.dev/guide/custom-theme
+
 import { h } from 'vue'
 import type { Theme } from 'vitepress'
 
@@ -9,7 +12,6 @@ import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
 import './style.scss'
 
 import MessagePreview from '@theme/components/MessagePreview.vue'
-
 export default {
   extends: DefaultTheme,
   Layout: () => {
@@ -21,5 +23,5 @@ export default {
     enhanceAppWithTabs(app)
 
     app.component('MessagePreview', MessagePreview)
-  }
+  },
 } satisfies Theme

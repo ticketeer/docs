@@ -4,7 +4,7 @@ title: Markdown 101
 
 # Markdown 101
 
-::: info 
+::: info
 This is a mirror of the [Markdown Text 101](https://gist.github.com/matthewzring/9f7bbfd102003963f9be7dbcf7d40e51) from [matthewzring](https://gist.github.com/matthewzring).
 :::
 
@@ -15,6 +15,7 @@ Want to inject some flavor into your everyday text chat? You're in luck! Discord
 - [Text Formatting](#text-formatting)
 - [Organizational Text Formatting](#organizational-text-formatting)
   - [Headers](#headers)
+  - [Subtext](#subtext)
   - [Masked Links](#masked-links)
   - [Unordered Lists](#unordered-lists)
   - [Ordered Lists](#ordered-lists)
@@ -25,21 +26,21 @@ Want to inject some flavor into your everyday text chat? You're in luck! Discord
 
 ## Text Formatting
 
-*Italics*	\*italics* **or** \_italics\_
+_Italics_ \*italics\* **or** \_italics\_
 
-__*Underline italics*__	\__\*underline italics*__
+**_Underline italics_** \_\_\*underline italics\*\_\_
 
-**Bold**	\*\*bold**
+**Bold** \*\*bold\*\*
 
-__**Underline bold**__	\__\*\*underline bold**__
+****Underline bold**** \_\_\*\*underline bold\*\*\_\_
 
-***Bold Italics***	\*\*\*bold italics***
+**_Bold Italics_** \*\*\*bold italics\*\*\*
 
-__***underline bold italics***__	\__\*\*\*underline bold italics***__
+****_underline bold italics_**** \_\_\*\*\*underline bold italics\*\*\*\_\_
 
-__Underline__	\_\_underline__	
+**Underline** \_\_underline\_\_
 
-~~Strikethrough~~	 \~\~Strikethrough~~
+~~Strikethrough~~ \~\~Strikethrough~~
 
 Don't want to use markdown? You can slap a backslash in front of your statement, or put your message in a code block, and it'll escape the markdown formatting. You'll see those asterisks as you'd like!
 
@@ -51,11 +52,11 @@ To create a header, you need to include a specific number of the hash/pound sign
 
 ![headers](https://i.imgur.com/9dhQ4SE.png)
 
-# Tiny Header
+### Subtext
 
-To create a tiny header, you can use `-#`
+Like Headers, you can add subtext to any chat message. To do so, add a (-# ) before the text you want to appear in the subtext. Don’t forget the space after # and before your message.
 
-![tiny headers](https://i.imgur.com/rX0IK1Z.png)
+![subtext](https://i.imgur.com/ADFapDa.png)
 
 ### Masked Links
 
@@ -79,7 +80,7 @@ To create an ordered list, add line items with numbers followed by periods. The 
 
 ## Code Blocks
 
-Discord also supports code blocks as well.  You can make your own code blocks by wrapping your text in backticks (\`)
+Discord also supports code blocks as well. You can make your own code blocks by wrapping your text in backticks (\`)
 
 ![one line code blocks](https://i.imgur.com/UNxqhiy.png)
 
@@ -198,3 +199,8 @@ yaml
 ![yaml](https://i.imgur.com/aT0Nmjy.png)
 
 And you get the idea! Now you're a **Discord text markdown expert**. Get out there and highlight your statements!
+
+## Acknowledgements
+
+[Discord](https://support.discord.com/hc/en-us/articles/210298617-Markdown-Text-101-Chat-Formatting-Bold-Italic-Underline-)  
+[Discord Highlight.js](https://discord.gg/SkZTwPk)

@@ -67,10 +67,10 @@ for (const section of Object.keys(messageSections)) {
         fields += ` | ${field.description} |\n`
       }
 
-      output += `### ${message.info.title} {#${id}}
+      output += `### ${message.info.title} ${message.info.type == 'dm' ? 'Direct Message' : 'Message'} {#${id}}
 
 <ClientOnly>
-<MessagePreview class="mt-3" title="${message.info.title}" :message="templates['${id}']" />
+<MessagePreview class="mt-3" :message="templates['${id}']" />
 </ClientOnly>
 
 ::: info
@@ -127,6 +127,10 @@ ${output}## Object Types
 |\`server.name\`| \`string\` | Server name |
 |\`server.icon\`| \`string\` | Server icon |
 |\`server.description\`| \`string\` | Server description |
+|\`server.tickets\`| \`number\` | Count of opended tickets for your server |
+|\`server.tickets.opened\`| \`number\` | Count of opended tickets for your server |
+|\`server.tickets.closed\`| \`number\` | Count of closed tickets for your server |
+|\`server.tickets.deleted\`| \`number\` | Count of deleted tickets for your server |
 
 ### Group Object
 
@@ -152,14 +156,30 @@ ${output}## Object Types
 |\`ticket.priority.description?\`| \`string\`\\|\`null\` | Ticket priority description |
 |\`ticket.priority.emoji?\`| \`string\`\\|\`null\` | Ticket priority emoji |
 |\`ticket.priority.color?\`| \`string\`\\|\`null\` | Ticket priority color |
-|\`ticket.form?\`| \`array\`\\|\`null\` | The filled out form from opening a ticket |
-|\`ticket.form?.title\`| \`string\`\\|\`null\` | Title of the form field |
-|\`ticket.form?.value\`| \`string\`\\|\`null\` | Value of the form field |
+|\`ticket.form?\`| \`Array[]\`\\|\`null\` | The filled out form from opening a ticket |
+|\`ticket.form.[0-4?].title\`| \`string\`\\|\`null\` | Title of the form field |
+|\`ticket.form.[0-4?].value\`| \`string\`\\|\`null\` | Value of the form field |
 |\`ticket.closed_reason?\`| \`string\`\\|\`null\` | Reason for closing the ticket |
 |\`ticket.owner\`| [User](#user-object) | Owner of ticket |
 |\`ticket.assigned?\`| [User](#user-object)\\|\`null\` | Assigned user to ticket |
 |\`ticket.group\`| [Group](#group-object) | Ticket Group |
-|\`ticket.channel?\`| [Channel](#user-channel)\\|\`null\` | Ticket channel |
+|\`ticket.channel?\`| [Channel](#channel-object)\\|\`null\` | Ticket channel |
+|\`ticket.thread?\`| [Channel](#channel-object)\\|\`null\` | Ticket private thread |
+|\`ticket.users\`| [User[]](#user-object) | Array of all users in the ticket |
+|\`ticket.rating\`| number | The agrage rating the ticket has recieved |
+|\`ticket.ratings\`| \`Array[]\` | Array of ratings given to the ticket |
+|\`ticket.ratings.[0-24?]\`| \`number\` | The rating in number form given to the ticket |
+|\`ticket.ratings.[0-24?].rating\`| \`number\` | The rating in number form given to the ticket |
+|\`ticket.ratings.[0-24?].label?\`| \`string\`\\|\`null\` | The rating level label |
+|\`ticket.ratings.[0-24?].description?\`| \`string\`\\|\`null\` | The rating level description |
+|\`ticket.ratings.[0-24?].emoji?\`| \`string\`\\|\`null\` | The rating level emoji |
+|\`ticket.ratings.[0-24?].color?\`| \`string\`\\|\`null\` | The rating level color |
+|\`ticket.ratings.[0-24?].user\`| [User](#user-object) | The user that gave the rating |
+|\`ticket.feedback\`| \`Array[]\` | Array of feedback given to the ticket |
+|\`ticket.feedback[0-24?].form\`| \`Array[]\` | The filled out feedback from |
+|\`ticket.feedback[0-24?].form.[0-4?].title\`| \`string\`\\|\`null\` | Title of the form field |
+|\`ticket.feedback[0-24?].form.[0-4?].value\`| \`string\`\\|\`null\` | Value of the form field |
+|\`ticket.feedback[0-24?].user\`| [User[]](#user-object) | The user that gave the feedback |
 
 ### Channel Object
 
@@ -173,6 +193,7 @@ ${output}## Object Types
 |\`channel.nsfw\`| \`boolean\` | True if channel nsfw |
 |\`channel.locked\`| \`boolean\` | True if channel is locked |
 |\`channel.invitable\`| \`boolean\` | True if channel invitable |
+|\`channel.users?\`| [User[]](#user-object)\\|\`null\` | Array of all users in the channel |
 
 ### User Object
 
@@ -188,6 +209,21 @@ ${output}## Object Types
 |\`user.full\`| \`string\` | User username#tag (deprecated) |
 |\`user.roles\`| [Role[]](#role-object) | List of roles the user has in order of hierarchy |
 |\`user.joined_at?\`| \`number\`\\|\`null\` | Timestamp when user joined server |
+|\`user.steam?\`| [Steam User](#steam-user-object)\\|\`null\` | Steam account info of user if linked |
+
+
+### Steam User Object
+
+| Variable Name  | Type       | Description                                |
+|----------------|------------|--------------------------------------------|
+|\`steam\`| \`string\` | SteamID (STEAM_0:1:########) |
+|\`steam.id\`| \`string\` | SteamID (STEAM_0:1:########) |
+|\`steam.id_3\`| \`string\` | SteamID v3 ([U:1:########]) |
+|\`steam.id_64\`| \`number\` | SteamID 64 (7656119##########) |
+|\`steam.account_id\`| \`number\` | Steam account id |
+|\`steam.name\`| \`string\` | Steam account name |
+|\`steam.avatar\`| \`string\` | URL to Steam account avatar |
+|\`steam.profile\`| \`string\` | URL to Steam account profile |
 
 ### Role Object
 

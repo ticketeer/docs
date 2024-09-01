@@ -1,54 +1,65 @@
 <script setup lang="ts">
-  import Emoji from '@theme/components/Emoji.vue';
-  import DiscordOutboundLinkIcon from '@theme/components/Discord/OutboundLinkIcon.vue';
-
   import { computed, PropType } from 'vue'
 
   const props = defineProps({
-    disabled: Boolean,
-    emoji: String as PropType<string | null>,
-    url: String,
     type: {
       type: [String, Number] as PropType<string | number>,
       default: 'primary',
+      required: true,
     },
+    content: String,
+    emoji: String as PropType<string | null | undefined>,
   })
 
+  const STYLES: Record<number, string> = {
+    1: 'primary',
+    2: 'secondary',
+    3: 'success',
+    4: 'destructive',
+    5: 'secondary',
+  }
+
   const type = computed(() => {
-    if (typeof props.type === 'string') {
-      return props.type
+    if (!props.type) {
+      return 'primary'
     }
 
-    switch (props.type) {
-      case 1:
-        return 'primary'
-      case 2:
-        return 'secondary'
-      case 3:
-        return 'success'
-      case 4:
-        return 'danger'
-      case 5:
-        return 'link'
+    let type = props.type as any
+    if (!isNaN(type) && typeof props.type !== 'number') {
+      type = parseInt(props.type)
     }
 
-    return 'primary'
+    if (typeof props.type == 'number' && STYLES[props.type]) {
+      return STYLES[props.type]
+    }
+
+    return props.type
+  })
+
+  const emojiRegex = /^<(a?):(\w+):(\d{5,32})>$/i
+
+  const emoji = computed(() => {
+    if (props.emoji && emojiRegex.test(props.emoji)) {
+      const capture = emojiRegex.exec(props.emoji)
+      if (capture === null) {
+        return null
+      }
+
+      const [_, _animated, name, id] = capture
+      const animated = _animated === 'a'
+
+      return {
+        id,
+        name,
+        url: `https://cdn.discordapp.com/emojis/${id}.${animated ? 'gif' : 'png'}`,
+        animated,
+      }
+    }
+
+    return { id: null, name: props.emoji, url: null, animated: false }
   })
 </script>
 
 <template>
-  <a v-if="type === 'link' && url && !disabled" class="discord-button discord-button-link" :href="url" target="_blank" rel="noopener noreferrer">
-    <Emoji v-if="emoji" class="discord-button-emoji" :value="emoji" />
-    <div class="discord-button-text">
-      <slot></slot>
-    </div>
-    <DiscordOutboundLinkIcon />
-  </a>
-  <button v-else class="discord-button" :class="[`discord-button-${type}`, disabled ? 'discord-button-disabled' : '']" :disabled="disabled">
-    <Emoji v-if="emoji" class="discord-button-emoji" :value="emoji" />
-    <div class="discord-button-text">
-      <slot></slot>
-    </div>
-    <DiscordOutboundLinkIcon v-if="type === 'link'" />
-  </button>
+  <discord-button :type="type" :emoji="emoji?.url || ''" :emoji-name="emoji?.name || ''"><slot /></discord-button>
 </template>
