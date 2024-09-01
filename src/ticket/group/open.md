@@ -32,6 +32,18 @@ This will set the "Hide after Inactivity" setting in discord that is available t
   <img src="https://i.imgur.com/MnSqQ27.png" loading="lazy" class="rounded-md" />
 </p>
 
+### Allow Invite
+
+<p align="center">
+  <img src="./images/open-allow-invite.webp" loading="lazy" class="rounded-md" />
+</p>
+
+If toggled on this will allow anyone to invite other people to the thread through discord
+
+<p align="center">
+  <img src="./images/open-discord-anyone-invite.webp" loading="lazy" class="rounded-md" />
+</p>
+
 ## Channel Settings
 
 <p align="center">
