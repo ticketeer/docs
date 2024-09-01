@@ -4,4 +4,6 @@ title: 'Ticket Group :: Ticket Rating Section'
 
 # Ticket Rating Section
 
-Coming soon :tm:
+::: info
+This documentation is currently going through an overhaul, some information may be missing or incomplete!
+:::

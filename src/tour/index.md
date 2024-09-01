@@ -4,6 +4,10 @@ title: Web Panel Tour
 
 # Dashboard Tour
 
+::: info
+This documentation is currently going through an overhaul, some information may be missing or incomplete!
+:::
+
 ## Server List
 
 <p align="center">

@@ -23,3 +23,7 @@ features:
   - title: Fully Customizable Messages
     details: Fully customizable messages with an advanced templating engine
 ---
+
+::: info
+This documentation is currently going through an overhaul, some information may be missing or incomplete!
+:::
