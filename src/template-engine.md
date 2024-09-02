@@ -318,6 +318,20 @@ Formats
 
 :::
 
+### `date`
+
+Format a timestamp into a date string
+
+:::info
+
+| Argument Name | Argument Type | Default Value | Description             |
+| ------------- | ------------- | ------------- | ----------------------- |
+| format        | `format`      | `Y-m-d H:i:s` | Format of the timestamp |
+
+Formats can be found [here](https://www.php.net/manual/en/datetime.format.php)
+
+:::
+
 ### `codeblock`
 
 Wraps a variable in a codeblock

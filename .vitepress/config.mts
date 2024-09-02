@@ -99,7 +99,7 @@ export default defineConfig({
               { text: 'Locking Section', link: '/ticket/group/locking' },
               { text: 'Assigning Section', link: '/ticket/group/assigning' },
               { text: 'Expiring Section', link: '/ticket/group/expiring' },
-              { text: 'Transcripts Section', link: '/ticket/group/transcript' },
+              { text: 'Transcripts Section', link: '/ticket/group/transcripts' },
               { text: 'Form Section', link: '/ticket/group/form' },
               { text: 'Feedback Section', link: '/ticket/group/feedback' },
               { text: 'Ratings Section', link: '/ticket/group/rating' },
