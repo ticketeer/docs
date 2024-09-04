@@ -264,10 +264,10 @@ Set a variable in the context
 
 Aliases: `none`
 
-| Argument Name | Argument Type | Default Value | Description |
-| ------------- | ------------- | ------------- | ----------- | -------------- |
-| `name`        | `string`      | -             | -           | Variable name  |
-| `value`       | `string`      | -             | -           | Variable value |
+| Argument Name | Argument Type | Default Value | Description    |
+| ------------- | ------------- | ------------- | -------------- |
+| `name`        | `string`      | -             | Variable name  |
+| `value`       | `string`      | -             | Variable value |
 
 :::
 
@@ -508,6 +508,65 @@ Aliases: `implode`
 | Argument Name | Argument Type | Default Value | Description              |
 | ------------- | ------------- | ------------- | ------------------------ |
 | separator     | `string`      | `,`           | The separator to join on |
+
+:::
+
+### `has`
+
+Check if an array has a value, returns the number of matched values, input accepts comma separated values
+
+Example:
+
+```
+{if $ticket.owner.roles|has:id:############1,############2,############3 > 0}
+```
+
+:::info
+
+| Argument Name | Argument Type | Default Value | Description                                           |
+| ------------- | ------------- | ------------- | ----------------------------------------------------- |
+| keyOrValue    | `string`      | -             | The key of a item in the array or the values to check |
+| value         | `string`      | -             | The values to check                                   |
+
+:::
+
+### `has_all`
+
+Check if an array has all values in a list, returns a boolean, input accepts comma separated values
+
+Example:
+
+```
+{if $ticket.owner.roles|has_all:id:############1,############2,############3}
+```
+
+:::info
+
+| Argument Name | Argument Type | Default Value | Description                                           |
+| ------------- | ------------- | ------------- | ----------------------------------------------------- |
+| keyOrValue    | `string`      | -             | The key of a item in the array or the values to check |
+| value         | `string`      | -             | The values to check                                   |
+
+:::
+
+### `has_some`
+
+Check if an array has at least one value in a list, returns a boolean, input accepts comma separated values
+
+Example:
+
+```
+{if $ticket.owner.roles|has_some:id:############1,############2,############3}
+```
+
+:::info
+
+Aliases: `includes`
+
+| Argument Name | Argument Type | Default Value | Description                                           |
+| ------------- | ------------- | ------------- | ----------------------------------------------------- |
+| keyOrValue    | `string`      | -             | The key of a item in the array or the values to check |
+| value         | `string`      | -             | The values to check                                   |
 
 :::
 
