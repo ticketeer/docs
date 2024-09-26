@@ -1426,9 +1426,9 @@ This is a complete list of all the messages that can be used in Ticketeer along 
 
 ### Ticket Menu (Opened) Message {#ticket_menu_opened}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['ticket_menu_opened']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -1492,9 +1492,9 @@ This is the ticket menu shown to the user when the ticket status is open.
 :::
 ### Ticket Menu (Locked) Message {#ticket_menu_locked}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['ticket_menu_locked']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -1558,9 +1558,9 @@ This is the ticket menu shown to the user when the ticket status is locked.
 :::
 ### Ticket Menu (Assigned) Message {#ticket_menu_assigned}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['ticket_menu_assigned']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -1624,9 +1624,9 @@ This is the ticket menu shown to the user when the ticket status is assigned.
 :::
 ### Ticket Menu (Closed) Message {#ticket_menu_closed}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['ticket_menu_closed']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -1702,9 +1702,9 @@ This is the ticket menu shown to the user when the ticket status is closed.
 :::
 ### Ticket Menu (Deleted) Message {#ticket_menu_deleted}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['ticket_menu_deleted']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -1770,9 +1770,9 @@ This is the ticket menu shown to the user when the ticket status is deleted.
 
 ### Ticket Created Message {#created}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['created']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -1821,9 +1821,9 @@ This message is a reply to the user when a ticket is created.
 :::
 ### Ticket Created Direct Message {#created_dm}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['created_dm']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -1872,9 +1872,9 @@ This message is sent to The owner/creator of the ticket in a direct message when
 :::
 ### Ticket Public Message {#created_public_message}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['created_public_message']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -1924,9 +1924,9 @@ This message is sent in the channel the ticket will be created in, this message 
 :::
 ### Ticket Welcome Message {#created_welcome}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['created_welcome']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -1983,9 +1983,9 @@ This message is sent as the first message in the ticket's channel when it is cre
 :::
 ### Ticket Created from Message {#created_from_message}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['created_from_message']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -2052,9 +2052,9 @@ This message is sent to the ticket channel (after the welcome message) when a ti
 :::
 ### Ticket Created with Message {#created_with_message}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['created_with_message']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -2104,9 +2104,9 @@ This message is sent to the ticket channel (after the welcome message) when a ti
 :::
 ### Form Results Message {#form_results}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['form_results']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -2175,9 +2175,9 @@ This message is sent right after the welcome message if a form is submitted.
 :::
 ### Ticket Opened Message {#opened}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['opened']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -2228,9 +2228,9 @@ This message is sent to the ticket channel when a ticket is opened.
 
 ### Ticket Closed Message {#closed}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['closed']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -2284,9 +2284,9 @@ This message is sent to the ticket channel when a ticket is closed.
 :::
 ### Ticket Close Confirm Message {#close_confirm}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['close_confirm']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -2339,9 +2339,9 @@ This message is sent to the user to confirm they want to close a ticket.
 :::
 ### Ticket Closed Direct Message {#closed_dm}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['closed_dm']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -2413,9 +2413,9 @@ This message is sent to all members of the ticket in a direct message when a it 
 :::
 ### Ticket Deleting Message {#deleting}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['deleting']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -2463,9 +2463,9 @@ This message is sent to the ticket channel when a ticket is about to be deleted.
 :::
 ### Ticket Member Missing Message {#missing_member}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['missing_member']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -2514,9 +2514,9 @@ This message is sent to the ticket channel when the owner/creator of the ticket 
 
 ### Ticket Locked Message {#locked}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['locked']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -2572,9 +2572,9 @@ This message is sent to the ticket channel when a ticket is locked.
 :::
 ### Ticket Unlocked Message {#unlocked}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['unlocked']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -2624,9 +2624,9 @@ This message is sent to the ticket channel when a ticket is unlocked.
 
 ### Ticket Assigned Message {#assigned}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['assigned']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -2674,9 +2674,9 @@ This message is sent to the ticket channel when a ticket is assigned.
 :::
 ### Ticket Unassigned Message {#unassigned}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['unassigned']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -2726,9 +2726,9 @@ This message is sent to the ticket channel when a ticket is unassigned.
 
 ### Ticket User Added Message {#user_added}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['user_added']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -2777,9 +2777,9 @@ This message is sent to the ticket channel when a user is added to the ticket.
 :::
 ### Ticket User Added Direct Message {#user_added_dm}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['user_added_dm']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -2829,9 +2829,9 @@ This message is sent to the user added to the ticket in a direct message.
 :::
 ### Ticket User Removed Message {#user_removed}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['user_removed']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -2880,9 +2880,9 @@ This message is sent to the ticket channel when a user is removed from the ticke
 :::
 ### Ticket User Removed Direct Message {#user_removed_dm}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['user_removed_dm']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -2937,9 +2937,9 @@ This message is sent to the user removed from the ticket in a direct message.
 :::
 ### Ticket Owner Change Message {#owner_change}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['owner_change']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -2988,9 +2988,9 @@ This message is sent to the ticket channel when The owner/creator of the ticket 
 :::
 ### Ticket Owner Change Direct Message {#owner_change_dm}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['owner_change_dm']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -3042,9 +3042,9 @@ This message is sent to the new and old owner of the ticket in a direct message 
 
 ### Ticket Notes Thread Message {#thread}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['thread']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -3094,9 +3094,9 @@ This is the first message that is sent in the notes private thread when a ticket
 :::
 ### Notes Thread Created Message {#thread_created}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['thread_created']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -3146,9 +3146,9 @@ This is the first message that is sent in the notes private thread when a ticket
 :::
 ### Ticket Notes User Added Message {#thread_member_added}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['thread_member_added']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -3197,9 +3197,9 @@ This message is sent to the ticket notes thread when a user is added to the note
 :::
 ### Ticket Notes User Removed Message {#thread_member_removed}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['thread_member_removed']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -3250,9 +3250,9 @@ This message is sent to the notes thread when a user is removed from the notes.
 
 ### Ticket Priority Change Message {#priority_change}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['priority_change']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -3301,9 +3301,9 @@ This message is sent to the ticket channel when the priority of the ticket has c
 :::
 ### Ticket Priority Menu Message {#priority_menu}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['priority_menu']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -3346,9 +3346,9 @@ This message is the menu shown to the user when they are changing the priority o
 
 ### Ticket Expired Message {#expired}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['expired']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -3400,9 +3400,9 @@ This message is sent to the ticket channel when a ticket has expired.
 :::
 ### Ticket Expiring Message {#expiring}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['expiring']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -3453,9 +3453,9 @@ This message is sent to the ticket channel when a ticket is going to automatical
 :::
 ### Ticket Expire Message {#expire}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['expire']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -3506,9 +3506,9 @@ This message is sent when the <code>/expire</code> command is ran.
 :::
 ### Ticket Expire Log Message {#expire_log}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['expire_log']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -3576,9 +3576,9 @@ This message is sent in the log channels when the expire is set to expire.
 :::
 ### Ticket Eternal Message {#eternal}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['eternal']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -3629,9 +3629,9 @@ This message is sent when the <code>/eternal</code> command is ran.
 
 ### Ticket Schedule Error Message {#schedule_error}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['schedule_error']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -3677,9 +3677,9 @@ This message is sent to the user when they attempt to open a ticket while out of
 :::
 ### Ticket Schedule Notice Message {#schedule_notice}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['schedule_notice']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -3729,9 +3729,9 @@ This message is sent to the ticket channel (after the welcome message) when a ti
 
 ### Ticket Feedback Message {#feedback_response}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['feedback_response']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -3783,9 +3783,9 @@ This message is sent to the user when they give feedback on a ticket.
 
 ### Ticket Transcript Message {#transcript}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['transcript']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -3846,9 +3846,9 @@ This message is sent to the transcript channel when a transcript is created.
 :::
 ### Ticket Transcript Direct Message {#transcript_dm}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['transcript_dm']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -3895,9 +3895,9 @@ This message is sent in a direct message to a user that has requested a transcri
 :::
 ### Ticket Transcript Saving Message {#transcript_saving}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['transcript_saving']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -3950,9 +3950,9 @@ This message is sent to the user that has requested a transcript.
 
 ### Ticket Rating Message {#rating_response}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['rating_response']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -4007,9 +4007,9 @@ This message is sent to the user when they give a rating on a ticket.
 :::
 ### Ticket Rating Menu Message {#rating_menu}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['rating_menu']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -4052,9 +4052,9 @@ This message is the menu shown to the user when they are rating a ticket.
 
 ### Ticket Created Log Message {#created_log}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['created_log']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -4122,9 +4122,9 @@ This message is sent in the log channels when a ticket is created.
 :::
 ### Ticket Opened Log Message {#opened_log}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['opened_log']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -4192,9 +4192,9 @@ This message is sent in the log channels when a ticket is opened.
 :::
 ### Ticket Closed Log Message {#closed_log}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['closed_log']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -4262,9 +4262,9 @@ This message is sent in the log channels when a ticket is closed.
 :::
 ### Ticket Locked Log Message {#locked_log}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['locked_log']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -4332,9 +4332,9 @@ This message is sent in the log channels when a ticket is locked.
 :::
 ### Ticket Unlocked Log Message {#unlocked_log}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['unlocked_log']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -4402,9 +4402,9 @@ This message is sent in the log channels when a ticket is unlocked.
 :::
 ### Ticket Assigned Log Message {#assigned_log}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['assigned_log']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -4472,9 +4472,9 @@ This message is sent in the log channels when a ticket is assigned.
 :::
 ### Ticket Unassigned Log Message {#unassigned_log}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['unassigned_log']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -4542,9 +4542,9 @@ This message is sent in the log channels when a ticket is unassigned.
 :::
 ### Ticket Deleting Log Message {#deleted_log}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['deleted_log']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -4612,9 +4612,9 @@ This message is sent in the log channels when a ticket has been deleted.
 :::
 ### Ticket Transcript Log Message {#transcript_log}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['transcript_log']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -4682,9 +4682,9 @@ This message is sent in the log channels when a transcript is created.
 :::
 ### Ticket User Added Log Message {#user_added_log}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['user_added_log']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -4753,9 +4753,9 @@ This message is sent in the log channels when a user is added to a ticket.
 :::
 ### Ticket User Removed Log Message {#user_removed_log}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['user_removed_log']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -4824,9 +4824,9 @@ This message is sent in the log channels when a user is removed from a ticket.
 :::
 ### Ticket Owner Change Log Message {#owner_change_log}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['owner_change_log']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -4895,9 +4895,9 @@ This message is sent in the log channels when The owner/creator of the ticket ha
 :::
 ### Ticket Priority Change Log Message {#priority_change_log}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['priority_change_log']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -4965,9 +4965,9 @@ This message is sent in the log channels when the priority of a ticket has chang
 :::
 ### Ticket Name Set Log Message {#name_set_log}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['name_set_log']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -5034,9 +5034,9 @@ This message is sent in the log channels when a ticket name is set.
 :::
 ### Ticket Name Cleared Log Message {#name_cleared_log}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['name_cleared_log']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -5103,9 +5103,9 @@ This message is sent in the log channels when a tickets name is cleared.
 :::
 ### Ticket Expired Log Message {#expired_log}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['expired_log']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -5177,9 +5177,9 @@ This message is sent in the log channels when a ticket has expired.
 :::
 ### Ticket Eternal Log Message {#eternal_log}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['eternal_log']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -5248,9 +5248,9 @@ This message is sent in the log channels when the ticket eternal status changes.
 :::
 ### Ticket Feedback Log Message {#feedback_log}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['feedback_log']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -5303,9 +5303,9 @@ This message is sent in the log channels when a ticket is given feedback.
 :::
 ### Ticket Rating Log Message {#rating_log}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['rating_log']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -5360,9 +5360,9 @@ This message is sent in the log channels when a ticket is given a rating.
 :::
 ### Ticket Notes Created Log Message {#thread_created_log}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['thread_created_log']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -5429,9 +5429,9 @@ This message is sent in the log channels when a ticket notes are created.
 :::
 ### Ticket Notes Member Added Log Message {#thread_member_added_log}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['thread_member_added_log']" />
-</ClientOnly>
+
 
 ::: info
 
@@ -5499,9 +5499,9 @@ This message is sent in the log channels when a member is added to a ticket note
 :::
 ### Ticket Notes Member Removed Log Message {#thread_member_removed_log}
 
-<ClientOnly>
+
 <MessagePreview class="mt-3" :message="templates['thread_member_removed_log']" />
-</ClientOnly>
+
 
 ::: info
 
