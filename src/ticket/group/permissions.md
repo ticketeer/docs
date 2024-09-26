@@ -32,29 +32,29 @@ This documentation is currently going through an overhaul, some information may 
 
 > TODO
 
+### Special Roles
+
+#### Ticket Owner
+
+> TODO
+
+#### Ticket Members
+
+> TODO
+
+#### Assigned Staff
+
+> TODO
+
+#### @everyone
+
+> TODO
+
 ## Permission Presets
 
 > TODO
 
 ## Blacklisting
-
-> TODO
-
-## Special Roles
-
-### Ticket Owner
-
-> TODO
-
-### Ticket Members
-
-> TODO
-
-### Assigned Staff
-
-> TODO
-
-### @everyone
 
 > TODO
 
@@ -71,6 +71,8 @@ This documentation is currently going through an overhaul, some information may 
 ## Ticket Permissions
 
 > TODO
+
+#### Administrator
 
 ### General Ticket Permissions
 
@@ -132,7 +134,7 @@ Allows member to unassign the ticket from any member.
 
 ### Ticket Member Permissions
 
-#### Change Owner/Creator
+#### Change Owner/Creator {#change-owner}
 
 Allows member to change the owner/creator of the ticket to another member.
 
@@ -145,6 +147,10 @@ Allows member to add a new member to the ticket.
 Allows member to remove member of the ticket.
 
 ### Ticket Notes (Private Thread) Permissions
+
+#### Manage Notes
+
+Allows member or role create notes thread and add or remove other members from the thread.
 
 #### Include In Thread
 
