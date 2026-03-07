@@ -30,8 +30,8 @@ Current Name: {$curName}
 {/for}
 ```
 
-Inside each loop, there are to magic-values `@index0` (index starting with 0) and `@index1` for a
-index starting with amp1.
+Inside each loop, there are two magic-values `@index0` (index starting with 0) and `@index1` for an
+index starting with 1.
 
 ```text
 {for $curName in $names}

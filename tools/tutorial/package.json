@@ -1,0 +1,20 @@
+{
+  "name": "@ticketeer/tutorial-generator",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "generate": "tsx src/cli.ts",
+    "generate:example": "tsx src/cli.ts --tutorial tutorials/getting-started.yaml"
+  },
+  "dependencies": {
+    "playwright": "^1.52.0",
+    "sharp": "^0.33.5",
+    "yaml": "^2.7.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.16.2",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.4"
+  }
+}

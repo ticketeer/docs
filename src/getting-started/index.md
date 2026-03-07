@@ -128,8 +128,8 @@ Personalize the ticket opening process for your users.
 
 If you are familiar with Discord bots, follow this quickstart guide to get Ticketeer up and running:
 
-1. [Invite Ticketeer](https://ticketeer.dev/invite) to your server.
-2. [Log in to the dashboard](https://ticketeer.dev/guilds).
+1. [Invite Ticketeer](https://ticketeer.bot/invite) to your server.
+2. [Log in to the dashboard](https://ticketeer.bot/guilds).
 3. [Create a Ticket Group](#creating-a-group-via-web-portal).
 4. [Create a Ticket Panel](#creating-a-panel-via-web-portal).
 5. You're ready to go! You can now open a new ticket from the ticket panel or via the `/new` command.
@@ -150,7 +150,7 @@ Ensure you have the `Manage Server` permission or you will not be able to access
 
 ### Creating a Group via Web Portal
 
-1. Log in to the [Ticketeer dashboard](https://ticketeer.dev/guilds).
+1. Log in to the [Ticketeer dashboard](https://ticketeer.bot/guilds).
 2. Navigate to the "Groups" section.
 3. Click "Create Group" and follow the prompts to set up your first ticket group.
 
@@ -176,7 +176,7 @@ A ticket panel is a message sent via Ticketeer that allows your users to open a 
 
 ### Creating a Panel via Web Portal
 
-1. Log in to the [web portal](https://ticketeer.dev/guilds).
+1. Log in to the [web portal](https://ticketeer.bot/guilds).
 2. Navigate to the "Panels" section.
 3. Click "Create Panel" and attach one or more ticket groups to it. Customize the message and buttons as needed.
 

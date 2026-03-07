@@ -58,7 +58,7 @@ This error happens when you try to open a ticket in a channel that no longer exi
 
 ::: info `Invalid Status`
 
-This error happens when you try change the status of a ticket to an invalid status.
+This error happens when you try to change the status of a ticket to an invalid status.
 
 :::
 
@@ -66,7 +66,7 @@ This error happens when you try change the status of a ticket to an invalid stat
 
 ::: info `Feature Disabled`
 
-This error happens when you try access a feature that is disabled.
+This error happens when you try to access a feature that is disabled.
 
 :::
 
@@ -108,7 +108,7 @@ This error happens when you do an action that requires you to link your steam ac
 
 ::: info `Forbidden`
 
-Ticketeer tried to access a resource from discord and it did not have permission to do so.
+Ticketeer tried to access a resource from Discord and it did not have permission to do so.
 
 :::
 
@@ -116,7 +116,7 @@ Ticketeer tried to access a resource from discord and it did not have permission
 
 ::: info `Request Invalid`
 
-Ticketeer tried to send something to discord that was not valid.
+Ticketeer tried to send something to Discord that was not valid.
 
 :::
 
@@ -132,7 +132,7 @@ Ticketeer is being rate limited.
 
 ::: info `Request Timeout`
 
-Discord is taking too long to respond to a request. This could be due to an [outage](https://discordstatus.com/).
+Discord is taking too long to respond to a request. This could be due to a [Discord outage](https://discordstatus.com/).
 
 :::
 

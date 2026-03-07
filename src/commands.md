@@ -6,7 +6,7 @@ title: Commands
 
 ## Global Slash Commands
 
-These commands can be ran by anyone in and out of the server.
+These commands can be run by anyone in and out of the server.
 
 ### `/app about`
 
@@ -58,7 +58,7 @@ Displays information about the documentation and how to use it.
 
 ## Ticket Slash Commands
 
-These commands can only be ran inside a ticket channel. (except for the `/new` command)
+These commands can only be run inside a ticket channel (except for the `/new` command).
 
 ### `/new {group}`
 
@@ -183,7 +183,7 @@ Give feedback about the current ticket
 ### `/notes create {name}`
 
 ::: info
-Creates a notes private thread attacked to the ticket (channel tickets only)
+Creates a notes private thread attached to the ticket (channel tickets only)
 :::
 
 ### `/notes add {user}`
@@ -223,7 +223,7 @@ Creates a new ticket panel.
 ### `/panel send {panel}`
 
 ::: info
-Send a ticket to a panel to a channel.
+Send a ticket panel to a channel.
 :::
 
 ### `/panel delete {panel}`

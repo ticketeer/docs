@@ -6,11 +6,11 @@ title: Frequently Asked Questions
 
 ## General
 
-::: details How do I make the tickets channels
+::: details How do I make the tickets channels?
 In the "Opening Ticket Settings" section if you set the "Open Ticket Channel" to a category type channel, your tickets will be channels.
 :::
 
-::: details How do I make the tickets threads
+::: details How do I make the tickets threads?
 In the "Opening Ticket Settings" section if you set the "Open Ticket Channel" to a text type channel, your tickets will be threads.
 :::
 
@@ -23,7 +23,7 @@ This permission is required to assign roles to a channel. This is a requirement 
 :::
 
 ::: details Why does Ticketeer need permission manage webhooks?
-This permission is required to Ticket Panels with custom user identity.
+This permission is required for Ticket Panels with custom user identity.
 :::
 
 ::: details Why does Ticketeer need permission mention @everyone?

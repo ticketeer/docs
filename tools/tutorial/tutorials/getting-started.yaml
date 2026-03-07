@@ -1,0 +1,138 @@
+# Getting Started with Ticketeer
+# This tutorial walks through adding Ticketeer to a Discord server
+# and creating the first ticket group.
+#
+# Usage:
+#   pnpm generate --tutorial tutorials/getting-started.yaml
+#
+# Authentication:
+#   Set TICKETEER_SESSION_COOKIE env var with a valid session cookie,
+#   or configure the auth section below to log in via Discord OAuth.
+
+title: Getting Started with Ticketeer
+description: >
+  Learn how to add Ticketeer to your Discord server, navigate the dashboard,
+  and create your first ticket group.
+
+baseUrl: http://localhost:8000
+
+viewport:
+  width: 1280
+  height: 800
+
+# Output location (relative to this file's directory or absolute)
+outputDir: ../../src/tutorials/getting-started
+
+screenshotDir: images
+
+# Option 1: Set cookies directly (fast, no OAuth needed)
+# Grab your session cookie from the browser DevTools and set it as env var.
+# cookies:
+#   - name: ticketeer_session
+#     value: ${TICKETEER_SESSION_COOKIE}
+#     domain: localhost
+#     path: /
+
+steps:
+  - title: Visit the homepage
+    description: >
+      Open the Ticketeer website. You'll see the landing page with an overview
+      of features and a button to add the bot to your server.
+    action: goto
+    url: http://localhost:8000
+    annotations:
+      - type: rectangle
+        x: "50%"
+        y: "45%"
+        width: 200
+        height: 50
+        color: "#FF3B30"
+        label: Add to Discord
+
+  - title: Log in with Discord
+    description: >
+      Click the **Login** button in the top navigation bar to authenticate
+      with your Discord account.
+    action: click
+    selector: "a[href*='login'], [data-nav='login']"
+    waitFor: "body"
+    annotations:
+      # Use a selector to auto-detect the element's position
+      - type: circle
+        selector: "a[href*='login'], [data-nav='login']"
+        color: "#FF3B30"
+        label: Login
+
+  - title: Select your server
+    description: >
+      After logging in, you'll see a list of Discord servers you manage.
+      Click on the server you want to add Ticketeer to.
+    action: screenshot
+    waitFor: "body"
+    annotations:
+      - type: arrow
+        x: "25%"
+        y: "30%"
+        width: 60
+        color: "#FF3B30"
+        label: Your server
+
+  - title: Server dashboard
+    description: >
+      This is the main dashboard for your server. From here you can manage
+      ticket groups, panels, settings, and more.
+    action: screenshot
+    waitFor: "body"
+
+  - title: Navigate to Ticket Groups
+    description: >
+      Click on **Ticket Groups** in the sidebar to manage your ticket
+      categories. Ticket groups define how tickets are created and organized.
+    action: click
+    selector: "a[href*='groups'], [data-nav='groups']"
+    waitFor: "body"
+    annotations:
+      # Auto-resolve position from the sidebar link
+      - type: rectangle
+        selector: "a[href*='groups'], [data-nav='groups']"
+        color: "#FF3B30"
+        label: Ticket Groups
+
+  - title: Create a new ticket group
+    description: >
+      Click the **Create** button to set up a new ticket group.
+      You'll be able to configure the name, description, channel settings,
+      and permissions.
+    action: click
+    selector: "button:has-text('Create'), a:has-text('Create')"
+    waitFor: "body"
+    annotations:
+      # Auto-resolve position from the Create button
+      - type: circle
+        selector: "button:has-text('Create'), a:has-text('Create')"
+        color: "#FF3B30"
+        label: Create
+
+  - title: Configure the ticket group
+    description: >
+      Fill in the ticket group details:
+
+      - **Name**: Give your group a descriptive name (e.g., "Support")
+      - **Description**: Explain what this group is for
+      - **Category**: Select the Discord channel category for tickets
+
+      Customize additional settings as needed, then save.
+    action: screenshot
+    waitFor: "body"
+
+  - title: Done
+    description: >
+      Your first ticket group is now set up. Users can create tickets
+      through ticket panels, slash commands, or other configured methods.
+
+      **Next steps:**
+      - [Create a Ticket Panel](/tutorials/ticket-panels) to let users open tickets with a button
+      - [Configure Permissions](/tutorials/permissions) to control who can manage tickets
+      - [Set up Custom Messages](/tutorials/custom-messages) to personalize responses
+    action: screenshot
+    screenshot: false

@@ -135,6 +135,14 @@ export default defineConfig({
           { text: 'Messages', link: '/messages' },
           { text: 'Markdown 101', link: '/markdown' },
           { text: 'Template Engine', link: '/template-engine' },
+          { text: 'Components V2', link: '/components-v2' },
+        ],
+      },
+      {
+        text: 'Integrations',
+        items: [
+          { text: 'API', link: '/api' },
+          { text: 'Webhooks', link: '/webhooks' },
         ],
       },
       {

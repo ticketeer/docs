@@ -1,8 +1,8 @@
 ---
 title: 'Ticket Panel'
 prev:
-  text: 'Ticket Panel'
-  link: '/ticket/panel'
+  text: 'Ticket Group'
+  link: '/ticket/group'
 next:
   text: 'Ticket View'
   link: '/ticket/view'
